@@ -16,8 +16,7 @@
 package com.qwazr.binder.impl;
 
 import com.qwazr.binder.BinderException;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
+import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -42,14 +41,14 @@ public class StringSetterTest {
 
 	@Test
 	public void testString() {
-		final String v = RandomStringUtils.randomAlphabetic(10);
+		final String v = RandomUtils.nextString();
 		setter.fromString(v, this);
 		Assert.assertEquals(v, value);
 	}
 
 	@Test
 	public void testStringArray() {
-		final String[] v = new String[] { RandomStringUtils.randomAlphanumeric(10) };
+		final String[] v = new String[] { RandomUtils.nextString() };
 		setter.fromString(v, this);
 		Assert.assertEquals(v[0], value);
 	}
@@ -63,14 +62,13 @@ public class StringSetterTest {
 
 	@Test(expected = BinderException.class)
 	public void testStringArrayOverflow() {
-		final String[] v = new String[] { RandomStringUtils.randomAlphanumeric(10),
-				RandomStringUtils.randomAlphanumeric(10) };
+		final String[] v = new String[] { RandomUtils.nextString(), RandomUtils.nextString() };
 		setter.fromString(v, this);
 	}
 
 	@Test
 	public void testStringCollection() {
-		final Collection<String> v = Arrays.asList(RandomStringUtils.randomAlphanumeric(10));
+		final Collection<String> v = Arrays.asList(RandomUtils.nextString());
 		setter.fromString(v, this);
 		Assert.assertEquals(v.iterator().next(), value);
 	}
@@ -84,14 +82,13 @@ public class StringSetterTest {
 
 	@Test(expected = BinderException.class)
 	public void testStringCollectionOverflow() {
-		final Collection<String> v = Arrays.asList(RandomStringUtils.randomAlphanumeric(10),
-				RandomStringUtils.randomAlphanumeric(10));
+		final Collection<String> v = Arrays.asList(RandomUtils.nextString(), RandomUtils.nextString());
 		setter.fromString(v, this);
 	}
 
 	@Test
 	public void testStringList() {
-		final List<String> v = Arrays.asList(RandomStringUtils.randomAlphanumeric(10));
+		final List<String> v = Arrays.asList(RandomUtils.nextString());
 		setter.fromString(v, this);
 		Assert.assertEquals(v.get(0), value);
 	}
@@ -105,8 +102,7 @@ public class StringSetterTest {
 
 	@Test(expected = BinderException.class)
 	public void testStringListOverflow() {
-		final List<String> v = Arrays.asList(RandomStringUtils.randomAlphanumeric(10),
-				RandomStringUtils.randomAlphanumeric(10));
+		final List<String> v = Arrays.asList(RandomUtils.nextString(), RandomUtils.nextString());
 		setter.fromString(v, this);
 	}
 
@@ -488,14 +484,14 @@ public class StringSetterTest {
 
 	@Test
 	public void testShortPrimitive() {
-		final short v = (short) RandomUtils.nextInt(0, Short.MAX_VALUE);
+		final short v = RandomUtils.nextShort();
 		setter.fromShort(v, this);
 		Assert.assertEquals(Short.toString(v), value);
 	}
 
 	@Test
 	public void testShortPrimitiveArray() {
-		final short[] v = new short[] { (short) RandomUtils.nextInt(0, Short.MAX_VALUE) };
+		final short[] v = new short[] { RandomUtils.nextShort() };
 		setter.fromShort(v, this);
 		Assert.assertEquals(Short.toString(v[0]), value);
 	}
@@ -509,21 +505,20 @@ public class StringSetterTest {
 
 	@Test(expected = BinderException.class)
 	public void testShortPrimitiveArrayOverflow() {
-		final short[] v = new short[] { (short) RandomUtils.nextInt(0, Short.MAX_VALUE), (short) RandomUtils.nextInt(0,
-				Short.MAX_VALUE) };
+		final short[] v = new short[] { RandomUtils.nextShort(), RandomUtils.nextShort() };
 		setter.fromShort(v, this);
 	}
 
 	@Test
 	public void testShort() {
-		final Short v = (short) RandomUtils.nextInt(0, Short.MAX_VALUE);
+		final Short v = RandomUtils.nextShort();
 		setter.fromShort(v, this);
 		Assert.assertEquals(Short.toString(v), value);
 	}
 
 	@Test
 	public void testShortArray() {
-		final Short[] v = new Short[] { (short) RandomUtils.nextInt(0, Short.MAX_VALUE) };
+		final Short[] v = new Short[] { RandomUtils.nextShort() };
 		setter.fromShort(v, this);
 		Assert.assertEquals(Short.toString(v[0]), value);
 	}
@@ -537,14 +532,13 @@ public class StringSetterTest {
 
 	@Test(expected = BinderException.class)
 	public void testShortArrayOverflow() {
-		final Short[] v = new Short[] { (short) RandomUtils.nextInt(0, Short.MAX_VALUE), (short) RandomUtils.nextInt(0,
-				Short.MAX_VALUE) };
+		final Short[] v = new Short[] { RandomUtils.nextShort(), RandomUtils.nextShort() };
 		setter.fromShort(v, this);
 	}
 
 	@Test
 	public void testShortCollection() {
-		final Collection<Short> v = Arrays.asList((short) RandomUtils.nextInt(0, Short.MAX_VALUE));
+		final Collection<Short> v = Arrays.asList(RandomUtils.nextShort());
 		setter.fromShort(v, this);
 		Assert.assertEquals(Short.toString(v.iterator().next()), value);
 	}
@@ -558,14 +552,13 @@ public class StringSetterTest {
 
 	@Test(expected = BinderException.class)
 	public void testShortCollectionOverflow() {
-		final Collection<Short> v = Arrays.asList((short) RandomUtils.nextInt(0, Short.MAX_VALUE),
-				(short) RandomUtils.nextInt(0, Short.MAX_VALUE));
+		final Collection<Short> v = Arrays.asList(RandomUtils.nextShort(), RandomUtils.nextShort());
 		setter.fromShort(v, this);
 	}
 
 	@Test
 	public void testShortList() {
-		final List<Short> v = Arrays.asList((short) RandomUtils.nextInt(0, Short.MAX_VALUE));
+		final List<Short> v = Arrays.asList(RandomUtils.nextShort());
 		setter.fromShort(v, this);
 		Assert.assertEquals(Short.toString(v.iterator().next()), value);
 	}
@@ -579,21 +572,20 @@ public class StringSetterTest {
 
 	@Test(expected = BinderException.class)
 	public void testShortListOverflow() {
-		final List<Short> v = Arrays.asList((short) RandomUtils.nextInt(0, Short.MAX_VALUE),
-				(short) RandomUtils.nextInt(0, Short.MAX_VALUE));
+		final List<Short> v = Arrays.asList(RandomUtils.nextShort(), RandomUtils.nextShort());
 		setter.fromShort(v, this);
 	}
 
 	@Test
 	public void testCharPrimitive() {
-		final char v = RandomStringUtils.randomAlphanumeric(1).charAt(0);
+		final char v = RandomUtils.nextChar();
 		setter.fromChar(v, this);
 		Assert.assertEquals(Character.toString(v), value);
 	}
 
 	@Test
 	public void testCharPrimitiveArray() {
-		final char[] v = new char[] { RandomStringUtils.randomAlphanumeric(1).charAt(0) };
+		final char[] v = new char[] { RandomUtils.nextChar() };
 		setter.fromChar(v, this);
 		Assert.assertEquals(Character.toString(v[0]), value);
 	}
@@ -607,21 +599,20 @@ public class StringSetterTest {
 
 	@Test(expected = BinderException.class)
 	public void testCharPrimitiveArrayOverflow() {
-		final char[] v = new char[] { RandomStringUtils.randomAlphanumeric(1).charAt(0),
-				RandomStringUtils.randomAlphanumeric(1).charAt(0) };
+		final char[] v = new char[] { RandomUtils.nextChar(), RandomUtils.nextChar() };
 		setter.fromChar(v, this);
 	}
 
 	@Test
 	public void testChar() {
-		final Character v = RandomStringUtils.randomAlphanumeric(1).charAt(0);
+		final Character v = RandomUtils.nextChar();
 		setter.fromChar(v, this);
 		Assert.assertEquals(v.toString(), value);
 	}
 
 	@Test
 	public void testCharArray() {
-		final Character[] v = new Character[] { RandomStringUtils.randomAlphabetic(1).charAt(0) };
+		final Character[] v = new Character[] { RandomUtils.nextChar() };
 		setter.fromChar(v, this);
 		Assert.assertEquals(Character.toString(v[0]), value);
 	}
@@ -635,14 +626,13 @@ public class StringSetterTest {
 
 	@Test(expected = BinderException.class)
 	public void testCharArrayOverflow() {
-		final Character[] v = new Character[] { RandomStringUtils.randomAlphabetic(1).charAt(0),
-				RandomStringUtils.randomAlphabetic(1).charAt(0) };
+		final Character[] v = new Character[] { RandomUtils.nextChar(), RandomUtils.nextChar() };
 		setter.fromChar(v, this);
 	}
 
 	@Test
 	public void testCharCollection() {
-		final Collection<Character> v = Arrays.asList(RandomStringUtils.randomAlphabetic(1).charAt(0));
+		final Collection<Character> v = Arrays.asList(RandomUtils.nextChar());
 		setter.fromChar(v, this);
 		Assert.assertEquals(Character.toString(v.iterator().next()), value);
 	}
@@ -656,14 +646,13 @@ public class StringSetterTest {
 
 	@Test(expected = BinderException.class)
 	public void testCharCollectionOverflow() {
-		final Collection<Character> v = Arrays.asList(RandomStringUtils.randomAlphabetic(1).charAt(0),
-				RandomStringUtils.randomAlphabetic(1).charAt(0));
+		final Collection<Character> v = Arrays.asList(RandomUtils.nextChar(), RandomUtils.nextChar());
 		setter.fromChar(v, this);
 	}
 
 	@Test
 	public void testCharList() {
-		final List<Character> v = Arrays.asList(RandomStringUtils.randomAlphabetic(1).charAt(0));
+		final List<Character> v = Arrays.asList(RandomUtils.nextChar());
 		setter.fromChar(v, this);
 		Assert.assertEquals(Character.toString(v.iterator().next()), value);
 	}
@@ -677,8 +666,7 @@ public class StringSetterTest {
 
 	@Test(expected = BinderException.class)
 	public void testCharListOverflow() {
-		final List<Character> v = Arrays.asList(RandomStringUtils.randomAlphabetic(1).charAt(0),
-				RandomStringUtils.randomAlphabetic(1).charAt(0));
+		final List<Character> v = Arrays.asList(RandomUtils.nextChar(), RandomUtils.nextChar());
 		setter.fromChar(v, this);
 	}
 
