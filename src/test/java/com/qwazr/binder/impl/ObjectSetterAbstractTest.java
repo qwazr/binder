@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2017 Emmanuel Keller / QWAZR
+ * Copyright 2017 Emmanuel Keller / QWAZR
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,19 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qwazr.binder;
+package com.qwazr.binder.impl;
 
-public class RandomUtils extends com.qwazr.utils.RandomUtils {
+import java.lang.reflect.Field;
 
-	public static String nextString() {
-		return RandomUtils.alphanumeric(nextInt(5, 15));
+public abstract class ObjectSetterAbstractTest<T> {
+
+	protected ObjectSetterAbstract setter;
+	protected T value;
+
+	protected ObjectSetterAbstractTest(ObjectSetterAbstract setter) {
+		this.setter = setter;
 	}
 
-	public static short nextShort() {
-		return (short) nextInt(0, Short.MAX_VALUE);
+	static public Field getValueField() {
+		try {
+			return ObjectSetterAbstractTest.class.getDeclaredField("value");
+		} catch (NoSuchFieldException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
-	public static char nextChar() {
-		return RandomUtils.alphanumeric(1).charAt(0);
-	}
 }

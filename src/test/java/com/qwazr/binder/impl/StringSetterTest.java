@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2017 Emmanuel Keller / QWAZR
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,846 +15,119 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.binder.BinderException;
 import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.function.Supplier;
 
-/**
- * Created by ekeller on 30/05/2017.
- */
+@RunWith(Suite.class)
+@Suite.SuiteClasses({ StringSetterTest.FromString.class,
+		StringSetterTest.FromShort.class,
+		StringSetterTest.FromLong.class,
+		StringSetterTest.FromInteger.class,
+		StringSetterTest.FromFloat.class,
+		StringSetterTest.FromDouble.class,
+		StringSetterTest.FromChar.class,
+		StringSetterTest.FromByte.class,
+		StringSetterTest.FromBoolean.class })
 public class StringSetterTest {
 
-	String value;
+	private static Supplier<String> nextString = RandomUtils::nextString;
+	private static StringSetterImpl stringSetter = new StringSetterImpl(ObjectSetterAbstractTest.getValueField());
 
-	static StringSetterImpl setter;
+	public static class FromString extends FromStringAbstractTest<String> {
 
-	@BeforeClass
-	public static void setup() throws NoSuchFieldException {
-		setter = new StringSetterImpl(StringSetterTest.class.getDeclaredField("value"));
-	}
-
-	@Test
-	public void testString() {
-		final String v = RandomUtils.nextString();
-		setter.fromString(v, this);
-		Assert.assertEquals(v, value);
-	}
-
-	@Test
-	public void testStringArray() {
-		final String[] v = new String[] { RandomUtils.nextString() };
-		setter.fromString(v, this);
-		Assert.assertEquals(v[0], value);
-	}
-
-	@Test
-	public void testStringArrayEmpty() {
-		final String[] v = new String[] {};
-		setter.fromString(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testStringArrayOverflow() {
-		final String[] v = new String[] { RandomUtils.nextString(), RandomUtils.nextString() };
-		setter.fromString(v, this);
-	}
-
-	@Test
-	public void testStringCollection() {
-		final Collection<String> v = Arrays.asList(RandomUtils.nextString());
-		setter.fromString(v, this);
-		Assert.assertEquals(v.iterator().next(), value);
-	}
-
-	@Test
-	public void testStringCollectionEmpty() {
-		final Collection<String> v = Arrays.asList();
-		setter.fromString(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testStringCollectionOverflow() {
-		final Collection<String> v = Arrays.asList(RandomUtils.nextString(), RandomUtils.nextString());
-		setter.fromString(v, this);
-	}
-
-	@Test
-	public void testStringList() {
-		final List<String> v = Arrays.asList(RandomUtils.nextString());
-		setter.fromString(v, this);
-		Assert.assertEquals(v.get(0), value);
-	}
-
-	@Test
-	public void testStringListEmpty() {
-		final List<String> v = Arrays.asList();
-		setter.fromString(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testStringListOverflow() {
-		final List<String> v = Arrays.asList(RandomUtils.nextString(), RandomUtils.nextString());
-		setter.fromString(v, this);
-	}
-
-	@Test
-	public void testDoublePrimitive() {
-		final double v = RandomUtils.nextDouble();
-		setter.fromDouble(v, this);
-		Assert.assertEquals(Double.toString(v), value);
-	}
-
-	@Test
-	public void testDoublePrimitiveArray() {
-		final double[] v = new double[] { RandomUtils.nextDouble() };
-		setter.fromDouble(v, this);
-		Assert.assertEquals(Double.toString(v[0]), value);
-	}
-
-	@Test
-	public void testDoublePrimitiveArrayEmpty() {
-		final double[] v = new double[] {};
-		setter.fromDouble(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testDoublePrimitiveArrayOverflow() {
-		final double[] v = new double[] { RandomUtils.nextDouble(), RandomUtils.nextDouble() };
-		setter.fromDouble(v, this);
-	}
-
-	@Test
-	public void testDouble() {
-		final Double v = RandomUtils.nextDouble();
-		setter.fromDouble(v, this);
-		Assert.assertEquals(Double.toString(v), value);
-	}
-
-	@Test
-	public void testDoubleArray() {
-		final Double[] v = new Double[] { RandomUtils.nextDouble() };
-		setter.fromDouble(v, this);
-		Assert.assertEquals(Double.toString(v[0]), value);
-	}
-
-	@Test
-	public void testDoubleArrayEmpty() {
-		final Double[] v = new Double[] {};
-		setter.fromDouble(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testDoubleArrayOverflow() {
-		final Double[] v = new Double[] { RandomUtils.nextDouble(), RandomUtils.nextDouble() };
-		setter.fromDouble(v, this);
-	}
-
-	@Test
-	public void testDoubleCollection() {
-		final Collection<Double> v = Arrays.asList(RandomUtils.nextDouble());
-		setter.fromDouble(v, this);
-		Assert.assertEquals(Double.toString(v.iterator().next()), value);
-	}
-
-	@Test
-	public void testDoubleCollectionEmpty() {
-		final Collection<Double> v = Arrays.asList();
-		setter.fromDouble(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testDoubleCollectionOverflow() {
-		final Collection<Double> v = Arrays.asList(RandomUtils.nextDouble(), RandomUtils.nextDouble());
-		setter.fromDouble(v, this);
-	}
-
-	@Test
-	public void testDoubleList() {
-		final List<Double> v = Arrays.asList(RandomUtils.nextDouble());
-		setter.fromDouble(v, this);
-		Assert.assertEquals(Double.toString(v.iterator().next()), value);
-	}
-
-	@Test
-	public void testDoubleListEmpty() {
-		final List<Double> v = Arrays.asList();
-		setter.fromDouble(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testDoubleListOverflow() {
-		final List<Double> v = Arrays.asList(RandomUtils.nextDouble(), RandomUtils.nextDouble());
-		setter.fromDouble(v, this);
-	}
-
-	@Test
-	public void testFloatPrimitive() {
-		final float v = RandomUtils.nextFloat();
-		setter.fromFloat(v, this);
-		Assert.assertEquals(Float.toString(v), value);
-	}
-
-	@Test
-	public void testFloatPrimitiveArray() {
-		final float[] v = new float[] { RandomUtils.nextFloat() };
-		setter.fromFloat(v, this);
-		Assert.assertEquals(Float.toString(v[0]), value);
-	}
-
-	@Test
-	public void testFloatPrimitiveArrayEmpty() {
-		final float[] v = new float[] {};
-		setter.fromFloat(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testFloatPrimitiveArrayOverflow() {
-		final float[] v = new float[] { RandomUtils.nextFloat(), RandomUtils.nextFloat() };
-		setter.fromFloat(v, this);
-	}
-
-	@Test
-	public void testFloat() {
-		final Float v = RandomUtils.nextFloat();
-		setter.fromFloat(v, this);
-		Assert.assertEquals(Float.toString(v), value);
-	}
-
-	@Test
-	public void testFloatArray() {
-		final Float[] v = new Float[] { RandomUtils.nextFloat() };
-		setter.fromFloat(v, this);
-		Assert.assertEquals(Float.toString(v[0]), value);
-	}
-
-	@Test
-	public void testFloatArrayEmpty() {
-		final Float[] v = new Float[] {};
-		setter.fromFloat(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testFloatArrayOverflow() {
-		final Float[] v = new Float[] { RandomUtils.nextFloat(), RandomUtils.nextFloat() };
-		setter.fromFloat(v, this);
-	}
-
-	@Test
-	public void testFloatCollection() {
-		final Collection<Float> v = Arrays.asList(RandomUtils.nextFloat());
-		setter.fromFloat(v, this);
-		Assert.assertEquals(Float.toString(v.iterator().next()), value);
-	}
-
-	@Test
-	public void testFloatCollectionEmpty() {
-		final Collection<Float> v = Arrays.asList();
-		setter.fromFloat(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testFloatCollectionOverflow() {
-		final Collection<Float> v = Arrays.asList(RandomUtils.nextFloat(), RandomUtils.nextFloat());
-		setter.fromFloat(v, this);
-	}
-
-	@Test
-	public void testFloatList() {
-		final List<Float> v = Arrays.asList(RandomUtils.nextFloat());
-		setter.fromFloat(v, this);
-		Assert.assertEquals(Float.toString(v.iterator().next()), value);
-	}
-
-	@Test
-	public void testFloatListEmpty() {
-		final List<Float> v = Arrays.asList();
-		setter.fromFloat(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testFloatListOverflow() {
-		final List<Float> v = Arrays.asList(RandomUtils.nextFloat(), RandomUtils.nextFloat());
-		setter.fromFloat(v, this);
-	}
-
-	@Test
-	public void testLongPrimitive() {
-		final long v = RandomUtils.nextLong();
-		setter.fromLong(v, this);
-		Assert.assertEquals(Long.toString(v), value);
-	}
-
-	@Test
-	public void testLongPrimitiveArray() {
-		final long[] v = new long[] { RandomUtils.nextLong() };
-		setter.fromLong(v, this);
-		Assert.assertEquals(Long.toString(v[0]), value);
-	}
-
-	@Test
-	public void testLongPrimitiveArrayEmpty() {
-		final long[] v = new long[] {};
-		setter.fromLong(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testLongPrimitiveArrayOverflow() {
-		final long[] v = new long[] { RandomUtils.nextLong(), RandomUtils.nextLong() };
-		setter.fromLong(v, this);
-	}
-
-	@Test
-	public void testLong() {
-		final Long v = RandomUtils.nextLong();
-		setter.fromLong(v, this);
-		Assert.assertEquals(Long.toString(v), value);
-	}
-
-	@Test
-	public void testLongArray() {
-		final Long[] v = new Long[] { RandomUtils.nextLong() };
-		setter.fromLong(v, this);
-		Assert.assertEquals(Long.toString(v[0]), value);
-	}
-
-	@Test
-	public void testLongArrayEmpty() {
-		final Long[] v = new Long[] {};
-		setter.fromLong(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testLongArrayOverflow() {
-		final Long[] v = new Long[] { RandomUtils.nextLong(), RandomUtils.nextLong() };
-		setter.fromLong(v, this);
-	}
-
-	@Test
-	public void testLongCollection() {
-		final Collection<Long> v = Arrays.asList(RandomUtils.nextLong());
-		setter.fromLong(v, this);
-		Assert.assertEquals(Long.toString(v.iterator().next()), value);
-	}
-
-	@Test
-	public void testLongCollectionEmpty() {
-		final Collection<Long> v = Arrays.asList();
-		setter.fromLong(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testLongCollectionOverflow() {
-		final Collection<Long> v = Arrays.asList(RandomUtils.nextLong(), RandomUtils.nextLong());
-		setter.fromLong(v, this);
-	}
-
-	@Test
-	public void testLongList() {
-		final List<Long> v = Arrays.asList(RandomUtils.nextLong());
-		setter.fromLong(v, this);
-		Assert.assertEquals(Long.toString(v.iterator().next()), value);
-	}
-
-	@Test
-	public void testLongListEmpty() {
-		final List<Long> v = Arrays.asList();
-		setter.fromLong(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testLongListOverflow() {
-		final List<Long> v = Arrays.asList(RandomUtils.nextLong(), RandomUtils.nextLong());
-		setter.fromLong(v, this);
-	}
-
-	@Test
-	public void testIntegerPrimitive() {
-		final int v = RandomUtils.nextInt();
-		setter.fromInteger(v, this);
-		Assert.assertEquals(Integer.toString(v), value);
-	}
-
-	@Test
-	public void testIntegerPrimitiveArray() {
-		final int[] v = new int[] { RandomUtils.nextInt() };
-		setter.fromInteger(v, this);
-		Assert.assertEquals(Integer.toString(v[0]), value);
-	}
-
-	@Test
-	public void testIntegerPrimitiveArrayEmpty() {
-		final int[] v = new int[] {};
-		setter.fromInteger(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testIntegerPrimitiveArrayOverflow() {
-		final int[] v = new int[] { RandomUtils.nextInt(), RandomUtils.nextInt() };
-		setter.fromInteger(v, this);
-	}
-
-	@Test
-	public void testInteger() {
-		final Integer v = RandomUtils.nextInt();
-		setter.fromInteger(v, this);
-		Assert.assertEquals(Integer.toString(v), value);
-	}
-
-	@Test
-	public void testIntegerArray() {
-		final Integer[] v = new Integer[] { RandomUtils.nextInt() };
-		setter.fromInteger(v, this);
-		Assert.assertEquals(Integer.toString(v[0]), value);
-	}
-
-	@Test
-	public void testIntegerArrayEmpty() {
-		final Integer[] v = new Integer[] {};
-		setter.fromInteger(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testIntegerArrayOverflow() {
-		final Integer[] v = new Integer[] { RandomUtils.nextInt(), RandomUtils.nextInt() };
-		setter.fromInteger(v, this);
-	}
-
-	@Test
-	public void testIntegerCollection() {
-		final Collection<Integer> v = Arrays.asList(RandomUtils.nextInt());
-		setter.fromInteger(v, this);
-		Assert.assertEquals(Integer.toString(v.iterator().next()), value);
-	}
-
-	@Test
-	public void testIntegerCollectionEmpty() {
-		final Collection<Integer> v = Arrays.asList();
-		setter.fromInteger(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testIntegerCollectionOverflow() {
-		final Collection<Integer> v = Arrays.asList(RandomUtils.nextInt(), RandomUtils.nextInt());
-		setter.fromInteger(v, this);
-	}
-
-	@Test
-	public void testIntegerList() {
-		final List<Integer> v = Arrays.asList(RandomUtils.nextInt());
-		setter.fromInteger(v, this);
-		Assert.assertEquals(Integer.toString(v.iterator().next()), value);
-	}
-
-	@Test
-	public void testIntegerListEmpty() {
-		final List<Integer> v = Arrays.asList();
-		setter.fromInteger(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testIntegerListOverflow() {
-		final List<Integer> v = Arrays.asList(RandomUtils.nextInt(), RandomUtils.nextInt());
-		setter.fromInteger(v, this);
-	}
-
-	@Test
-	public void testShortPrimitive() {
-		final short v = RandomUtils.nextShort();
-		setter.fromShort(v, this);
-		Assert.assertEquals(Short.toString(v), value);
-	}
-
-	@Test
-	public void testShortPrimitiveArray() {
-		final short[] v = new short[] { RandomUtils.nextShort() };
-		setter.fromShort(v, this);
-		Assert.assertEquals(Short.toString(v[0]), value);
-	}
-
-	@Test
-	public void testShortPrimitiveArrayEmpty() {
-		final short[] v = new short[] {};
-		setter.fromShort(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testShortPrimitiveArrayOverflow() {
-		final short[] v = new short[] { RandomUtils.nextShort(), RandomUtils.nextShort() };
-		setter.fromShort(v, this);
-	}
-
-	@Test
-	public void testShort() {
-		final Short v = RandomUtils.nextShort();
-		setter.fromShort(v, this);
-		Assert.assertEquals(Short.toString(v), value);
-	}
-
-	@Test
-	public void testShortArray() {
-		final Short[] v = new Short[] { RandomUtils.nextShort() };
-		setter.fromShort(v, this);
-		Assert.assertEquals(Short.toString(v[0]), value);
-	}
-
-	@Test
-	public void testShortArrayEmpty() {
-		final Short[] v = new Short[] {};
-		setter.fromShort(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testShortArrayOverflow() {
-		final Short[] v = new Short[] { RandomUtils.nextShort(), RandomUtils.nextShort() };
-		setter.fromShort(v, this);
-	}
-
-	@Test
-	public void testShortCollection() {
-		final Collection<Short> v = Arrays.asList(RandomUtils.nextShort());
-		setter.fromShort(v, this);
-		Assert.assertEquals(Short.toString(v.iterator().next()), value);
-	}
-
-	@Test
-	public void testShortCollectionEmpty() {
-		final Collection<Short> v = Arrays.asList();
-		setter.fromShort(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testShortCollectionOverflow() {
-		final Collection<Short> v = Arrays.asList(RandomUtils.nextShort(), RandomUtils.nextShort());
-		setter.fromShort(v, this);
-	}
-
-	@Test
-	public void testShortList() {
-		final List<Short> v = Arrays.asList(RandomUtils.nextShort());
-		setter.fromShort(v, this);
-		Assert.assertEquals(Short.toString(v.iterator().next()), value);
-	}
-
-	@Test
-	public void testShortListEmpty() {
-		final List<Short> v = Arrays.asList();
-		setter.fromShort(v, this);
-		Assert.assertNull(value);
-	}
+		public FromString() {
+			super(nextString, stringSetter);
+		}
 
-	@Test(expected = BinderException.class)
-	public void testShortListOverflow() {
-		final List<Short> v = Arrays.asList(RandomUtils.nextShort(), RandomUtils.nextShort());
-		setter.fromShort(v, this);
+		@Override
+		protected void checkValue(String next, String value) {
+			Assert.assertEquals(next, value);
+		}
 	}
 
-	@Test
-	public void testCharPrimitive() {
-		final char v = RandomUtils.nextChar();
-		setter.fromChar(v, this);
-		Assert.assertEquals(Character.toString(v), value);
-	}
-
-	@Test
-	public void testCharPrimitiveArray() {
-		final char[] v = new char[] { RandomUtils.nextChar() };
-		setter.fromChar(v, this);
-		Assert.assertEquals(Character.toString(v[0]), value);
-	}
-
-	@Test
-	public void testCharPrimitiveArrayEmpty() {
-		final char[] v = new char[] {};
-		setter.fromChar(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testCharPrimitiveArrayOverflow() {
-		final char[] v = new char[] { RandomUtils.nextChar(), RandomUtils.nextChar() };
-		setter.fromChar(v, this);
-	}
-
-	@Test
-	public void testChar() {
-		final Character v = RandomUtils.nextChar();
-		setter.fromChar(v, this);
-		Assert.assertEquals(v.toString(), value);
-	}
-
-	@Test
-	public void testCharArray() {
-		final Character[] v = new Character[] { RandomUtils.nextChar() };
-		setter.fromChar(v, this);
-		Assert.assertEquals(Character.toString(v[0]), value);
-	}
-
-	@Test
-	public void testCharArrayEmpty() {
-		final Character[] v = new Character[] {};
-		setter.fromChar(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testCharArrayOverflow() {
-		final Character[] v = new Character[] { RandomUtils.nextChar(), RandomUtils.nextChar() };
-		setter.fromChar(v, this);
-	}
-
-	@Test
-	public void testCharCollection() {
-		final Collection<Character> v = Arrays.asList(RandomUtils.nextChar());
-		setter.fromChar(v, this);
-		Assert.assertEquals(Character.toString(v.iterator().next()), value);
-	}
-
-	@Test
-	public void testCharCollectionEmpty() {
-		final Collection<Character> v = Arrays.asList();
-		setter.fromChar(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testCharCollectionOverflow() {
-		final Collection<Character> v = Arrays.asList(RandomUtils.nextChar(), RandomUtils.nextChar());
-		setter.fromChar(v, this);
-	}
-
-	@Test
-	public void testCharList() {
-		final List<Character> v = Arrays.asList(RandomUtils.nextChar());
-		setter.fromChar(v, this);
-		Assert.assertEquals(Character.toString(v.iterator().next()), value);
-	}
-
-	@Test
-	public void testCharListEmpty() {
-		final List<Character> v = Arrays.asList();
-		setter.fromChar(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testCharListOverflow() {
-		final List<Character> v = Arrays.asList(RandomUtils.nextChar(), RandomUtils.nextChar());
-		setter.fromChar(v, this);
-	}
+	public static class FromShort extends FromShortAbstractTest<String> {
 
-	@Test
-	public void testBytePrimitive() {
-		final byte v = RandomUtils.nextBytes(1)[0];
-		setter.fromByte(v, this);
-		Assert.assertEquals(Byte.toString(v), value);
-	}
-
-	@Test
-	public void testBytePrimitiveArray() {
-		final byte[] v = new byte[] { RandomUtils.nextBytes(1)[0] };
-		setter.fromByte(v, this);
-		Assert.assertEquals(Byte.toString(v[0]), value);
-	}
-
-	@Test
-	public void testBytePrimitiveArrayEmpty() {
-		final byte[] v = new byte[] {};
-		setter.fromByte(v, this);
-		Assert.assertNull(value);
-	}
-
-	@Test(expected = BinderException.class)
-	public void testBytePrimitiveArrayOverflow() {
-		final byte[] v = RandomUtils.nextBytes(2);
-		setter.fromByte(v, this);
-	}
-
-	@Test
-	public void testByte() {
-		final Byte v = RandomUtils.nextBytes(1)[0];
-		setter.fromByte(v, this);
-		Assert.assertEquals(Byte.toString(v), value);
-	}
-
-	@Test
-	public void testByteArray() {
-		final Byte[] v = new Byte[] { RandomUtils.nextBytes(1)[0] };
-		setter.fromByte(v, this);
-		Assert.assertEquals(Byte.toString(v[0]), value);
-	}
-
-	@Test
-	public void testByteArrayEmpty() {
-		final Byte[] v = new Byte[] {};
-		setter.fromByte(v, this);
-		Assert.assertNull(value);
-	}
+		public FromShort() {
+			super(stringSetter);
+		}
 
-	@Test(expected = BinderException.class)
-	public void testByteArrayOverflow() {
-		final Byte[] v = new Byte[] { RandomUtils.nextBytes(1)[0], RandomUtils.nextBytes(1)[0] };
-		setter.fromByte(v, this);
+		@Override
+		protected void checkValue(Short next, String value) {
+			Assert.assertEquals(next, Short.parseShort(value), 0);
+		}
 	}
 
-	@Test
-	public void testByteCollection() {
-		final Collection<Byte> v = Arrays.asList(RandomUtils.nextBytes(1)[0]);
-		setter.fromByte(v, this);
-		Assert.assertEquals(Byte.toString(v.iterator().next()), value);
-	}
-
-	@Test
-	public void testByteCollectionEmpty() {
-		final Collection<Byte> v = Arrays.asList();
-		setter.fromByte(v, this);
-		Assert.assertNull(value);
-	}
+	public static class FromLong extends FromLongAbstractTest<String> {
 
-	@Test(expected = BinderException.class)
-	public void testByteCollectionOverflow() {
-		final Collection<Byte> v = Arrays.asList(RandomUtils.nextBytes(1)[0], RandomUtils.nextBytes(1)[0]);
-		setter.fromByte(v, this);
-	}
+		public FromLong() {
+			super(stringSetter);
+		}
 
-	@Test
-	public void testByteList() {
-		final List<Byte> v = Arrays.asList(RandomUtils.nextBytes(1)[0]);
-		setter.fromByte(v, this);
-		Assert.assertEquals(Byte.toString(v.iterator().next()), value);
+		@Override
+		protected void checkValue(Long next, String value) {
+			Assert.assertEquals(next, Long.parseLong(value), 0);
+		}
 	}
 
-	@Test
-	public void testByteListEmpty() {
-		final List<Byte> v = Arrays.asList();
-		setter.fromByte(v, this);
-		Assert.assertNull(value);
-	}
+	public static class FromInteger extends FromIntegerAbstractTest<String> {
 
-	@Test(expected = BinderException.class)
-	public void testByteListOverflow() {
-		final List<Byte> v = Arrays.asList(RandomUtils.nextBytes(1)[0], RandomUtils.nextBytes(1)[0]);
-		setter.fromByte(v, this);
-	}
+		public FromInteger() {
+			super(stringSetter);
+		}
 
-	@Test
-	public void testBooleanPrimitive() {
-		final boolean v = RandomUtils.nextBoolean();
-		setter.fromBoolean(v, this);
-		Assert.assertEquals(Boolean.toString(v), value);
+		@Override
+		protected void checkValue(Integer next, String value) {
+			Assert.assertEquals(next, Integer.parseInt(value), 0);
+		}
 	}
 
-	@Test
-	public void testBooleanPrimitiveArray() {
-		final boolean[] v = new boolean[] { RandomUtils.nextBoolean() };
-		setter.fromBoolean(v, this);
-		Assert.assertEquals(Boolean.toString(v[0]), value);
-	}
+	public static class FromFloat extends FromFloatAbstractTest<String> {
 
-	@Test
-	public void testBooleanPrimitiveArrayEmpty() {
-		final boolean[] v = new boolean[] {};
-		setter.fromBoolean(v, this);
-		Assert.assertNull(value);
-	}
+		public FromFloat() {
+			super(stringSetter);
+		}
 
-	@Test(expected = BinderException.class)
-	public void testBooleanPrimitiveArrayOverflow() {
-		final boolean[] v = new boolean[] { RandomUtils.nextBoolean(), RandomUtils.nextBoolean() };
-		setter.fromBoolean(v, this);
+		@Override
+		protected void checkValue(Float next, String value) {
+			Assert.assertEquals(next, Float.parseFloat(value), 0);
+		}
 	}
 
-	@Test
-	public void testBoolean() {
-		final Boolean v = RandomUtils.nextBoolean();
-		setter.fromBoolean(v, this);
-		Assert.assertEquals(Boolean.toString(v), value);
-	}
+	public static class FromDouble extends FromDoubleAbstractTest<String> {
 
-	@Test
-	public void testBooleanArray() {
-		final Boolean[] v = new Boolean[] { RandomUtils.nextBoolean() };
-		setter.fromBoolean(v, this);
-		Assert.assertEquals(Boolean.toString(v[0]), value);
-	}
+		public FromDouble() {
+			super(stringSetter);
+		}
 
-	@Test
-	public void testBooleanArrayEmpty() {
-		final Boolean[] v = new Boolean[] {};
-		setter.fromBoolean(v, this);
-		Assert.assertNull(value);
+		@Override
+		protected void checkValue(Double next, String value) {
+			Assert.assertEquals(next, Double.parseDouble(value), 0);
+		}
 	}
 
-	@Test(expected = BinderException.class)
-	public void testBooleanArrayOverflow() {
-		final Boolean[] v = new Boolean[] { RandomUtils.nextBoolean(), RandomUtils.nextBoolean() };
-		setter.fromBoolean(v, this);
-	}
+	public static class FromChar extends FromCharAbstractTest<String> {
 
-	@Test
-	public void testBooleanCollection() {
-		final Collection<Boolean> v = Arrays.asList(RandomUtils.nextBoolean());
-		setter.fromBoolean(v, this);
-		Assert.assertEquals(Boolean.toString(v.iterator().next()), value);
+		public FromChar() {
+			super(stringSetter);
+		}
 	}
 
-	@Test
-	public void testBooleanCollectionEmpty() {
-		final Collection<Boolean> v = Arrays.asList();
-		setter.fromBoolean(v, this);
-		Assert.assertNull(value);
-	}
+	public static class FromByte extends FromByteAbstractTest<String> {
 
-	@Test(expected = BinderException.class)
-	public void testBooleanCollectionOverflow() {
-		final Collection<Boolean> v = Arrays.asList(RandomUtils.nextBoolean(), RandomUtils.nextBoolean());
-		setter.fromBoolean(v, this);
+		public FromByte() {
+			super(stringSetter);
+		}
 	}
 
-	@Test
-	public void testBooleanList() {
-		final List<Boolean> v = Arrays.asList(RandomUtils.nextBoolean());
-		setter.fromBoolean(v, this);
-		Assert.assertEquals(Boolean.toString(v.iterator().next()), value);
-	}
+	public static class FromBoolean extends FromBooleanAbstractTest<String> {
 
-	@Test
-	public void testBooleanListEmpty() {
-		final List<Boolean> v = Arrays.asList();
-		setter.fromBoolean(v, this);
-		Assert.assertNull(value);
+		public FromBoolean() {
+			super(stringSetter);
+		}
 	}
 
-	@Test(expected = BinderException.class)
-	public void testBooleanListOverflow() {
-		final List<Boolean> v = Arrays.asList(RandomUtils.nextBoolean(), RandomUtils.nextBoolean());
-		setter.fromBoolean(v, this);
-	}
 }
