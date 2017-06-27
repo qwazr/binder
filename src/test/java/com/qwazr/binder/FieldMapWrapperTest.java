@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2016-2017 Emmanuel Keller / QWAZR
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,8 +17,6 @@ package com.qwazr.binder;
 
 import com.qwazr.utils.AnnotationsUtils;
 import com.qwazr.utils.CollectionsUtils;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -50,8 +48,8 @@ public class FieldMapWrapperTest {
 
 	@Test
 	public void test200newMap() {
-		Record record = new Record(RandomUtils.nextLong(), RandomStringUtils.randomAscii(10), RandomUtils.nextDouble(),
-				RandomStringUtils.randomAlphanumeric(3), RandomStringUtils.randomAlphanumeric(3));
+		Record record = new Record(RandomUtils.nextLong(), RandomUtils.alphanumeric(10), RandomUtils.nextDouble(),
+				RandomUtils.alphanumeric(3), RandomUtils.alphanumeric(3));
 		Map<String, Object> map = wrapper.newMap(record);
 		Assert.assertNotNull(map);
 		Assert.assertEquals(record, map);
@@ -59,10 +57,10 @@ public class FieldMapWrapperTest {
 
 	@Test
 	public void test300newMapCollection() {
-		Record record1 = new Record(RandomUtils.nextLong(), RandomStringUtils.randomAscii(10), RandomUtils.nextDouble(),
-				RandomStringUtils.randomAlphanumeric(3), RandomStringUtils.randomAlphanumeric(3));
-		Record record2 = new Record(RandomUtils.nextLong(), RandomStringUtils.randomAscii(10), RandomUtils.nextDouble(),
-				RandomStringUtils.randomAlphanumeric(3), RandomStringUtils.randomAlphanumeric(3));
+		Record record1 = new Record(RandomUtils.nextLong(), RandomUtils.alphanumeric(10), RandomUtils.nextDouble(),
+				RandomUtils.alphanumeric(3), RandomUtils.alphanumeric(3));
+		Record record2 = new Record(RandomUtils.nextLong(), RandomUtils.alphanumeric(10), RandomUtils.nextDouble(),
+				RandomUtils.alphanumeric(3), RandomUtils.alphanumeric(3));
 		List<Map<String, Object>> mapCollection = wrapper.newMapCollection(Arrays.asList(record1, record2));
 		Assert.assertNotNull(mapCollection);
 		Assert.assertEquals(2, mapCollection.size());
@@ -72,8 +70,8 @@ public class FieldMapWrapperTest {
 
 	@Test
 	public void test400newMapArray() {
-		Record record = new Record(RandomUtils.nextLong(), RandomStringUtils.randomAscii(10), RandomUtils.nextDouble(),
-				RandomStringUtils.randomAlphanumeric(3), RandomStringUtils.randomAlphanumeric(3));
+		Record record = new Record(RandomUtils.nextLong(), RandomUtils.alphanumeric(10), RandomUtils.nextDouble(),
+				RandomUtils.alphanumeric(3), RandomUtils.alphanumeric(3));
 		Map<String, Object> map = wrapper.newMap(record);
 		Assert.assertNotNull(map);
 		Assert.assertEquals(record.title, map.get("title"));
@@ -83,8 +81,8 @@ public class FieldMapWrapperTest {
 	private Map<String, Object> getRandom() {
 		Map<String, Object> map = new HashMap<>();
 		map.put("id", RandomUtils.nextLong());
-		map.put("title", RandomStringUtils.randomAscii(10));
-		map.put("price", RandomStringUtils.randomNumeric(3));
+		map.put("title", RandomUtils.alphanumeric(10));
+		map.put("price", RandomUtils.nextDouble());
 		return map;
 	}
 
@@ -99,7 +97,7 @@ public class FieldMapWrapperTest {
 	@Test
 	public void test501toRecordStringToCollection() throws ReflectiveOperationException, IOException {
 		Map map = getRandom();
-		map.put("tags", RandomStringUtils.randomAlphanumeric(5));
+		map.put("tags", RandomUtils.alphanumeric(5));
 		Record record = wrapper.toRecord(map);
 		Assert.assertNotNull(record);
 		Assert.assertEquals(record, map);
@@ -108,8 +106,7 @@ public class FieldMapWrapperTest {
 	@Test
 	public void test502toRecordCollectionToCollection() throws ReflectiveOperationException, IOException {
 		Map map = getRandom();
-		map.put("tags",
-				Arrays.asList(RandomStringUtils.randomAlphanumeric(5), RandomStringUtils.randomAlphanumeric(5)));
+		map.put("tags", Arrays.asList(RandomUtils.alphanumeric(5), RandomUtils.alphanumeric(5)));
 		Record record = wrapper.toRecord(map);
 		Assert.assertNotNull(record);
 		Assert.assertEquals(record, map);
@@ -118,8 +115,7 @@ public class FieldMapWrapperTest {
 	@Test
 	public void test503toRecordArrayToCollection() throws ReflectiveOperationException, IOException {
 		Map map = getRandom();
-		map.put("tags",
-				new String[] { RandomStringUtils.randomAlphanumeric(5), RandomStringUtils.randomAlphanumeric(5) });
+		map.put("tags", new String[] { RandomUtils.alphanumeric(5), RandomUtils.alphanumeric(5) });
 		Record record = wrapper.toRecord(map);
 		Assert.assertNotNull(record);
 		Assert.assertEquals(record, map);

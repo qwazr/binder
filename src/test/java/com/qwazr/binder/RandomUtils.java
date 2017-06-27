@@ -28,4 +28,9 @@ public class RandomUtils extends com.qwazr.utils.RandomUtils {
 	public static char nextChar() {
 		return RandomUtils.alphanumeric(1).charAt(0);
 	}
+
+	public static byte nextByte() {
+		return RandomUtils.nextBytes(1)[0];
+	}
+
 }

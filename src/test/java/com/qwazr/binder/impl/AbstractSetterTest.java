@@ -70,7 +70,7 @@ public abstract class AbstractSetterTest<T> {
 	}
 
 	final Character nextChar() {
-		return (char) (nextNumber().intValue() % Character.MAX_CODE_POINT);
+		return (char) (Math.abs(nextNumber().intValue()) % Character.MAX_CODE_POINT);
 	}
 
 	final Boolean nextBoolean() {
