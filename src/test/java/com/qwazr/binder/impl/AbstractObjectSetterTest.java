@@ -19,7 +19,7 @@ import org.junit.Assert;
 
 import java.lang.reflect.Field;
 
-public abstract class AbstractObjectSetterTest<T> extends AbstractSetterTest {
+public abstract class AbstractObjectSetterTest<T> extends AbstractSingleSetterTest {
 
 	final protected T value = null;
 

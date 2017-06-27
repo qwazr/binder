@@ -18,7 +18,7 @@ package com.qwazr.binder.impl;
 import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 
-public class CharPrimitiveSetterTest extends AbstractSetterTest {
+public class CharPrimitiveSetterTest extends AbstractSingleSetterTest {
 
 	char value;
 

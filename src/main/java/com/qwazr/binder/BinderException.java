@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 public class BinderException extends RuntimeException {
 
-	public BinderException(Field field, Object value, IllegalAccessException e) {
+	public BinderException(Field field, Object value, Exception e) {
 		super(getMessage(field, value), e);
 	}
 

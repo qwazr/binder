@@ -18,7 +18,7 @@ package com.qwazr.binder.impl;
 import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 
-public class BooleanPrimitiveSetterTest extends AbstractSetterTest {
+public class BooleanPrimitiveSetterTest extends AbstractSingleSetterTest {
 
 	boolean value;
 

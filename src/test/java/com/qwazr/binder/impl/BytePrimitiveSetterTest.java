@@ -18,7 +18,7 @@ package com.qwazr.binder.impl;
 import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 
-public class BytePrimitiveSetterTest extends AbstractSetterTest {
+public class BytePrimitiveSetterTest extends AbstractSingleSetterTest {
 
 	double value;
 
