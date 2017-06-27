@@ -30,6 +30,11 @@ public class StringSetterTest extends AbstractSetterTest<String> {
 	}
 
 	@Override
+	protected Number nextNumber() {
+		return RandomUtils.nextDouble();
+	}
+
+	@Override
 	protected void checkValueString(String next, String value) {
 		Assert.assertEquals(next, value);
 	}

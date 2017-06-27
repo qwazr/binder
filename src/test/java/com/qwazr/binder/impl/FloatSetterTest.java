@@ -30,6 +30,11 @@ public class FloatSetterTest extends AbstractSetterTest<Float> {
 	}
 
 	@Override
+	protected Number nextNumber() {
+		return RandomUtils.nextFloat();
+	}
+
+	@Override
 	protected void checkValueString(String next, Float value) {
 		Assert.assertEquals(Float.valueOf(next), value);
 	}

@@ -18,64 +18,64 @@ package com.qwazr.binder.impl;
 import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 
-public class ShortSetterTest extends AbstractSetterTest<Short> {
+public class LongSetterTest extends AbstractSetterTest<Long> {
 
-	public ShortSetterTest() {
-		super(new ShortSetterImpl(AbstractSetterTest.getValueField()));
+	public LongSetterTest() {
+		super(new LongSetterImpl(AbstractSetterTest.getValueField()));
 	}
 
 	@Override
 	protected String nextString() {
-		return Short.toString(RandomUtils.nextShort());
+		return Long.toString(RandomUtils.nextLong());
 	}
 
 	@Override
 	protected Number nextNumber() {
-		return RandomUtils.nextShort();
+		return RandomUtils.nextLong();
 	}
 
 	@Override
-	protected void checkValueString(String next, Short value) {
-		Assert.assertEquals(Short.valueOf(next), value);
+	protected void checkValueString(String next, Long value) {
+		Assert.assertEquals(Long.valueOf(next), value);
 	}
 
 	@Override
-	protected void checkValueShort(Short next, Short value) {
+	protected void checkValueShort(Short next, Long value) {
+		Assert.assertEquals(next, value.shortValue(), 0);
+	}
+
+	@Override
+	protected void checkValueLong(Long next, Long value) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueLong(Long next, Short value) {
-		Assert.assertEquals(next, value.longValue(), 0);
-	}
-
-	@Override
-	protected void checkValueInteger(Integer next, Short value) {
+	protected void checkValueInteger(Integer next, Long value) {
 		Assert.assertEquals(next, value.intValue(), 0);
 	}
 
 	@Override
-	protected void checkValueFloat(Float next, Short value) {
+	protected void checkValueFloat(Float next, Long value) {
 		Assert.assertEquals(next, value.floatValue(), 0);
 	}
 
 	@Override
-	protected void checkValueDouble(Double next, Short value) {
+	protected void checkValueDouble(Double next, Long value) {
 		Assert.assertEquals(next, value.doubleValue(), 0);
 	}
 
 	@Override
-	protected void checkValueChar(Character next, Short value) {
+	protected void checkValueChar(Character next, Long value) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueByte(Byte next, Short value) {
+	protected void checkValueByte(Byte next, Long value) {
 		Assert.assertEquals(next, value.byteValue(), 0);
 	}
 
 	@Override
-	protected void checkValueBoolean(Boolean next, Short value) {
+	protected void checkValueBoolean(Boolean next, Long value) {
 		Assert.assertEquals(next ? 1 : 0, value, 0);
 	}
 }

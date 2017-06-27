@@ -17,94 +17,94 @@ package com.qwazr.binder.impl;
 
 import java.lang.reflect.Field;
 
-final public class ShortSetterImpl extends ObjectSetterAbstract {
+final public class IntegerSetterImpl extends ObjectSetterAbstract {
 
-	ShortSetterImpl(Field field) {
+	IntegerSetterImpl(Field field) {
 		super(field);
 	}
 
 	@Override
 	public void fromString(String value, Object object) {
-		set(object, Short.parseShort(value));
+		set(object, Integer.parseInt(value));
 	}
 
 	@Override
 	public void fromDouble(Double value, Object object) {
-		set(object, value.shortValue());
+		set(object, value.intValue());
 	}
 
 	@Override
 	public void fromFloat(Float value, Object object) {
-		set(object, value.shortValue());
+		set(object, value.intValue());
 	}
 
 	@Override
 	public void fromLong(Long value, Object object) {
-		set(object, value.shortValue());
+		set(object, value.intValue());
 	}
 
 	@Override
 	public void fromInteger(Integer value, Object object) {
-		set(object, value.shortValue());
+		set(object, value);
 	}
 
 	@Override
 	public void fromShort(Short value, Object object) {
-		set(object, value);
+		set(object, value.intValue());
 	}
 
 	@Override
 	public void fromChar(Character value, Object object) {
-		set(object, (short) (int) value);
+		set(object, (int) value);
 	}
 
 	@Override
 	public void fromByte(Byte value, Object object) {
-		set(object, value.shortValue());
+		set(object, value.intValue());
 	}
 
 	@Override
 	public void fromBoolean(Boolean value, Object object) {
-		set(object, (short) (value ? 1 : 0));
+		set(object, (value ? 1 : 0));
 	}
 
 	@Override
 	public void fromDouble(double value, Object object) {
-		set(object, (short) value);
+		set(object, (int) value);
 	}
 
 	@Override
 	public void fromFloat(float value, Object object) {
-		set(object, (short) value);
+		set(object, (int) value);
 	}
 
 	@Override
 	public void fromLong(long value, Object object) {
-		set(object, (short) value);
+		set(object, (int) value);
 	}
 
 	@Override
 	public void fromInteger(int value, Object object) {
-		set(object, (short) value);
-	}
-
-	@Override
-	public void fromShort(short value, Object object) {
 		set(object, value);
 	}
 
 	@Override
+	public void fromShort(short value, Object object) {
+		set(object, (int) value);
+	}
+
+	@Override
 	public void fromChar(char value, Object object) {
-		set(object, (short) value);
+		set(object, (int) value);
 	}
 
 	@Override
 	public void fromByte(byte value, Object object) {
-		set(object, (short) value);
+		set(object, (int) value);
 	}
 
 	@Override
 	public void fromBoolean(boolean value, Object object) {
-		set(object, (short) (value ? 1 : 0));
+		set(object, value ? 1 : 0);
 	}
 }

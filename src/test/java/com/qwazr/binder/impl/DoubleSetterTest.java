@@ -29,6 +29,11 @@ public class DoubleSetterTest extends AbstractSetterTest<Double> {
 	}
 
 	@Override
+	protected Number nextNumber() {
+		return RandomUtils.nextDouble();
+	}
+
+	@Override
 	protected void checkValueString(String next, Double value) {
 		Assert.assertEquals(Double.valueOf(next), value);
 	}
