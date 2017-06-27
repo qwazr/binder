@@ -18,47 +18,47 @@ package com.qwazr.binder.impl;
 import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 
-public class DoublePrimitiveSetterTest extends AbstractSetterTest {
+public class CharPrimitiveSetterTest extends AbstractSetterTest {
 
-	double value;
+	char value;
 
-	public DoublePrimitiveSetterTest() throws NoSuchFieldException {
-		super(new DoublePrimitiveSetterImpl(DoublePrimitiveSetterTest.class.getDeclaredField("value")));
+	public CharPrimitiveSetterTest() throws NoSuchFieldException {
+		super(new CharPrimitiveSetterImpl(CharPrimitiveSetterTest.class.getDeclaredField("value")));
 	}
 
 	@Override
 	protected String nextString() {
-		return Double.toString(RandomUtils.nextDouble());
+		return Character.toString(RandomUtils.nextChar());
 	}
 
 	@Override
 	protected Number nextNumber() {
-		return RandomUtils.nextDouble();
+		return (int) RandomUtils.nextChar();
 	}
 
 	@Override
 	protected void checkValueString(String next) {
-		Assert.assertEquals(Double.parseDouble(next), value, 0);
+		Assert.assertEquals(next, Character.toString(value));
 	}
 
 	@Override
 	protected void checkValueShort(Short next) {
-		Assert.assertEquals(next.doubleValue(), value, 0);
+		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
 	protected void checkValueLong(Long next) {
-		Assert.assertEquals(next.doubleValue(), value, 0);
+		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
 	protected void checkValueInteger(Integer next) {
-		Assert.assertEquals(next.doubleValue(), value, 0);
+		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
 	protected void checkValueFloat(Float next) {
-		Assert.assertEquals(next.doubleValue(), value, 0);
+		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class DoublePrimitiveSetterTest extends AbstractSetterTest {
 
 	@Override
 	protected void checkValueByte(Byte next) {
-		Assert.assertEquals(next.doubleValue(), value, 0);
+		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
@@ -83,6 +83,6 @@ public class DoublePrimitiveSetterTest extends AbstractSetterTest {
 
 	@Override
 	protected void checkValueNull() {
-		Assert.assertEquals(Double.NaN, value, 0);
+		Assert.assertEquals(0, value, 0);
 	}
 }
