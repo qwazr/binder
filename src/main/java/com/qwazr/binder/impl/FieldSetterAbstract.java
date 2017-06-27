@@ -45,6 +45,62 @@ abstract class FieldSetterAbstract implements FieldSetter {
 		}
 	}
 
+	final void setByte(final Object object, final byte value) {
+		try {
+			field.setByte(object, value);
+		} catch (IllegalAccessException e) {
+			throw new BinderException(field, value, e);
+		}
+	}
+
+	final void setChar(final Object object, final char value) {
+		try {
+			field.setChar(object, value);
+		} catch (IllegalAccessException e) {
+			throw new BinderException(field, value, e);
+		}
+	}
+
+	final void setDouble(final Object object, final double value) {
+		try {
+			field.setDouble(object, value);
+		} catch (IllegalAccessException e) {
+			throw new BinderException(field, value, e);
+		}
+	}
+
+	final void setFloat(final Object object, final float value) {
+		try {
+			field.setFloat(object, value);
+		} catch (IllegalAccessException e) {
+			throw new BinderException(field, value, e);
+		}
+	}
+
+	final void setLong(final Object object, final long value) {
+		try {
+			field.setLong(object, value);
+		} catch (IllegalAccessException e) {
+			throw new BinderException(field, value, e);
+		}
+	}
+
+	final void setInteger(final Object object, final int value) {
+		try {
+			field.setInt(object, value);
+		} catch (IllegalAccessException e) {
+			throw new BinderException(field, value, e);
+		}
+	}
+
+	final void setShort(final Object object, final short value) {
+		try {
+			field.setShort(object, value);
+		} catch (IllegalAccessException e) {
+			throw new BinderException(field, value, e);
+		}
+	}
+
 	final void error(final Object value) {
 		throw new BinderException(field, value);
 	}
