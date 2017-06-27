@@ -17,15 +17,13 @@ package com.qwazr.binder.impl;
 
 import com.qwazr.utils.RandomUtils;
 import org.junit.Assert;
+import org.junit.Ignore;
 
-import java.util.Collection;
-
-public class StringCollectionSetterTest extends AbstractCollectionSetterTest {
-
-	Collection<String> value;
+@Ignore
+public class StringCollectionSetterTest extends AbstractCollectionSetterTest<String> {
 
 	public StringCollectionSetterTest() throws NoSuchFieldException {
-		super(new StringCollectionSetterImpl(StringCollectionSetterTest.class.getDeclaredField("value")));
+		super(new StringCollectionSetterImpl(AbstractCollectionSetterTest.class.getDeclaredField("value")));
 	}
 
 	@Override
@@ -89,21 +87,7 @@ public class StringCollectionSetterTest extends AbstractCollectionSetterTest {
 	}
 
 	@Override
-	protected void checkValuesString(String... value) {
-	}
-
-	@Override
-	protected void checkValuesShort(Short... v) {
-
-	}
-
-	@Override
 	protected void checkValuesShort(short... v) {
-
-	}
-
-	@Override
-	protected void checkValuesLong(Long... v) {
 
 	}
 
@@ -113,17 +97,7 @@ public class StringCollectionSetterTest extends AbstractCollectionSetterTest {
 	}
 
 	@Override
-	protected void checkValuesInteger(Integer... v) {
-
-	}
-
-	@Override
 	protected void checkValuesInteger(int... v) {
-
-	}
-
-	@Override
-	protected void checkValuesFloat(Float... v) {
 
 	}
 
@@ -133,17 +107,7 @@ public class StringCollectionSetterTest extends AbstractCollectionSetterTest {
 	}
 
 	@Override
-	protected void checkValuesDouble(Double... v) {
-
-	}
-
-	@Override
 	protected void checkValuesDouble(double... v) {
-
-	}
-
-	@Override
-	protected void checkValuesChar(Character... v) {
 
 	}
 
@@ -153,17 +117,7 @@ public class StringCollectionSetterTest extends AbstractCollectionSetterTest {
 	}
 
 	@Override
-	protected void checkValuesByte(Byte... v) {
-
-	}
-
-	@Override
 	protected void checkValuesByte(byte... v) {
-
-	}
-
-	@Override
-	protected void checkValuesBoolean(Boolean... v) {
 
 	}
 
