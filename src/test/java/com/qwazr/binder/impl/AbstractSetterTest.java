@@ -16,29 +16,18 @@
 package com.qwazr.binder.impl;
 
 import com.qwazr.binder.BinderException;
-import org.junit.Assert;
 import org.junit.Test;
 
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class AbstractSetterTest<T> {
+public abstract class AbstractSetterTest {
 
 	protected FieldSetterAbstract setter;
-	protected T value;
 
 	protected AbstractSetterTest(FieldSetterAbstract setter) {
 		this.setter = setter;
-	}
-
-	static public Field getValueField() {
-		try {
-			return AbstractSetterTest.class.getDeclaredField("value");
-		} catch (NoSuchFieldException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	protected abstract String nextString();
@@ -77,43 +66,45 @@ public abstract class AbstractSetterTest<T> {
 		return nextNumber().byteValue() != 0;
 	}
 
-	protected abstract void checkValueString(String next, T value);
+	protected abstract void checkValueString(String next);
 
-	protected abstract void checkValueShort(Short next, T value);
+	protected abstract void checkValueShort(Short next);
 
-	protected abstract void checkValueLong(Long next, T value);
+	protected abstract void checkValueLong(Long next);
 
-	protected abstract void checkValueInteger(Integer next, T value);
+	protected abstract void checkValueInteger(Integer next);
 
-	protected abstract void checkValueFloat(Float next, T value);
+	protected abstract void checkValueFloat(Float next);
 
-	protected abstract void checkValueDouble(Double next, T value);
+	protected abstract void checkValueDouble(Double next);
 
-	protected abstract void checkValueChar(Character next, T value);
+	protected abstract void checkValueChar(Character next);
 
-	protected abstract void checkValueByte(Byte next, T value);
+	protected abstract void checkValueByte(Byte next);
 
-	protected abstract void checkValueBoolean(Boolean next, T value);
+	protected abstract void checkValueBoolean(Boolean next);
+
+	protected abstract void checkValueNull();
 
 	@Test
 	final public void testString() {
 		final String v = nextString();
 		setter.fromString(v, this);
-		checkValueString(v, value);
+		checkValueString(v);
 	}
 
 	@Test
 	final public void testStringArray() {
 		final String[] v = new String[] { nextString() };
 		setter.fromString(v, this);
-		checkValueString(v[0], value);
+		checkValueString(v[0]);
 	}
 
 	@Test
 	final public void testStringArrayEmpty() {
 		final String[] v = new String[] {};
 		setter.fromString(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -126,14 +117,14 @@ public abstract class AbstractSetterTest<T> {
 	final public void testStringCollection() {
 		final Collection<String> v = Arrays.asList(nextString());
 		setter.fromString(v, this);
-		checkValueString(v.iterator().next(), value);
+		checkValueString(v.iterator().next());
 	}
 
 	@Test
 	final public void testStringCollectionEmpty() {
 		final Collection<String> v = Arrays.asList();
 		setter.fromString(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -146,14 +137,14 @@ public abstract class AbstractSetterTest<T> {
 	final public void testStringList() {
 		final List<String> v = Arrays.asList(nextString());
 		setter.fromString(v, this);
-		checkValueString(v.get(0), value);
+		checkValueString(v.get(0));
 	}
 
 	@Test
 	final public void testStringListEmpty() {
 		final List<String> v = Arrays.asList();
 		setter.fromString(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -166,21 +157,21 @@ public abstract class AbstractSetterTest<T> {
 	final public void testShortPrimitive() {
 		final short v = nextShort();
 		setter.fromShort(v, this);
-		checkValueShort(v, value);
+		checkValueShort(v);
 	}
 
 	@Test
 	final public void testShortPrimitiveArray() {
 		final short[] v = new short[] { nextShort() };
 		setter.fromShort(v, this);
-		checkValueShort(v[0], value);
+		checkValueShort(v[0]);
 	}
 
 	@Test
 	final public void testShortPrimitiveArrayEmpty() {
 		final short[] v = new short[] {};
 		setter.fromShort(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -193,21 +184,21 @@ public abstract class AbstractSetterTest<T> {
 	final public void testShort() {
 		final Short v = nextShort();
 		setter.fromShort(v, this);
-		checkValueShort(v, value);
+		checkValueShort(v);
 	}
 
 	@Test
 	final public void testShortArray() {
 		final Short[] v = new Short[] { nextShort() };
 		setter.fromShort(v, this);
-		checkValueShort(v[0], value);
+		checkValueShort(v[0]);
 	}
 
 	@Test
 	final public void testShortArrayEmpty() {
 		final Short[] v = new Short[] {};
 		setter.fromShort(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -220,14 +211,14 @@ public abstract class AbstractSetterTest<T> {
 	final public void testShortCollection() {
 		final Collection<Short> v = Arrays.asList(nextShort());
 		setter.fromShort(v, this);
-		checkValueShort(v.iterator().next(), value);
+		checkValueShort(v.iterator().next());
 	}
 
 	@Test
 	final public void testShortCollectionEmpty() {
 		final Collection<Short> v = Arrays.asList();
 		setter.fromShort(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -240,14 +231,14 @@ public abstract class AbstractSetterTest<T> {
 	public void testShortList() {
 		final List<Short> v = Arrays.asList(nextShort());
 		setter.fromShort(v, this);
-		checkValueShort(v.iterator().next(), value);
+		checkValueShort(v.iterator().next());
 	}
 
 	@Test
 	final public void testShortListEmpty() {
 		final List<Short> v = Arrays.asList();
 		setter.fromShort(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -260,21 +251,21 @@ public abstract class AbstractSetterTest<T> {
 	public void testLongPrimitive() {
 		final long v = nextLong();
 		setter.fromLong(v, this);
-		checkValueLong(v, value);
+		checkValueLong(v);
 	}
 
 	@Test
 	public void testLongPrimitiveArray() {
 		final long[] v = new long[] { nextLong() };
 		setter.fromLong(v, this);
-		checkValueLong(v[0], value);
+		checkValueLong(v[0]);
 	}
 
 	@Test
 	public void testLongPrimitiveArrayEmpty() {
 		final long[] v = new long[] {};
 		setter.fromLong(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -287,21 +278,21 @@ public abstract class AbstractSetterTest<T> {
 	public void testLong() {
 		final Long v = nextLong();
 		setter.fromLong(v, this);
-		checkValueLong(v, value);
+		checkValueLong(v);
 	}
 
 	@Test
 	public void testLongArray() {
 		final Long[] v = new Long[] { nextLong() };
 		setter.fromLong(v, this);
-		checkValueLong(v[0], value);
+		checkValueLong(v[0]);
 	}
 
 	@Test
 	public void testLongArrayEmpty() {
 		final Long[] v = new Long[] {};
 		setter.fromLong(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -314,14 +305,14 @@ public abstract class AbstractSetterTest<T> {
 	public void testLongCollection() {
 		final Collection<Long> v = Arrays.asList(nextLong());
 		setter.fromLong(v, this);
-		checkValueLong(v.iterator().next(), value);
+		checkValueLong(v.iterator().next());
 	}
 
 	@Test
 	public void testLongCollectionEmpty() {
 		final Collection<Long> v = Arrays.asList();
 		setter.fromLong(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -334,14 +325,14 @@ public abstract class AbstractSetterTest<T> {
 	public void testLongList() {
 		final List<Long> v = Arrays.asList(nextLong());
 		setter.fromLong(v, this);
-		checkValueLong(v.iterator().next(), value);
+		checkValueLong(v.iterator().next());
 	}
 
 	@Test
 	public void testLongListEmpty() {
 		final List<Long> v = Arrays.asList();
 		setter.fromLong(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -354,21 +345,21 @@ public abstract class AbstractSetterTest<T> {
 	public void testIntegerPrimitive() {
 		final int v = nextInt();
 		setter.fromInteger(v, this);
-		checkValueInteger(v, value);
+		checkValueInteger(v);
 	}
 
 	@Test
 	public void testIntegerPrimitiveArray() {
 		final int[] v = new int[] { nextInt() };
 		setter.fromInteger(v, this);
-		checkValueInteger(v[0], value);
+		checkValueInteger(v[0]);
 	}
 
 	@Test
 	public void testIntegerPrimitiveArrayEmpty() {
 		final int[] v = new int[] {};
 		setter.fromInteger(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -381,21 +372,21 @@ public abstract class AbstractSetterTest<T> {
 	public void testInteger() {
 		final Integer v = nextInt();
 		setter.fromInteger(v, this);
-		checkValueInteger(v, value);
+		checkValueInteger(v);
 	}
 
 	@Test
 	public void testIntegerArray() {
 		final Integer[] v = new Integer[] { nextInt() };
 		setter.fromInteger(v, this);
-		checkValueInteger(v[0], value);
+		checkValueInteger(v[0]);
 	}
 
 	@Test
 	public void testIntegerArrayEmpty() {
 		final Integer[] v = new Integer[] {};
 		setter.fromInteger(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -408,14 +399,14 @@ public abstract class AbstractSetterTest<T> {
 	public void testIntegerCollection() {
 		final Collection<Integer> v = Arrays.asList(nextInt());
 		setter.fromInteger(v, this);
-		checkValueInteger(v.iterator().next(), value);
+		checkValueInteger(v.iterator().next());
 	}
 
 	@Test
 	public void testIntegerCollectionEmpty() {
 		final Collection<Integer> v = Arrays.asList();
 		setter.fromInteger(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -428,14 +419,14 @@ public abstract class AbstractSetterTest<T> {
 	public void testIntegerList() {
 		final List<Integer> v = Arrays.asList(nextInt());
 		setter.fromInteger(v, this);
-		checkValueInteger(v.iterator().next(), value);
+		checkValueInteger(v.iterator().next());
 	}
 
 	@Test
 	public void testIntegerListEmpty() {
 		final List<Integer> v = Arrays.asList();
 		setter.fromInteger(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -448,21 +439,21 @@ public abstract class AbstractSetterTest<T> {
 	public void testFloatPrimitive() {
 		final float v = nextFloat();
 		setter.fromFloat(v, this);
-		checkValueFloat(v, value);
+		checkValueFloat(v);
 	}
 
 	@Test
 	public void testFloatPrimitiveArray() {
 		final float[] v = new float[] { nextFloat() };
 		setter.fromFloat(v, this);
-		checkValueFloat(v[0], value);
+		checkValueFloat(v[0]);
 	}
 
 	@Test
 	public void testFloatPrimitiveArrayEmpty() {
 		final float[] v = new float[] {};
 		setter.fromFloat(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -475,21 +466,21 @@ public abstract class AbstractSetterTest<T> {
 	public void testFloat() {
 		final Float v = nextFloat();
 		setter.fromFloat(v, this);
-		checkValueFloat(v, value);
+		checkValueFloat(v);
 	}
 
 	@Test
 	public void testFloatArray() {
 		final Float[] v = new Float[] { nextFloat() };
 		setter.fromFloat(v, this);
-		checkValueFloat(v[0], value);
+		checkValueFloat(v[0]);
 	}
 
 	@Test
 	public void testFloatArrayEmpty() {
 		final Float[] v = new Float[] {};
 		setter.fromFloat(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -502,14 +493,14 @@ public abstract class AbstractSetterTest<T> {
 	public void testFloatCollection() {
 		final Collection<Float> v = Arrays.asList(nextFloat());
 		setter.fromFloat(v, this);
-		checkValueFloat(v.iterator().next(), value);
+		checkValueFloat(v.iterator().next());
 	}
 
 	@Test
 	public void testFloatCollectionEmpty() {
 		final Collection<Float> v = Arrays.asList();
 		setter.fromFloat(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -522,14 +513,14 @@ public abstract class AbstractSetterTest<T> {
 	public void testFloatList() {
 		final List<Float> v = Arrays.asList(nextFloat());
 		setter.fromFloat(v, this);
-		checkValueFloat(v.iterator().next(), value);
+		checkValueFloat(v.iterator().next());
 	}
 
 	@Test
 	public void testFloatListEmpty() {
 		final List<Float> v = Arrays.asList();
 		setter.fromFloat(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -542,21 +533,21 @@ public abstract class AbstractSetterTest<T> {
 	public void testDoublePrimitive() {
 		final double v = nextDouble();
 		setter.fromDouble(v, this);
-		checkValueDouble(v, value);
+		checkValueDouble(v);
 	}
 
 	@Test
 	public void testDoublePrimitiveArray() {
 		final double[] v = new double[] { nextDouble() };
 		setter.fromDouble(v, this);
-		checkValueDouble(v[0], value);
+		checkValueDouble(v[0]);
 	}
 
 	@Test
 	public void testDoublePrimitiveArrayEmpty() {
 		final double[] v = new double[] {};
 		setter.fromDouble(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -569,21 +560,21 @@ public abstract class AbstractSetterTest<T> {
 	public void testDouble() {
 		final Double v = nextDouble();
 		setter.fromDouble(v, this);
-		checkValueDouble(v, value);
+		checkValueDouble(v);
 	}
 
 	@Test
 	public void testDoubleArray() {
 		final Double[] v = new Double[] { nextDouble() };
 		setter.fromDouble(v, this);
-		checkValueDouble(v[0], value);
+		checkValueDouble(v[0]);
 	}
 
 	@Test
 	public void testDoubleArrayEmpty() {
 		final Double[] v = new Double[] {};
 		setter.fromDouble(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -596,14 +587,14 @@ public abstract class AbstractSetterTest<T> {
 	public void testDoubleCollection() {
 		final Collection<Double> v = Arrays.asList(nextDouble());
 		setter.fromDouble(v, this);
-		checkValueDouble(v.iterator().next(), value);
+		checkValueDouble(v.iterator().next());
 	}
 
 	@Test
 	public void testDoubleCollectionEmpty() {
 		final Collection<Double> v = Arrays.asList();
 		setter.fromDouble(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -616,14 +607,14 @@ public abstract class AbstractSetterTest<T> {
 	public void testDoubleList() {
 		final List<Double> v = Arrays.asList(nextDouble());
 		setter.fromDouble(v, this);
-		checkValueDouble(v.iterator().next(), value);
+		checkValueDouble(v.iterator().next());
 	}
 
 	@Test
 	public void testDoubleListEmpty() {
 		final List<Double> v = Arrays.asList();
 		setter.fromDouble(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -636,21 +627,21 @@ public abstract class AbstractSetterTest<T> {
 	final public void testCharPrimitive() {
 		final char v = nextChar();
 		setter.fromChar(v, this);
-		checkValueChar(v, value);
+		checkValueChar(v);
 	}
 
 	@Test
 	final public void testCharPrimitiveArray() {
 		final char[] v = new char[] { nextChar() };
 		setter.fromChar(v, this);
-		checkValueChar(v[0], value);
+		checkValueChar(v[0]);
 	}
 
 	@Test
 	final public void testCharPrimitiveArrayEmpty() {
 		final char[] v = new char[] {};
 		setter.fromChar(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -663,21 +654,21 @@ public abstract class AbstractSetterTest<T> {
 	final public void testChar() {
 		final Character v = nextChar();
 		setter.fromChar(v, this);
-		checkValueChar(v, value);
+		checkValueChar(v);
 	}
 
 	@Test
 	final public void testCharArray() {
 		final Character[] v = new Character[] { nextChar() };
 		setter.fromChar(v, this);
-		checkValueChar(v[0], value);
+		checkValueChar(v[0]);
 	}
 
 	@Test
 	final public void testCharArrayEmpty() {
 		final Character[] v = new Character[] {};
 		setter.fromChar(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -690,14 +681,14 @@ public abstract class AbstractSetterTest<T> {
 	final public void testCharCollection() {
 		final Collection<Character> v = Arrays.asList(nextChar());
 		setter.fromChar(v, this);
-		checkValueChar(v.iterator().next(), value);
+		checkValueChar(v.iterator().next());
 	}
 
 	@Test
 	final public void testCharCollectionEmpty() {
 		final Collection<Character> v = Arrays.asList();
 		setter.fromChar(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -710,14 +701,14 @@ public abstract class AbstractSetterTest<T> {
 	public void testCharList() {
 		final List<Character> v = Arrays.asList(nextChar());
 		setter.fromChar(v, this);
-		checkValueChar(v.iterator().next(), value);
+		checkValueChar(v.iterator().next());
 	}
 
 	@Test
 	final public void testCharListEmpty() {
 		final List<Character> v = Arrays.asList();
 		setter.fromChar(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -730,21 +721,21 @@ public abstract class AbstractSetterTest<T> {
 	final public void testBytePrimitive() {
 		final byte v = nextByte();
 		setter.fromByte(v, this);
-		checkValueByte(v, value);
+		checkValueByte(v);
 	}
 
 	@Test
 	final public void testBytePrimitiveArray() {
 		final byte[] v = new byte[] { nextByte() };
 		setter.fromByte(v, this);
-		checkValueByte(v[0], value);
+		checkValueByte(v[0]);
 	}
 
 	@Test
 	final public void testBytePrimitiveArrayEmpty() {
 		final byte[] v = new byte[] {};
 		setter.fromByte(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -757,21 +748,21 @@ public abstract class AbstractSetterTest<T> {
 	final public void testByte() {
 		final Byte v = nextByte();
 		setter.fromByte(v, this);
-		checkValueByte(v, value);
+		checkValueByte(v);
 	}
 
 	@Test
 	final public void testByteArray() {
 		final Byte[] v = new Byte[] { nextByte() };
 		setter.fromByte(v, this);
-		checkValueByte(v[0], value);
+		checkValueByte(v[0]);
 	}
 
 	@Test
 	final public void testByteArrayEmpty() {
 		final Byte[] v = new Byte[] {};
 		setter.fromByte(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -784,14 +775,14 @@ public abstract class AbstractSetterTest<T> {
 	final public void testByteCollection() {
 		final Collection<Byte> v = Arrays.asList(nextByte());
 		setter.fromByte(v, this);
-		checkValueByte(v.iterator().next(), value);
+		checkValueByte(v.iterator().next());
 	}
 
 	@Test
 	final public void testByteCollectionEmpty() {
 		final Collection<Byte> v = Arrays.asList();
 		setter.fromByte(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -804,14 +795,14 @@ public abstract class AbstractSetterTest<T> {
 	final public void testByteList() {
 		final List<Byte> v = Arrays.asList(nextByte());
 		setter.fromByte(v, this);
-		checkValueByte(v.iterator().next(), value);
+		checkValueByte(v.iterator().next());
 	}
 
 	@Test
 	final public void testByteListEmpty() {
 		final List<Byte> v = Arrays.asList();
 		setter.fromByte(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -824,21 +815,21 @@ public abstract class AbstractSetterTest<T> {
 	final public void testBooleanPrimitive() {
 		final boolean v = nextBoolean();
 		setter.fromBoolean(v, this);
-		checkValueBoolean(v, value);
+		checkValueBoolean(v);
 	}
 
 	@Test
 	final public void testBooleanPrimitiveArray() {
 		final boolean[] v = new boolean[] { nextBoolean() };
 		setter.fromBoolean(v, this);
-		checkValueBoolean(v[0], value);
+		checkValueBoolean(v[0]);
 	}
 
 	@Test
 	final public void testBooleanPrimitiveArrayEmpty() {
 		final boolean[] v = new boolean[] {};
 		setter.fromBoolean(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -851,21 +842,21 @@ public abstract class AbstractSetterTest<T> {
 	final public void testBoolean() {
 		final Boolean v = nextBoolean();
 		setter.fromBoolean(v, this);
-		checkValueBoolean(v, value);
+		checkValueBoolean(v);
 	}
 
 	@Test
 	final public void testBooleanArray() {
 		final Boolean[] v = new Boolean[] { nextBoolean() };
 		setter.fromBoolean(v, this);
-		checkValueBoolean(v[0], value);
+		checkValueBoolean(v[0]);
 	}
 
 	@Test
 	final public void testBooleanArrayEmpty() {
 		final Boolean[] v = new Boolean[] {};
 		setter.fromBoolean(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -878,14 +869,14 @@ public abstract class AbstractSetterTest<T> {
 	final public void testBooleanCollection() {
 		final Collection<Boolean> v = Arrays.asList(nextBoolean());
 		setter.fromBoolean(v, this);
-		checkValueBoolean(v.iterator().next(), value);
+		checkValueBoolean(v.iterator().next());
 	}
 
 	@Test
 	final public void testBooleanCollectionEmpty() {
 		final Collection<Boolean> v = Arrays.asList();
 		setter.fromBoolean(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)
@@ -898,14 +889,14 @@ public abstract class AbstractSetterTest<T> {
 	final public void testBooleanList() {
 		final List<Boolean> v = Arrays.asList(nextBoolean());
 		setter.fromBoolean(v, this);
-		checkValueBoolean(v.iterator().next(), value);
+		checkValueBoolean(v.iterator().next());
 	}
 
 	@Test
 	final public void testBooleanListEmpty() {
 		final List<Boolean> v = Arrays.asList();
 		setter.fromBoolean(v, this);
-		Assert.assertNull(value);
+		checkValueNull();
 	}
 
 	@Test(expected = BinderException.class)

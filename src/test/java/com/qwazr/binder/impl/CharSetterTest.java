@@ -18,10 +18,10 @@ package com.qwazr.binder.impl;
 import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 
-public class CharSetterTest extends AbstractSetterTest<Character> {
+public class CharSetterTest extends AbstractObjectSetterTest<Character> {
 
 	public CharSetterTest() {
-		super(new CharSetterImpl(AbstractSetterTest.getValueField()));
+		super(new CharSetterImpl(getValueField()));
 	}
 
 	@Override
@@ -35,47 +35,47 @@ public class CharSetterTest extends AbstractSetterTest<Character> {
 	}
 
 	@Override
-	protected void checkValueString(String next, Character value) {
+	protected void checkValueString(String next) {
 		Assert.assertEquals(next, value.toString());
 	}
 
 	@Override
-	protected void checkValueShort(Short next, Character value) {
+	protected void checkValueShort(Short next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueLong(Long next, Character value) {
+	protected void checkValueLong(Long next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueInteger(Integer next, Character value) {
+	protected void checkValueInteger(Integer next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueFloat(Float next, Character value) {
+	protected void checkValueFloat(Float next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueDouble(Double next, Character value) {
+	protected void checkValueDouble(Double next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueChar(Character next, Character value) {
+	protected void checkValueChar(Character next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueByte(Byte next, Character value) {
+	protected void checkValueByte(Byte next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueBoolean(Boolean next, Character value) {
+	protected void checkValueBoolean(Boolean next) {
 		Assert.assertEquals(next ? 1 : 0, value, 0);
 	}
 }

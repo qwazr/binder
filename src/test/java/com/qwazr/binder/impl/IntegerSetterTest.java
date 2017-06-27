@@ -18,10 +18,10 @@ package com.qwazr.binder.impl;
 import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 
-public class IntegerSetterTest extends AbstractSetterTest<Integer> {
+public class IntegerSetterTest extends AbstractObjectSetterTest<Integer> {
 
 	public IntegerSetterTest() {
-		super(new IntegerSetterImpl(AbstractSetterTest.getValueField()));
+		super(new IntegerSetterImpl(getValueField()));
 	}
 
 	@Override
@@ -35,47 +35,47 @@ public class IntegerSetterTest extends AbstractSetterTest<Integer> {
 	}
 
 	@Override
-	protected void checkValueString(String next, Integer value) {
+	protected void checkValueString(String next) {
 		Assert.assertEquals(Integer.valueOf(next), value);
 	}
 
 	@Override
-	protected void checkValueShort(Short next, Integer value) {
+	protected void checkValueShort(Short next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueLong(Long next, Integer value) {
+	protected void checkValueLong(Long next) {
 		Assert.assertEquals(next, value.longValue(), 0);
 	}
 
 	@Override
-	protected void checkValueInteger(Integer next, Integer value) {
+	protected void checkValueInteger(Integer next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueFloat(Float next, Integer value) {
+	protected void checkValueFloat(Float next) {
 		Assert.assertEquals(next, value.floatValue(), 0);
 	}
 
 	@Override
-	protected void checkValueDouble(Double next, Integer value) {
+	protected void checkValueDouble(Double next) {
 		Assert.assertEquals(next, value.doubleValue(), 0);
 	}
 
 	@Override
-	protected void checkValueChar(Character next, Integer value) {
+	protected void checkValueChar(Character next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueByte(Byte next, Integer value) {
+	protected void checkValueByte(Byte next) {
 		Assert.assertEquals(next, value.byteValue(), 0);
 	}
 
 	@Override
-	protected void checkValueBoolean(Boolean next, Integer value) {
+	protected void checkValueBoolean(Boolean next) {
 		Assert.assertEquals(next ? 1 : 0, value, 0);
 	}
 }

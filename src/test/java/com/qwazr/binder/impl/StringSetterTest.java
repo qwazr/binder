@@ -18,10 +18,10 @@ package com.qwazr.binder.impl;
 import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 
-public class StringSetterTest extends AbstractSetterTest<String> {
+public class StringSetterTest extends AbstractObjectSetterTest<String> {
 
 	public StringSetterTest() {
-		super(new StringSetterImpl(AbstractSetterTest.getValueField()));
+		super(new StringSetterImpl(getValueField()));
 	}
 
 	@Override
@@ -35,47 +35,47 @@ public class StringSetterTest extends AbstractSetterTest<String> {
 	}
 
 	@Override
-	protected void checkValueString(String next, String value) {
+	protected void checkValueString(String next) {
 		Assert.assertEquals(next, value);
 	}
 
 	@Override
-	protected void checkValueShort(Short next, String value) {
+	protected void checkValueShort(Short next) {
 		Assert.assertEquals(next, Short.parseShort(value), 0);
 	}
 
 	@Override
-	protected void checkValueLong(Long next, String value) {
+	protected void checkValueLong(Long next) {
 		Assert.assertEquals(next, Long.parseLong(value), 0);
 	}
 
 	@Override
-	protected void checkValueInteger(Integer next, String value) {
+	protected void checkValueInteger(Integer next) {
 		Assert.assertEquals(next, Integer.parseInt(value), 0);
 	}
 
 	@Override
-	protected void checkValueFloat(Float next, String value) {
+	protected void checkValueFloat(Float next) {
 		Assert.assertEquals(next, Float.parseFloat(value), 0);
 	}
 
 	@Override
-	protected void checkValueDouble(Double next, String value) {
+	protected void checkValueDouble(Double next) {
 		Assert.assertEquals(next, Double.parseDouble(value), 0);
 	}
 
 	@Override
-	protected void checkValueChar(Character next, String value) {
+	protected void checkValueChar(Character next) {
 		Assert.assertEquals(Character.toString(next), value);
 	}
 
 	@Override
-	protected void checkValueByte(Byte next, String value) {
+	protected void checkValueByte(Byte next) {
 		Assert.assertEquals(next, Byte.parseByte(value), 0);
 	}
 
 	@Override
-	protected void checkValueBoolean(Boolean next, String value) {
+	protected void checkValueBoolean(Boolean next) {
 		Assert.assertEquals(next, Boolean.parseBoolean(value));
 	}
 

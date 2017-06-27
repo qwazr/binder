@@ -18,10 +18,10 @@ package com.qwazr.binder.impl;
 import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 
-public class ByteSetterTest extends AbstractSetterTest<Byte> {
+public class ByteSetterTest extends AbstractObjectSetterTest<Byte> {
 
 	public ByteSetterTest() {
-		super(new ByteSetterImpl(AbstractSetterTest.getValueField()));
+		super(new ByteSetterImpl(getValueField()));
 	}
 
 	@Override
@@ -35,47 +35,47 @@ public class ByteSetterTest extends AbstractSetterTest<Byte> {
 	}
 
 	@Override
-	protected void checkValueString(String next, Byte value) {
+	protected void checkValueString(String next) {
 		Assert.assertEquals(Byte.valueOf(next), value);
 	}
 
 	@Override
-	protected void checkValueShort(Short next, Byte value) {
+	protected void checkValueShort(Short next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueLong(Long next, Byte value) {
+	protected void checkValueLong(Long next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueInteger(Integer next, Byte value) {
+	protected void checkValueInteger(Integer next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueFloat(Float next, Byte value) {
+	protected void checkValueFloat(Float next) {
 		Assert.assertEquals(next, value.floatValue(), 0);
 	}
 
 	@Override
-	protected void checkValueDouble(Double next, Byte value) {
+	protected void checkValueDouble(Double next) {
 		Assert.assertEquals(next, value.doubleValue(), 0);
 	}
 
 	@Override
-	protected void checkValueChar(Character next, Byte value) {
+	protected void checkValueChar(Character next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueByte(Byte next, Byte value) {
+	protected void checkValueByte(Byte next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueBoolean(Boolean next, Byte value) {
+	protected void checkValueBoolean(Boolean next) {
 		Assert.assertEquals(next ? 1 : 0, value, 0);
 	}
 }

@@ -37,6 +37,14 @@ abstract class FieldSetterAbstract implements FieldSetter {
 		}
 	}
 
+	final void setBoolean(final Object object, final boolean value) {
+		try {
+			field.setBoolean(object, value);
+		} catch (IllegalAccessException e) {
+			throw new BinderException(field, value, e);
+		}
+	}
+
 	final void error(final Object value) {
 		throw new BinderException(field, value);
 	}

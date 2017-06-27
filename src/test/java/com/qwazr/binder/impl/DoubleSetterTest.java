@@ -18,10 +18,10 @@ package com.qwazr.binder.impl;
 import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 
-public class DoubleSetterTest extends AbstractSetterTest<Double> {
+public class DoubleSetterTest extends AbstractObjectSetterTest<Double> {
 
 	public DoubleSetterTest() {
-		super(new DoubleSetterImpl(AbstractSetterTest.getValueField()));
+		super(new DoubleSetterImpl(getValueField()));
 	}
 
 	protected String nextString() {
@@ -34,47 +34,47 @@ public class DoubleSetterTest extends AbstractSetterTest<Double> {
 	}
 
 	@Override
-	protected void checkValueString(String next, Double value) {
+	protected void checkValueString(String next) {
 		Assert.assertEquals(Double.valueOf(next), value);
 	}
 
 	@Override
-	protected void checkValueShort(Short next, Double value) {
+	protected void checkValueShort(Short next) {
 		Assert.assertEquals(next, value.shortValue(), 0);
 	}
 
 	@Override
-	protected void checkValueLong(Long next, Double value) {
+	protected void checkValueLong(Long next) {
 		Assert.assertEquals(next, value.longValue(), 0);
 	}
 
 	@Override
-	protected void checkValueInteger(Integer next, Double value) {
+	protected void checkValueInteger(Integer next) {
 		Assert.assertEquals(next, value.intValue(), 0);
 	}
 
 	@Override
-	protected void checkValueFloat(Float next, Double value) {
+	protected void checkValueFloat(Float next) {
 		Assert.assertEquals(next, value.floatValue(), 0);
 	}
 
 	@Override
-	protected void checkValueDouble(Double next, Double value) {
+	protected void checkValueDouble(Double next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueChar(Character next, Double value) {
+	protected void checkValueChar(Character next) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueByte(Byte next, Double value) {
+	protected void checkValueByte(Byte next) {
 		Assert.assertEquals(next, value.byteValue(), 0);
 	}
 
 	@Override
-	protected void checkValueBoolean(Boolean next, Double value) {
+	protected void checkValueBoolean(Boolean next) {
 		Assert.assertEquals(next ? 1 : 0, value, 0);
 	}
 

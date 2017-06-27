@@ -27,7 +27,7 @@ abstract class ObjectSetterAbstract extends SingleSetterAbstract {
 	}
 
 	@Override
-	final public void fromNull(Object object) {
+	public void fromNull(Object object) {
 		set(object, null);
 	}
 
