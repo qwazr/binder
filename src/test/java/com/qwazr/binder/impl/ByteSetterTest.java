@@ -28,7 +28,7 @@ public class ByteSetterTest extends AbstractObjectSetterTest<Byte> {
 	protected String nextString() {
 		return Long.toString(RandomUtils.nextByte());
 	}
-
+	
 	@Override
 	protected Number nextNumber() {
 		return RandomUtils.nextByte();

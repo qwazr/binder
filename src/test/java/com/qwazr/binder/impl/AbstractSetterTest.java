@@ -59,7 +59,7 @@ public abstract class AbstractSetterTest {
 	}
 
 	final Character nextChar() {
-		return (char) (Math.abs(nextNumber().intValue()) % Character.MAX_CODE_POINT);
+		return (char) (Math.abs(nextNumber().intValue()) % Character.MAX_VALUE);
 	}
 
 	final Boolean nextBoolean() {
