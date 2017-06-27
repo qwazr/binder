@@ -17,93 +17,60 @@ package com.qwazr.binder.impl;
 
 import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 
-import java.util.function.Supplier;
+public class DoubleSetterTest extends AbstractSetterTest<Double> {
 
-@RunWith(Suite.class)
-@Suite.SuiteClasses({ DoubleSetterTest.FromString.class,
-		DoubleSetterTest.FromShort.class,
-		DoubleSetterTest.FromLong.class,
-		DoubleSetterTest.FromInteger.class,
-		DoubleSetterTest.FromFloat.class,
-		DoubleSetterTest.FromDouble.class })
-public class DoubleSetterTest {
-
-	private static Supplier<String> nextString = () -> Double.toString(RandomUtils.nextDouble());
-	private static DoubleSetterImpl doubleSetter = new DoubleSetterImpl(ObjectSetterAbstractTest.getValueField());
-
-	public static class FromString extends FromStringAbstractTest<Double> {
-
-		public FromString() {
-			super(nextString, doubleSetter);
-		}
-
-		@Override
-		protected void checkValue(String next, Double value) {
-			Assert.assertEquals(Double.valueOf(next), value);
-		}
+	public DoubleSetterTest() {
+		super(new DoubleSetterImpl(AbstractSetterTest.getValueField()));
 	}
 
-	public static class FromShort extends FromShortAbstractTest<Double> {
-
-		public FromShort() {
-			super(doubleSetter);
-		}
-
-		@Override
-		protected void checkValue(Short next, Double value) {
-			Assert.assertEquals(next, value.shortValue(), 0);
-		}
+	protected String nextString() {
+		return Double.toString(RandomUtils.nextDouble());
 	}
 
-	public static class FromLong extends FromLongAbstractTest<Double> {
-
-		public FromLong() {
-			super(doubleSetter);
-		}
-
-		@Override
-		protected void checkValue(Long next, Double value) {
-			Assert.assertEquals(next, value.longValue(), 0);
-		}
+	@Override
+	protected void checkValueString(String next, Double value) {
+		Assert.assertEquals(Double.valueOf(next), value);
 	}
 
-	public static class FromInteger extends FromIntegerAbstractTest<Double> {
-
-		public FromInteger() {
-			super(doubleSetter);
-		}
-
-		@Override
-		protected void checkValue(Integer next, Double value) {
-			Assert.assertEquals(next, value.intValue(), 0);
-		}
+	@Override
+	protected void checkValueShort(Short next, Double value) {
+		Assert.assertEquals(next, value.shortValue(), 0);
 	}
 
-	public static class FromFloat extends FromFloatAbstractTest<Double> {
-
-		public FromFloat() {
-			super(doubleSetter);
-		}
-
-		@Override
-		protected void checkValue(Float next, Double value) {
-			Assert.assertEquals(next, value.floatValue(), 0);
-		}
+	@Override
+	protected void checkValueLong(Long next, Double value) {
+		Assert.assertEquals(next, value.longValue(), 0);
 	}
 
-	public static class FromDouble extends FromDoubleAbstractTest<Double> {
+	@Override
+	protected void checkValueInteger(Integer next, Double value) {
+		Assert.assertEquals(next, value.intValue(), 0);
+	}
 
-		public FromDouble() {
-			super(doubleSetter);
-		}
+	@Override
+	protected void checkValueFloat(Float next, Double value) {
+		Assert.assertEquals(next, value.floatValue(), 0);
+	}
 
-		@Override
-		protected void checkValue(Double next, Double value) {
-			Assert.assertEquals(next, value, 0);
-		}
+	@Override
+	protected void checkValueDouble(Double next, Double value) {
+		Assert.assertEquals(next, value, 0);
+	}
+
+	@Override
+	protected void checkValueChar(Character next, Double value) {
+		Assert.assertEquals(next, value, 0);
+	}
+
+	@Override
+	protected void checkValueByte(Byte next, Double value) {
+		Assert.assertEquals(next, value.byteValue(), 0);
+	}
+
+	@Override
+	protected void checkValueBoolean(Boolean next, Double value) {
+		Assert.assertEquals(next ? 1 : 0, value, 0);
 	}
 
 }

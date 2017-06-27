@@ -17,60 +17,62 @@ package com.qwazr.binder.impl;
 
 import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
+import org.junit.Ignore;
 
-public class FloatSetterTest extends AbstractSetterTest<Float> {
+@Ignore
+public class ShortSetterTest extends AbstractSetterTest<Short> {
 
-	public FloatSetterTest() {
-		super(new FloatSetterImpl(AbstractSetterTest.getValueField()));
+	public ShortSetterTest() {
+		super(new ShortSetterImpl(AbstractSetterTest.getValueField()));
 	}
 
 	@Override
 	protected String nextString() {
-		return Float.toString(RandomUtils.nextFloat());
+		return Float.toString(RandomUtils.nextShort());
 	}
 
 	@Override
-	protected void checkValueString(String next, Float value) {
+	protected void checkValueString(String next, Short value) {
 		Assert.assertEquals(Float.valueOf(next), value);
 	}
 
 	@Override
-	protected void checkValueShort(Short next, Float value) {
-		Assert.assertEquals(next, value.shortValue(), 0);
+	protected void checkValueShort(Short next, Short value) {
+		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueLong(Long next, Float value) {
+	protected void checkValueLong(Long next, Short value) {
 		Assert.assertEquals(next, value.longValue(), 0);
 	}
 
 	@Override
-	protected void checkValueInteger(Integer next, Float value) {
+	protected void checkValueInteger(Integer next, Short value) {
 		Assert.assertEquals(next, value.intValue(), 0);
 	}
 
 	@Override
-	protected void checkValueFloat(Float next, Float value) {
+	protected void checkValueFloat(Float next, Short value) {
+		Assert.assertEquals(next, value.floatValue(), 0);
+	}
+
+	@Override
+	protected void checkValueDouble(Double next, Short value) {
+		Assert.assertEquals(next, value.doubleValue(), 0);
+	}
+
+	@Override
+	protected void checkValueChar(Character next, Short value) {
 		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
-	protected void checkValueDouble(Double next, Float value) {
-		Assert.assertEquals(next.floatValue(), value, 0);
-	}
-
-	@Override
-	protected void checkValueChar(Character next, Float value) {
-		Assert.assertEquals(next, value, 0);
-	}
-
-	@Override
-	protected void checkValueByte(Byte next, Float value) {
+	protected void checkValueByte(Byte next, Short value) {
 		Assert.assertEquals(next, value.byteValue(), 0);
 	}
 
 	@Override
-	protected void checkValueBoolean(Boolean next, Float value) {
+	protected void checkValueBoolean(Boolean next, Short value) {
 		Assert.assertEquals(next ? 1 : 0, value, 0);
 	}
 }
