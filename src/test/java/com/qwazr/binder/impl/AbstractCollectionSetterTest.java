@@ -15,12 +15,11 @@
  */
 package com.qwazr.binder.impl;
 
-import org.junit.Assert;
+import com.qwazr.utils.ArrayUtils;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 public abstract class AbstractCollectionSetterTest<T> extends AbstractSetterTest {
@@ -30,8 +29,18 @@ public abstract class AbstractCollectionSetterTest<T> extends AbstractSetterTest
 	protected AbstractCollectionSetterTest(FieldSetterAbstract setter) {
 		super(setter);
 	}
-	
+
+	protected abstract void checkValuesString(String... v);
+
+	private void checkValuesString(Collection<String> v) {
+		checkValuesString(ArrayUtils.toArray(v));
+	}
+
 	protected abstract void checkValuesShort(short... v);
+
+	private void checkValuesShort(Collection<Short> v) {
+		checkValuesShort(ArrayUtils.toPrimitiveShort(v));
+	}
 
 	protected abstract void checkValuesLong(long... v);
 
@@ -47,32 +56,18 @@ public abstract class AbstractCollectionSetterTest<T> extends AbstractSetterTest
 
 	protected abstract void checkValuesBoolean(boolean... v);
 
-	private <V> void checkValuesObject(V... values) {
-		Assert.assertEquals(values.length, value.size());
-		Iterator<T> iterator = value.iterator();
-		for (V v : values)
-			Assert.assertEquals(v, iterator.next());
-	}
-
-	private <V> void checkValuesObject(Collection<V> values) {
-		Assert.assertEquals(values.size(), value.size());
-		Iterator<T> iterator = value.iterator();
-		for (V v : values)
-			Assert.assertEquals(v, iterator.next());
-	}
-
 	@Test
 	final public void testStringCollectionMultiple() {
 		final Collection<String> v = Arrays.asList(nextString(), nextString());
 		setter.fromString(v, this);
-		checkValuesObject(v);
+		checkValuesString(v);
 	}
 
 	@Test
 	final public void testStringListMultiple() {
 		final List<String> v = Arrays.asList(nextString(), nextString());
 		setter.fromString(v, this);
-		checkValuesObject(v);
+		checkValuesString(v);
 	}
 
 	@Test
@@ -86,7 +81,7 @@ public abstract class AbstractCollectionSetterTest<T> extends AbstractSetterTest
 	final public void testShortArrayMultiple() {
 		final Short[] v = new Short[] { nextShort(), nextShort() };
 		setter.fromShort(v, this);
-		checkValuesObject(v);
+		checkValuesShort(v);
 	}
 
 	@Test

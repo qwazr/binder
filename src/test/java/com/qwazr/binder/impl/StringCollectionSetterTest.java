@@ -17,9 +17,7 @@ package com.qwazr.binder.impl;
 
 import com.qwazr.utils.RandomUtils;
 import org.junit.Assert;
-import org.junit.Ignore;
 
-@Ignore
 public class StringCollectionSetterTest extends AbstractCollectionSetterTest<String> {
 
 	public StringCollectionSetterTest() throws NoSuchFieldException {
