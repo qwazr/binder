@@ -29,6 +29,11 @@ abstract class FieldSetterAbstract implements FieldSetter {
 		field.setAccessible(true);
 	}
 
+	@Override
+	public void fromNull(final Object object) {
+		set(object, null);
+	}
+	
 	final void set(final Object object, final Object value) {
 		try {
 			field.set(object, value);

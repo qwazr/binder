@@ -37,14 +37,14 @@ public class BooleanPrimitiveSetterTest extends AbstractSingleSetterTest {
 
 	@Override
 	protected void checkValueNumber(Number next) {
-		Assert.assertEquals(next.intValue() != 0, value);
+		Assert.assertEquals(next.doubleValue() != 0, value);
 	}
 
 	@Override
 	protected void checkValueChar(Character next) {
 		Assert.assertEquals(next != 0, value);
 	}
-	
+
 	@Override
 	protected void checkValueBoolean(Boolean next) {
 		Assert.assertEquals(next, value);

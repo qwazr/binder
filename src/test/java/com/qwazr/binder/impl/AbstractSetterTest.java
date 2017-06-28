@@ -74,6 +74,8 @@ public abstract class AbstractSetterTest {
 
 	protected abstract void checkValueNull();
 
+	protected abstract void checkValueEmpty();
+
 	@Test
 	final public void testString() {
 		final String v = nextString();
@@ -92,7 +94,7 @@ public abstract class AbstractSetterTest {
 	final public void testStringArrayEmpty() {
 		final String[] v = new String[] {};
 		setter.fromString(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -106,7 +108,7 @@ public abstract class AbstractSetterTest {
 	final public void testStringCollectionEmpty() {
 		final Collection<String> v = Arrays.asList();
 		setter.fromString(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -120,7 +122,7 @@ public abstract class AbstractSetterTest {
 	final public void testStringListEmpty() {
 		final List<String> v = Arrays.asList();
 		setter.fromString(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -141,7 +143,7 @@ public abstract class AbstractSetterTest {
 	final public void testShortPrimitiveArrayEmpty() {
 		final short[] v = new short[] {};
 		setter.fromShort(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -162,7 +164,7 @@ public abstract class AbstractSetterTest {
 	final public void testShortArrayEmpty() {
 		final Short[] v = new Short[] {};
 		setter.fromShort(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -176,7 +178,7 @@ public abstract class AbstractSetterTest {
 	final public void testShortCollectionEmpty() {
 		final Collection<Short> v = Arrays.asList();
 		setter.fromShort(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -190,7 +192,7 @@ public abstract class AbstractSetterTest {
 	final public void testShortListEmpty() {
 		final List<Short> v = Arrays.asList();
 		setter.fromShort(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -211,7 +213,7 @@ public abstract class AbstractSetterTest {
 	final public void testLongPrimitiveArrayEmpty() {
 		final long[] v = new long[] {};
 		setter.fromLong(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -232,7 +234,7 @@ public abstract class AbstractSetterTest {
 	final public void testLongArrayEmpty() {
 		final Long[] v = new Long[] {};
 		setter.fromLong(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -246,7 +248,7 @@ public abstract class AbstractSetterTest {
 	final public void testLongCollectionEmpty() {
 		final Collection<Long> v = Arrays.asList();
 		setter.fromLong(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -260,7 +262,7 @@ public abstract class AbstractSetterTest {
 	final public void testLongListEmpty() {
 		final List<Long> v = Arrays.asList();
 		setter.fromLong(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -281,7 +283,7 @@ public abstract class AbstractSetterTest {
 	final public void testIntegerPrimitiveArrayEmpty() {
 		final int[] v = new int[] {};
 		setter.fromInteger(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -302,7 +304,7 @@ public abstract class AbstractSetterTest {
 	final public void testIntegerArrayEmpty() {
 		final Integer[] v = new Integer[] {};
 		setter.fromInteger(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -316,7 +318,7 @@ public abstract class AbstractSetterTest {
 	final public void testIntegerCollectionEmpty() {
 		final Collection<Integer> v = Arrays.asList();
 		setter.fromInteger(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -330,7 +332,7 @@ public abstract class AbstractSetterTest {
 	final public void testIntegerListEmpty() {
 		final List<Integer> v = Arrays.asList();
 		setter.fromInteger(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -351,7 +353,7 @@ public abstract class AbstractSetterTest {
 	final public void testFloatPrimitiveArrayEmpty() {
 		final float[] v = new float[] {};
 		setter.fromFloat(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -372,7 +374,7 @@ public abstract class AbstractSetterTest {
 	final public void testFloatArrayEmpty() {
 		final Float[] v = new Float[] {};
 		setter.fromFloat(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -386,7 +388,7 @@ public abstract class AbstractSetterTest {
 	final public void testFloatCollectionEmpty() {
 		final Collection<Float> v = Arrays.asList();
 		setter.fromFloat(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -400,7 +402,7 @@ public abstract class AbstractSetterTest {
 	final public void testFloatListEmpty() {
 		final List<Float> v = Arrays.asList();
 		setter.fromFloat(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -421,7 +423,7 @@ public abstract class AbstractSetterTest {
 	final public void testDoublePrimitiveArrayEmpty() {
 		final double[] v = new double[] {};
 		setter.fromDouble(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -442,7 +444,7 @@ public abstract class AbstractSetterTest {
 	final public void testDoubleArrayEmpty() {
 		final Double[] v = new Double[] {};
 		setter.fromDouble(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -456,7 +458,7 @@ public abstract class AbstractSetterTest {
 	final public void testDoubleCollectionEmpty() {
 		final Collection<Double> v = Arrays.asList();
 		setter.fromDouble(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -470,7 +472,7 @@ public abstract class AbstractSetterTest {
 	final public void testDoubleListEmpty() {
 		final List<Double> v = Arrays.asList();
 		setter.fromDouble(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -491,7 +493,7 @@ public abstract class AbstractSetterTest {
 	final public void testCharPrimitiveArrayEmpty() {
 		final char[] v = new char[] {};
 		setter.fromChar(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -512,7 +514,7 @@ public abstract class AbstractSetterTest {
 	final public void testCharArrayEmpty() {
 		final Character[] v = new Character[] {};
 		setter.fromChar(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -526,7 +528,7 @@ public abstract class AbstractSetterTest {
 	final public void testCharCollectionEmpty() {
 		final Collection<Character> v = Arrays.asList();
 		setter.fromChar(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -540,7 +542,7 @@ public abstract class AbstractSetterTest {
 	final public void testCharListEmpty() {
 		final List<Character> v = Arrays.asList();
 		setter.fromChar(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -561,7 +563,7 @@ public abstract class AbstractSetterTest {
 	final public void testBytePrimitiveArrayEmpty() {
 		final byte[] v = new byte[] {};
 		setter.fromByte(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -582,7 +584,7 @@ public abstract class AbstractSetterTest {
 	final public void testByteArrayEmpty() {
 		final Byte[] v = new Byte[] {};
 		setter.fromByte(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -596,7 +598,7 @@ public abstract class AbstractSetterTest {
 	final public void testByteCollectionEmpty() {
 		final Collection<Byte> v = Arrays.asList();
 		setter.fromByte(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -610,7 +612,7 @@ public abstract class AbstractSetterTest {
 	final public void testByteListEmpty() {
 		final List<Byte> v = Arrays.asList();
 		setter.fromByte(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -635,7 +637,7 @@ public abstract class AbstractSetterTest {
 	final public void testBooleanPrimitiveArrayEmpty() {
 		final boolean[] v = new boolean[] {};
 		setter.fromBoolean(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -660,7 +662,7 @@ public abstract class AbstractSetterTest {
 	final public void testBooleanArrayEmpty() {
 		final Boolean[] v = new Boolean[] {};
 		setter.fromBoolean(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -674,7 +676,7 @@ public abstract class AbstractSetterTest {
 	final public void testBooleanCollectionEmpty() {
 		final Collection<Boolean> v = Arrays.asList();
 		setter.fromBoolean(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 
 	@Test
@@ -688,6 +690,6 @@ public abstract class AbstractSetterTest {
 	final public void testBooleanListEmpty() {
 		final List<Boolean> v = Arrays.asList();
 		setter.fromBoolean(v, this);
-		checkValueNull();
+		checkValueEmpty();
 	}
 }

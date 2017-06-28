@@ -26,11 +26,6 @@ abstract class ObjectSetterAbstract extends SingleSetterAbstract {
 		super(field);
 	}
 
-	@Override
-	public void fromNull(Object object) {
-		set(object, null);
-	}
-
 	final <T> void fromObjectArray(final T[] values, final Object object, final BiConsumer<T, Object> consumer) {
 		if (values.length == 0)
 			fromNull(object);

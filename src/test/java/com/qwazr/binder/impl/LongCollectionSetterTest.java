@@ -30,11 +30,6 @@ public class LongCollectionSetterTest extends AbstractCollectionSetterTest<Long>
 	}
 
 	@Override
-	protected void checkValueNull() {
-		Assert.assertNull(value);
-	}
-
-	@Override
 	protected void checkValueString(String... values) {
 		Assert.assertEquals(values.length, value.size());
 		int i = 0;

@@ -32,11 +32,6 @@ public class StringCollectionSetterTest extends AbstractCollectionSetterTest<Str
 	}
 
 	@Override
-	protected void checkValueNull() {
-		Assert.assertNull(value);
-	}
-
-	@Override
 	protected void checkValueString(String... v) {
 		Assert.assertTrue(CollectionsUtils.equals(value, v));
 	}

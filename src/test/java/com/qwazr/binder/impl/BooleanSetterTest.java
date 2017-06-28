@@ -23,7 +23,7 @@ public class BooleanSetterTest extends AbstractObjectSetterTest<Boolean> {
 		super(new BooleanSetterImpl(getValueField()));
 
 	}
-	
+
 	@Override
 	protected String nextString() {
 		return Boolean.toString(nextBoolean());
@@ -36,7 +36,7 @@ public class BooleanSetterTest extends AbstractObjectSetterTest<Boolean> {
 
 	@Override
 	protected void checkValueNumber(Number next) {
-		Assert.assertEquals(next.intValue() != 0, value);
+		Assert.assertEquals(next.doubleValue() != 0, value);
 	}
 
 	@Override

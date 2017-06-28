@@ -15,8 +15,6 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.binder.BinderException;
-
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
@@ -154,8 +152,6 @@ public abstract class ArraySetterAbstract<T> extends FieldSetterAbstract {
 	}
 
 	private <V> void fromArray(final V[] values, final Object object, final Function<V, T> converter) {
-		if (values == null || values.length == 0)
-			return;
 		final T[] array = newArray((values.length));
 		int i = 0;
 		for (V value : values)
@@ -209,8 +205,6 @@ public abstract class ArraySetterAbstract<T> extends FieldSetterAbstract {
 	}
 
 	private <V> void fromCollection(final Collection<V> values, final Object object, final Function<V, T> converter) {
-		if (values == null || values.isEmpty())
-			return;
 		final T[] array = newArray((values.size()));
 		int i = 0;
 		for (V value : values)
@@ -310,8 +304,6 @@ public abstract class ArraySetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromDouble(double[] values, Object object) {
-		if (values == null || values.length == 0)
-			return;
 		final T[] array = newArray(values.length);
 		int i = 0;
 		for (double value : values)
@@ -321,8 +313,6 @@ public abstract class ArraySetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromFloat(float[] values, Object object) {
-		if (values == null || values.length == 0)
-			return;
 		final T[] array = newArray(values.length);
 		int i = 0;
 		for (float value : values)
@@ -332,8 +322,6 @@ public abstract class ArraySetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromLong(long[] values, Object object) {
-		if (values == null || values.length == 0)
-			return;
 		final T[] array = newArray(values.length);
 		int i = 0;
 		for (long value : values)
@@ -343,8 +331,6 @@ public abstract class ArraySetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromInteger(int[] values, Object object) {
-		if (values == null || values.length == 0)
-			return;
 		final T[] array = newArray(values.length);
 		int i = 0;
 		for (int value : values)
@@ -354,8 +340,6 @@ public abstract class ArraySetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromShort(short[] values, Object object) {
-		if (values == null || values.length == 0)
-			return;
 		final T[] array = newArray(values.length);
 		int i = 0;
 		for (short value : values)
@@ -365,8 +349,6 @@ public abstract class ArraySetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromChar(char[] values, Object object) {
-		if (values == null || values.length == 0)
-			return;
 		final T[] array = newArray(values.length);
 		int i = 0;
 		for (char value : values)
@@ -376,8 +358,6 @@ public abstract class ArraySetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromByte(byte[] values, Object object) {
-		if (values == null || values.length == 0)
-			return;
 		final T[] array = newArray(values.length);
 		int i = 0;
 		for (byte value : values)
@@ -387,22 +367,11 @@ public abstract class ArraySetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromBoolean(boolean[] values, Object object) {
-		if (values == null || values.length == 0)
-			return;
 		final T[] array = newArray(values.length);
 		int i = 0;
 		for (boolean value : values)
 			array[i++] = fromBoolean(value);
 		set(object, array);
-	}
-
-	@Override
-	final public void fromNull(Object object) {
-		try {
-			field.set(object, null);
-		} catch (IllegalAccessException e) {
-			throw new BinderException(field, null, e);
-		}
 	}
 
 }

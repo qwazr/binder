@@ -31,6 +31,11 @@ public abstract class AbstractMultipleSetterTest extends AbstractSetterTest {
 
 	protected abstract int size();
 
+	@Override
+	final protected void checkValueEmpty() {
+		Assert.assertEquals(0, size());
+	}
+
 	private void checkValueString(Collection<String> v) {
 		Assert.assertEquals(v.size(), size());
 		checkValueString(ArrayUtils.toArray(v));

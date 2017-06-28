@@ -37,6 +37,10 @@ public abstract class AbstractSingleSetterTest extends AbstractSetterTest {
 
 	protected abstract void checkValueBoolean(Boolean next);
 
+	@Override
+	final protected void checkValueEmpty() {
+	}
+
 	final protected void checkValueString(String... next) {
 		Assert.assertNotNull(next);
 		Assert.assertEquals(1, next.length);

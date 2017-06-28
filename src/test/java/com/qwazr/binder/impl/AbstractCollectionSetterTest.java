@@ -15,6 +15,8 @@
  */
 package com.qwazr.binder.impl;
 
+import org.junit.Assert;
+
 import java.util.Collection;
 
 public abstract class AbstractCollectionSetterTest<T> extends AbstractMultipleSetterTest {
@@ -29,4 +31,10 @@ public abstract class AbstractCollectionSetterTest<T> extends AbstractMultipleSe
 	final protected int size() {
 		return value.size();
 	}
+
+	@Override
+	final protected void checkValueNull() {
+		Assert.assertNull(value);
+	}
+
 }

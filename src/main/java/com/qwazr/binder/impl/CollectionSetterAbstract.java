@@ -173,8 +173,6 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 	}
 
 	private <V> void fromArray(final V[] values, final Object object, final Function<V, T> converter) {
-		if (values == null || values.length == 0)
-			return;
 		final Collection<T> collection = createCollection(object);
 		for (V value : values)
 			collection.add(converter.apply(value));
@@ -226,8 +224,6 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 	}
 
 	private <V> void fromCollection(final Collection<V> values, final Object object, final Function<V, T> converter) {
-		if (values == null || values.isEmpty())
-			return;
 		final Collection<T> collection = createCollection(object);
 		for (V value : values)
 			collection.add(converter.apply(value));
@@ -325,8 +321,6 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromDouble(double[] values, Object object) {
-		if (values == null || values.length == 0)
-			return;
 		final Collection<T> collection = createCollection(object);
 		for (double value : values)
 			collection.add(fromDouble(value));
@@ -334,8 +328,6 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromFloat(float[] values, Object object) {
-		if (values == null || values.length == 0)
-			return;
 		final Collection<T> collection = createCollection(object);
 		for (float value : values)
 			collection.add(fromFloat(value));
@@ -343,8 +335,6 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromLong(long[] values, Object object) {
-		if (values == null || values.length == 0)
-			return;
 		final Collection<T> collection = createCollection(object);
 		for (long value : values)
 			collection.add(fromLong(value));
@@ -352,8 +342,6 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromInteger(int[] values, Object object) {
-		if (values == null || values.length == 0)
-			return;
 		final Collection<T> collection = createCollection(object);
 		for (int value : values)
 			collection.add(fromInteger(value));
@@ -361,8 +349,6 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromShort(short[] values, Object object) {
-		if (values == null || values.length == 0)
-			return;
 		final Collection<T> collection = createCollection(object);
 		for (short value : values)
 			collection.add(fromShort(value));
@@ -370,8 +356,6 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromChar(char[] values, Object object) {
-		if (values == null || values.length == 0)
-			return;
 		final Collection<T> collection = createCollection(object);
 		for (char value : values)
 			collection.add(fromChar(value));
@@ -379,8 +363,6 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromByte(byte[] values, Object object) {
-		if (values == null || values.length == 0)
-			return;
 		final Collection<T> collection = createCollection(object);
 		for (byte value : values)
 			collection.add(fromByte(value));
@@ -388,20 +370,9 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromBoolean(boolean[] values, Object object) {
-		if (values == null || values.length == 0)
-			return;
 		final Collection<T> collection = createCollection(object);
 		for (boolean value : values)
 			collection.add(fromBoolean(value));
-	}
-
-	@Override
-	final public void fromNull(Object object) {
-		try {
-			field.set(object, null);
-		} catch (IllegalAccessException e) {
-			throw new BinderException(field, null, e);
-		}
 	}
 
 }
