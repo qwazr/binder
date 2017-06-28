@@ -15,6 +15,7 @@
  */
 package com.qwazr.binder.impl;
 
+import com.qwazr.utils.RandomUtils;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -23,7 +24,7 @@ import java.util.List;
 
 public abstract class AbstractSetterTest {
 
-	protected FieldSetterAbstract setter;
+	final protected FieldSetterAbstract setter;
 
 	protected AbstractSetterTest(FieldSetterAbstract setter) {
 		this.setter = setter;
@@ -31,38 +32,36 @@ public abstract class AbstractSetterTest {
 
 	protected abstract String nextString();
 
-	protected abstract Number nextNumber();
-
 	final Long nextLong() {
-		return nextNumber().longValue();
+		return RandomUtils.nextLong(0, Byte.MAX_VALUE);
 	}
 
 	final Short nextShort() {
-		return nextNumber().shortValue();
+		return (short) RandomUtils.nextInt(0, Byte.MAX_VALUE);
 	}
 
 	final Integer nextInt() {
-		return nextNumber().intValue();
+		return RandomUtils.nextInt(0, Byte.MAX_VALUE);
 	}
 
 	final Double nextDouble() {
-		return nextNumber().doubleValue();
+		return RandomUtils.nextDouble(0, Byte.MAX_VALUE);
 	}
 
 	final Float nextFloat() {
-		return nextNumber().floatValue();
+		return RandomUtils.nextFloat(0, Byte.MAX_VALUE);
 	}
 
 	final Byte nextByte() {
-		return nextNumber().byteValue();
+		return (byte) RandomUtils.nextInt(0, Byte.MAX_VALUE);
 	}
 
 	final Character nextChar() {
-		return (char) (Math.abs(nextNumber().intValue()) % Character.MAX_VALUE);
+		return (char) (byte) nextByte();
 	}
 
 	final Boolean nextBoolean() {
-		return nextNumber().byteValue() != 0;
+		return RandomUtils.nextBoolean();
 	}
 
 	protected abstract void checkValueString(String next);

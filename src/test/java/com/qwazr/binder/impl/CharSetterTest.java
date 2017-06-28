@@ -15,7 +15,6 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 
 public class CharSetterTest extends AbstractObjectSetterTest<Character> {
@@ -26,12 +25,7 @@ public class CharSetterTest extends AbstractObjectSetterTest<Character> {
 
 	@Override
 	protected String nextString() {
-		return Character.toString(RandomUtils.nextChar());
-	}
-
-	@Override
-	protected Number nextNumber() {
-		return (int) RandomUtils.nextChar();
+		return Character.toString(nextChar());
 	}
 
 	@Override
@@ -56,12 +50,12 @@ public class CharSetterTest extends AbstractObjectSetterTest<Character> {
 
 	@Override
 	protected void checkValueFloat(Float next) {
-		Assert.assertEquals(next, value, 0);
+		Assert.assertEquals(next.intValue(), value, 0);
 	}
 
 	@Override
 	protected void checkValueDouble(Double next) {
-		Assert.assertEquals(next, value, 0);
+		Assert.assertEquals(next.intValue(), value, 0);
 	}
 
 	@Override

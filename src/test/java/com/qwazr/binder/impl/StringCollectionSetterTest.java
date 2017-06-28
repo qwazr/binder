@@ -15,6 +15,8 @@
  */
 package com.qwazr.binder.impl;
 
+import com.qwazr.utils.ArrayUtils;
+import com.qwazr.utils.CollectionsUtils;
 import com.qwazr.utils.RandomUtils;
 import org.junit.Assert;
 
@@ -27,11 +29,6 @@ public class StringCollectionSetterTest extends AbstractCollectionSetterTest<Str
 	@Override
 	protected String nextString() {
 		return RandomUtils.alphanumeric(10);
-	}
-
-	@Override
-	protected Number nextNumber() {
-		return RandomUtils.nextDouble();
 	}
 
 	@Override
@@ -85,42 +82,47 @@ public class StringCollectionSetterTest extends AbstractCollectionSetterTest<Str
 	}
 
 	@Override
-	protected void checkValuesShort(short... v) {
+	protected void checkValuesString(String... v) {
+		Assert.assertTrue(CollectionsUtils.equals(value, v));
+	}
 
+	@Override
+	protected void checkValuesShort(short... v) {
+		Assert.assertArrayEquals(ArrayUtils.toStringArray(ArrayUtils.toObject(v)), value.toArray());
 	}
 
 	@Override
 	protected void checkValuesLong(long... v) {
-
+		Assert.assertArrayEquals(ArrayUtils.toStringArray(ArrayUtils.toObject(v)), value.toArray());
 	}
 
 	@Override
 	protected void checkValuesInteger(int... v) {
-
+		Assert.assertArrayEquals(ArrayUtils.toStringArray(ArrayUtils.toObject(v)), value.toArray());
 	}
 
 	@Override
 	protected void checkValuesFloat(float... v) {
-
+		Assert.assertArrayEquals(ArrayUtils.toStringArray(ArrayUtils.toObject(v)), value.toArray());
 	}
 
 	@Override
 	protected void checkValuesDouble(double... v) {
-
+		Assert.assertArrayEquals(ArrayUtils.toStringArray(ArrayUtils.toObject(v)), value.toArray());
 	}
 
 	@Override
 	protected void checkValuesChar(char... v) {
-
+		Assert.assertArrayEquals(ArrayUtils.toStringArray(ArrayUtils.toObject(v)), value.toArray());
 	}
 
 	@Override
 	protected void checkValuesByte(byte... v) {
-
+		Assert.assertArrayEquals(ArrayUtils.toStringArray(ArrayUtils.toObject(v)), value.toArray());
 	}
 
 	@Override
 	protected void checkValuesBoolean(boolean... v) {
-
+		Assert.assertArrayEquals(ArrayUtils.toStringArray(ArrayUtils.toObject(v)), value.toArray());
 	}
 }

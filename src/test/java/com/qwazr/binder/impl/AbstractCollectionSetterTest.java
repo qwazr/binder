@@ -42,19 +42,79 @@ public abstract class AbstractCollectionSetterTest<T> extends AbstractSetterTest
 		checkValuesShort(ArrayUtils.toPrimitiveShort(v));
 	}
 
+	private void checkValuesShort(Short[] v) {
+		checkValuesShort(ArrayUtils.toPrimitive(v));
+	}
+
 	protected abstract void checkValuesLong(long... v);
+
+	private void checkValuesLong(Collection<Long> v) {
+		checkValuesLong(ArrayUtils.toPrimitiveLong(v));
+	}
+
+	private void checkValuesLong(Long[] v) {
+		checkValuesLong(ArrayUtils.toPrimitive(v));
+	}
 
 	protected abstract void checkValuesInteger(int... v);
 
+	private void checkValuesInteger(Collection<Integer> v) {
+		checkValuesInteger(ArrayUtils.toPrimitiveInt(v));
+	}
+
+	private void checkValuesInteger(Integer[] v) {
+		checkValuesInteger(ArrayUtils.toPrimitive(v));
+	}
+
 	protected abstract void checkValuesFloat(float... v);
+
+	private void checkValuesFloat(Collection<Float> v) {
+		checkValuesFloat(ArrayUtils.toPrimitiveFloat(v));
+	}
+
+	private void checkValuesFloat(Float[] v) {
+		checkValuesFloat(ArrayUtils.toPrimitive(v));
+	}
 
 	protected abstract void checkValuesDouble(double... v);
 
+	private void checkValuesDouble(Collection<Double> v) {
+		checkValuesDouble(ArrayUtils.toPrimitiveDouble(v));
+	}
+
+	private void checkValuesDouble(Double[] v) {
+		checkValuesDouble(ArrayUtils.toPrimitive(v));
+	}
+
 	protected abstract void checkValuesChar(char... v);
+
+	private void checkValuesChar(Collection<Character> v) {
+		checkValuesChar(ArrayUtils.toPrimitiveChar(v));
+	}
+
+	private void checkValuesChar(Character[] v) {
+		checkValuesChar(ArrayUtils.toPrimitive(v));
+	}
 
 	protected abstract void checkValuesByte(byte... v);
 
+	private void checkValuesByte(Collection<Byte> v) {
+		checkValuesByte(ArrayUtils.toPrimitiveByte(v));
+	}
+
+	private void checkValuesByte(Byte[] v) {
+		checkValuesByte(ArrayUtils.toPrimitive(v));
+	}
+
 	protected abstract void checkValuesBoolean(boolean... v);
+
+	private void checkValuesBoolean(Collection<Boolean> v) {
+		checkValuesBoolean(ArrayUtils.toPrimitiveBoolean(v));
+	}
+
+	private void checkValuesBoolean(Boolean[] v) {
+		checkValuesBoolean(ArrayUtils.toPrimitive(v));
+	}
 
 	@Test
 	final public void testStringCollectionMultiple() {
@@ -88,14 +148,14 @@ public abstract class AbstractCollectionSetterTest<T> extends AbstractSetterTest
 	final public void testShortCollectionMultiple() {
 		final Collection<Short> v = Arrays.asList(nextShort(), nextShort());
 		setter.fromShort(v, this);
-		checkValuesObject(v);
+		checkValuesShort(v);
 	}
 
 	@Test
 	final public void testShortListMultiple() {
 		final List<Short> v = Arrays.asList(nextShort(), nextShort());
 		setter.fromShort(v, this);
-		checkValuesObject(v);
+		checkValuesShort(v);
 	}
 
 	@Test
@@ -109,21 +169,21 @@ public abstract class AbstractCollectionSetterTest<T> extends AbstractSetterTest
 	final public void testLongArrayMultiple() {
 		final Long[] v = new Long[] { nextLong(), nextLong() };
 		setter.fromLong(v, this);
-		checkValuesObject(v);
+		checkValuesLong(v);
 	}
 
 	@Test
 	final public void testLongCollectionMultiple() {
 		final Collection<Long> v = Arrays.asList(nextLong(), nextLong());
 		setter.fromLong(v, this);
-		checkValuesObject(v);
+		checkValuesLong(v);
 	}
 
 	@Test
 	final public void testLongListMultiple() {
 		final List<Long> v = Arrays.asList(nextLong(), nextLong());
 		setter.fromLong(v, this);
-		checkValuesObject(v);
+		checkValuesLong(v);
 	}
 
 	@Test
@@ -137,21 +197,21 @@ public abstract class AbstractCollectionSetterTest<T> extends AbstractSetterTest
 	final public void testIntegerArrayMultiple() {
 		final Integer[] v = new Integer[] { nextInt(), nextInt() };
 		setter.fromInteger(v, this);
-		checkValuesObject(v);
+		checkValuesInteger(v);
 	}
 
 	@Test
 	final public void testIntegerCollectionMultiple() {
 		final Collection<Integer> v = Arrays.asList(nextInt(), nextInt());
 		setter.fromInteger(v, this);
-		checkValuesObject(v);
+		checkValuesInteger(v);
 	}
 
 	@Test
 	final public void testIntegerListMultiple() {
 		final List<Integer> v = Arrays.asList(nextInt(), nextInt());
 		setter.fromInteger(v, this);
-		checkValuesObject(v);
+		checkValuesInteger(v);
 	}
 
 	@Test
@@ -165,21 +225,21 @@ public abstract class AbstractCollectionSetterTest<T> extends AbstractSetterTest
 	final public void testFloatArrayMultiple() {
 		final Float[] v = new Float[] { nextFloat(), nextFloat() };
 		setter.fromFloat(v, this);
-		checkValuesObject(v);
+		checkValuesFloat(v);
 	}
 
 	@Test
 	final public void testFloatCollectionMultiple() {
 		final Collection<Float> v = Arrays.asList(nextFloat(), nextFloat());
 		setter.fromFloat(v, this);
-		checkValuesObject(v);
+		checkValuesFloat(v);
 	}
 
 	@Test
 	final public void testFloatListMultiple() {
 		final List<Float> v = Arrays.asList(nextFloat(), nextFloat());
 		setter.fromFloat(v, this);
-		checkValuesObject(v);
+		checkValuesFloat(v);
 	}
 
 	@Test
@@ -193,20 +253,21 @@ public abstract class AbstractCollectionSetterTest<T> extends AbstractSetterTest
 	final public void testDoubleArrayMultiple() {
 		final Double[] v = new Double[] { nextDouble(), nextDouble() };
 		setter.fromDouble(v, this);
-		checkValuesObject(v);
+		checkValuesDouble(v);
 	}
 
 	@Test
 	final public void testDoubleCollectionMultiple() {
 		final Collection<Double> v = Arrays.asList(nextDouble(), nextDouble());
 		setter.fromDouble(v, this);
-		checkValuesObject(v);
+		checkValuesDouble(v);
 	}
 
+	@Test
 	final public void testDoubleListMultiple() {
 		final List<Double> v = Arrays.asList(nextDouble(), nextDouble());
 		setter.fromDouble(v, this);
-		checkValuesObject(v);
+		checkValuesDouble(v);
 	}
 
 	@Test
@@ -220,21 +281,21 @@ public abstract class AbstractCollectionSetterTest<T> extends AbstractSetterTest
 	final public void testCharArrayMultiple() {
 		final Character[] v = new Character[] { nextChar(), nextChar() };
 		setter.fromChar(v, this);
-		checkValuesObject(v);
+		checkValuesChar(v);
 	}
 
 	@Test
 	final public void testCharCollectionMultiple() {
 		final Collection<Character> v = Arrays.asList(nextChar(), nextChar());
 		setter.fromChar(v, this);
-		checkValuesObject(v);
+		checkValuesChar(v);
 	}
 
 	@Test
 	final public void testCharListMultiple() {
 		final List<Character> v = Arrays.asList(nextChar(), nextChar());
 		setter.fromChar(v, this);
-		checkValuesObject(v);
+		checkValuesChar(v);
 	}
 
 	@Test
@@ -248,21 +309,21 @@ public abstract class AbstractCollectionSetterTest<T> extends AbstractSetterTest
 	final public void testByteArrayMultiple() {
 		final Byte[] v = new Byte[] { nextByte(), nextByte() };
 		setter.fromByte(v, this);
-		checkValuesObject(v);
+		checkValuesByte(v);
 	}
 
 	@Test
 	final public void testByteCollectionMultiple() {
 		final Collection<Byte> v = Arrays.asList(nextByte(), nextByte());
 		setter.fromByte(v, this);
-		checkValuesObject(v);
+		checkValuesByte(v);
 	}
 
 	@Test
 	final public void testByteListMultiple() {
 		final List<Byte> v = Arrays.asList(nextByte(), nextByte());
 		setter.fromByte(v, this);
-		checkValuesObject(v);
+		checkValuesByte(v);
 	}
 
 	@Test
@@ -276,20 +337,20 @@ public abstract class AbstractCollectionSetterTest<T> extends AbstractSetterTest
 	final public void testBooleanArrayMultiple() {
 		final Boolean[] v = new Boolean[] { nextBoolean(), nextBoolean() };
 		setter.fromBoolean(v, this);
-		checkValuesObject(v);
+		checkValuesBoolean(v);
 	}
 
 	@Test
 	final public void testBooleanCollectionMultiple() {
 		final Collection<Boolean> v = Arrays.asList(nextBoolean(), nextBoolean());
 		setter.fromBoolean(v, this);
-		checkValuesObject(v);
+		checkValuesBoolean(v);
 	}
 
 	@Test
 	final public void testBooleanListMultiple() {
 		final List<Boolean> v = Arrays.asList(nextBoolean(), nextBoolean());
 		setter.fromBoolean(v, this);
-		checkValuesObject(v);
+		checkValuesBoolean(v);
 	}
 }

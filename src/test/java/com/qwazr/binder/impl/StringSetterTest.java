@@ -15,7 +15,7 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.binder.RandomUtils;
+import com.qwazr.utils.RandomUtils;
 import org.junit.Assert;
 
 public class StringSetterTest extends AbstractObjectSetterTest<String> {
@@ -26,12 +26,7 @@ public class StringSetterTest extends AbstractObjectSetterTest<String> {
 
 	@Override
 	protected String nextString() {
-		return RandomUtils.nextString();
-	}
-
-	@Override
-	protected Number nextNumber() {
-		return RandomUtils.nextDouble();
+		return RandomUtils.alphanumeric(10);
 	}
 
 	@Override

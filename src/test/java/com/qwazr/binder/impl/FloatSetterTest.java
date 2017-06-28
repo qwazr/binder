@@ -15,7 +15,6 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 
 public class FloatSetterTest extends AbstractObjectSetterTest<Float> {
@@ -26,12 +25,7 @@ public class FloatSetterTest extends AbstractObjectSetterTest<Float> {
 
 	@Override
 	protected String nextString() {
-		return Float.toString(RandomUtils.nextFloat());
-	}
-
-	@Override
-	protected Number nextNumber() {
-		return RandomUtils.nextFloat();
+		return Float.toString(nextFloat());
 	}
 
 	@Override

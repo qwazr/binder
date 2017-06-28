@@ -35,7 +35,7 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 		Class<?> fieldType = field.getType();
 		final int modifier = fieldType.getModifiers();
 		if (Modifier.isAbstract(modifier) || Modifier.isInterface(modifier)) {
-			if (fieldType.isAssignableFrom(Set.class))
+			if (Set.class.isAssignableFrom(fieldType))
 				fieldType = LinkedHashSet.class;
 			else
 				fieldType = ArrayList.class;

@@ -15,7 +15,6 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 
 public class BytePrimitiveSetterTest extends AbstractSingleSetterTest {
@@ -28,12 +27,7 @@ public class BytePrimitiveSetterTest extends AbstractSingleSetterTest {
 
 	@Override
 	protected String nextString() {
-		return Byte.toString(RandomUtils.nextByte());
-	}
-
-	@Override
-	protected Number nextNumber() {
-		return RandomUtils.nextByte();
+		return Byte.toString(nextByte());
 	}
 
 	@Override

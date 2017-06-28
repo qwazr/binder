@@ -15,7 +15,6 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 
 public class ShortSetterTest extends AbstractObjectSetterTest<Short> {
@@ -26,12 +25,7 @@ public class ShortSetterTest extends AbstractObjectSetterTest<Short> {
 
 	@Override
 	protected String nextString() {
-		return Short.toString(RandomUtils.nextShort());
-	}
-
-	@Override
-	protected Number nextNumber() {
-		return RandomUtils.nextShort();
+		return Short.toString(nextShort());
 	}
 
 	@Override
@@ -46,22 +40,22 @@ public class ShortSetterTest extends AbstractObjectSetterTest<Short> {
 
 	@Override
 	protected void checkValueLong(Long next) {
-		Assert.assertEquals(next, value.longValue(), 0);
+		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
 	protected void checkValueInteger(Integer next) {
-		Assert.assertEquals(next, value.intValue(), 0);
+		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
 	protected void checkValueFloat(Float next) {
-		Assert.assertEquals(next, value.floatValue(), 0);
+		Assert.assertEquals(next.shortValue(), value, 0);
 	}
 
 	@Override
 	protected void checkValueDouble(Double next) {
-		Assert.assertEquals(next, value.doubleValue(), 0);
+		Assert.assertEquals(next.shortValue(), value, 0);
 	}
 
 	@Override
@@ -71,7 +65,7 @@ public class ShortSetterTest extends AbstractObjectSetterTest<Short> {
 
 	@Override
 	protected void checkValueByte(Byte next) {
-		Assert.assertEquals(next, value.byteValue(), 0);
+		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override

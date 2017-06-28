@@ -16,7 +16,6 @@
 package com.qwazr.binder.impl;
 
 import java.lang.reflect.Field;
-import java.util.Collection;
 
 final public class StringCollectionSetterImpl extends CollectionSetterAbstract<String> {
 

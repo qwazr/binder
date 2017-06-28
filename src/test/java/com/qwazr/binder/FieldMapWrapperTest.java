@@ -17,6 +17,7 @@ package com.qwazr.binder;
 
 import com.qwazr.utils.AnnotationsUtils;
 import com.qwazr.utils.CollectionsUtils;
+import com.qwazr.utils.RandomUtils;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;

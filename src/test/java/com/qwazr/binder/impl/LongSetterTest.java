@@ -15,7 +15,6 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 
 public class LongSetterTest extends AbstractObjectSetterTest<Long> {
@@ -26,12 +25,7 @@ public class LongSetterTest extends AbstractObjectSetterTest<Long> {
 
 	@Override
 	protected String nextString() {
-		return Long.toString(RandomUtils.nextLong());
-	}
-
-	@Override
-	protected Number nextNumber() {
-		return RandomUtils.nextLong();
+		return Long.toString(nextLong());
 	}
 
 	@Override
@@ -41,7 +35,7 @@ public class LongSetterTest extends AbstractObjectSetterTest<Long> {
 
 	@Override
 	protected void checkValueShort(Short next) {
-		Assert.assertEquals(next, value.shortValue(), 0);
+		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
@@ -51,17 +45,17 @@ public class LongSetterTest extends AbstractObjectSetterTest<Long> {
 
 	@Override
 	protected void checkValueInteger(Integer next) {
-		Assert.assertEquals(next, value.intValue(), 0);
+		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override
 	protected void checkValueFloat(Float next) {
-		Assert.assertEquals(next, value.floatValue(), 0);
+		Assert.assertEquals(next.longValue(), value, 0);
 	}
 
 	@Override
 	protected void checkValueDouble(Double next) {
-		Assert.assertEquals(next, value.doubleValue(), 0);
+		Assert.assertEquals(next.longValue(), value, 0);
 	}
 
 	@Override
@@ -71,7 +65,7 @@ public class LongSetterTest extends AbstractObjectSetterTest<Long> {
 
 	@Override
 	protected void checkValueByte(Byte next) {
-		Assert.assertEquals(next, value.byteValue(), 0);
+		Assert.assertEquals(next, value, 0);
 	}
 
 	@Override

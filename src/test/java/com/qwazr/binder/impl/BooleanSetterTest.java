@@ -15,7 +15,6 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.binder.RandomUtils;
 import org.junit.Assert;
 
 public class BooleanSetterTest extends AbstractObjectSetterTest<Boolean> {
@@ -31,12 +30,7 @@ public class BooleanSetterTest extends AbstractObjectSetterTest<Boolean> {
 
 	@Override
 	protected String nextString() {
-		return Boolean.toString(RandomUtils.nextBoolean());
-	}
-
-	@Override
-	protected Number nextNumber() {
-		return RandomUtils.nextBoolean() ? 1 : 0;
+		return Boolean.toString(nextBoolean());
 	}
 
 	@Override
