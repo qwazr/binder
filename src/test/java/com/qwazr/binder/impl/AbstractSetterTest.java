@@ -615,7 +615,11 @@ public abstract class AbstractSetterTest {
 
 	@Test
 	final public void testBooleanPrimitive() {
-		final boolean v = nextBoolean();
+		boolean v = true;
+		setter.fromBoolean(v, this);
+		checkValueBoolean(v);
+
+		v = false;
 		setter.fromBoolean(v, this);
 		checkValueBoolean(v);
 	}
@@ -636,7 +640,11 @@ public abstract class AbstractSetterTest {
 
 	@Test
 	final public void testBoolean() {
-		final Boolean v = nextBoolean();
+		Boolean v = true;
+		setter.fromBoolean(v, this);
+		checkValueBoolean(v);
+
+		v = false;
 		setter.fromBoolean(v, this);
 		checkValueBoolean(v);
 	}

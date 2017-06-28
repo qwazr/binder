@@ -15,18 +15,16 @@
  */
 package com.qwazr.binder.impl;
 
-import java.util.Collection;
+public abstract class AbstractArraySetterTest<T> extends AbstractMultipleSetterTest {
 
-public abstract class AbstractCollectionSetterTest<T> extends AbstractMultipleSetterTest {
+	T[] value;
 
-	Collection<T> value;
-
-	protected AbstractCollectionSetterTest(FieldSetterAbstract setter) {
+	protected AbstractArraySetterTest(FieldSetterAbstract setter) {
 		super(setter);
 	}
 
 	@Override
 	final protected int size() {
-		return value.size();
+		return value.length;
 	}
 }
