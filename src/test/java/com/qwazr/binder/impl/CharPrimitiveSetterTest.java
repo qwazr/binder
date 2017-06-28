@@ -36,37 +36,12 @@ public class CharPrimitiveSetterTest extends AbstractSingleSetterTest {
 	}
 
 	@Override
-	protected void checkValueShort(Short next) {
-		Assert.assertEquals(next, value, 0);
-	}
-
-	@Override
-	protected void checkValueLong(Long next) {
-		Assert.assertEquals(next, value, 0);
-	}
-
-	@Override
-	protected void checkValueInteger(Integer next) {
-		Assert.assertEquals(next, value, 0);
-	}
-
-	@Override
-	protected void checkValueFloat(Float next) {
-		Assert.assertEquals(next.intValue(), value, 0);
-	}
-
-	@Override
-	protected void checkValueDouble(Double next) {
-		Assert.assertEquals(next.intValue(), value, 0);
+	protected void checkValueNumber(Number next) {
+		Assert.assertEquals((char) next.intValue(), value);
 	}
 
 	@Override
 	protected void checkValueChar(Character next) {
-		Assert.assertEquals(next, value, 0);
-	}
-
-	@Override
-	protected void checkValueByte(Byte next) {
 		Assert.assertEquals(next, value, 0);
 	}
 

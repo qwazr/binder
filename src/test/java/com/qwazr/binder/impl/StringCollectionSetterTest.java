@@ -32,97 +32,27 @@ public class StringCollectionSetterTest extends AbstractCollectionSetterTest<Str
 	}
 
 	@Override
-	protected void checkValueString(String next) {
-		Assert.assertEquals(value.iterator().next(), next);
-	}
-
-	@Override
-	protected void checkValueShort(Short next) {
-		Assert.assertEquals(value.iterator().next(), next.toString());
-	}
-
-	@Override
-	protected void checkValueLong(Long next) {
-		Assert.assertEquals(value.iterator().next(), next.toString());
-	}
-
-	@Override
-	protected void checkValueInteger(Integer next) {
-		Assert.assertEquals(value.iterator().next(), next.toString());
-	}
-
-	@Override
-	protected void checkValueFloat(Float next) {
-		Assert.assertEquals(value.iterator().next(), next.toString());
-	}
-
-	@Override
-	protected void checkValueDouble(Double next) {
-		Assert.assertEquals(value.iterator().next(), next.toString());
-	}
-
-	@Override
-	protected void checkValueChar(Character next) {
-		Assert.assertEquals(value.iterator().next(), next.toString());
-	}
-
-	@Override
-	protected void checkValueByte(Byte next) {
-		Assert.assertEquals(value.iterator().next(), next.toString());
-	}
-
-	@Override
-	protected void checkValueBoolean(Boolean next) {
-		Assert.assertEquals(value.iterator().next(), next.toString());
-	}
-
-	@Override
 	protected void checkValueNull() {
 		Assert.assertNull(value);
 	}
 
 	@Override
-	protected void checkValuesString(String... v) {
+	protected void checkValueString(String... v) {
 		Assert.assertTrue(CollectionsUtils.equals(value, v));
 	}
 
 	@Override
-	protected void checkValuesShort(short... v) {
-		Assert.assertArrayEquals(ArrayUtils.toStringArray(ArrayUtils.toObject(v)), value.toArray());
+	protected void checkValueNumber(Number... v) {
+		Assert.assertArrayEquals(ArrayUtils.toStringArray(v), value.toArray());
 	}
 
 	@Override
-	protected void checkValuesLong(long... v) {
-		Assert.assertArrayEquals(ArrayUtils.toStringArray(ArrayUtils.toObject(v)), value.toArray());
+	protected void checkValueChar(Character... v) {
+		Assert.assertArrayEquals(ArrayUtils.toStringArray(v), value.toArray());
 	}
 
 	@Override
-	protected void checkValuesInteger(int... v) {
-		Assert.assertArrayEquals(ArrayUtils.toStringArray(ArrayUtils.toObject(v)), value.toArray());
-	}
-
-	@Override
-	protected void checkValuesFloat(float... v) {
-		Assert.assertArrayEquals(ArrayUtils.toStringArray(ArrayUtils.toObject(v)), value.toArray());
-	}
-
-	@Override
-	protected void checkValuesDouble(double... v) {
-		Assert.assertArrayEquals(ArrayUtils.toStringArray(ArrayUtils.toObject(v)), value.toArray());
-	}
-
-	@Override
-	protected void checkValuesChar(char... v) {
-		Assert.assertArrayEquals(ArrayUtils.toStringArray(ArrayUtils.toObject(v)), value.toArray());
-	}
-
-	@Override
-	protected void checkValuesByte(byte... v) {
-		Assert.assertArrayEquals(ArrayUtils.toStringArray(ArrayUtils.toObject(v)), value.toArray());
-	}
-
-	@Override
-	protected void checkValuesBoolean(boolean... v) {
-		Assert.assertArrayEquals(ArrayUtils.toStringArray(ArrayUtils.toObject(v)), value.toArray());
+	protected void checkValueBoolean(Boolean... v) {
+		Assert.assertArrayEquals(ArrayUtils.toStringArray(v), value.toArray());
 	}
 }

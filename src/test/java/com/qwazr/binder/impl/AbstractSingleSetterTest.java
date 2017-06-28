@@ -16,6 +16,7 @@
 package com.qwazr.binder.impl;
 
 import com.qwazr.binder.BinderException;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -26,6 +27,38 @@ public abstract class AbstractSingleSetterTest extends AbstractSetterTest {
 
 	protected AbstractSingleSetterTest(FieldSetterAbstract setter) {
 		super(setter);
+	}
+
+	protected abstract void checkValueString(String next);
+
+	protected abstract void checkValueNumber(Number next);
+
+	protected abstract void checkValueChar(Character next);
+
+	protected abstract void checkValueBoolean(Boolean next);
+
+	final protected void checkValueString(String... next) {
+		Assert.assertNotNull(next);
+		Assert.assertEquals(1, next.length);
+		checkValueString(next[0]);
+	}
+
+	final protected void checkValueNumber(Number... next) {
+		Assert.assertNotNull(next);
+		Assert.assertEquals(1, next.length);
+		checkValueNumber(next[0]);
+	}
+
+	final protected void checkValueChar(Character... next) {
+		Assert.assertNotNull(next);
+		Assert.assertEquals(1, next.length);
+		checkValueChar(next[0]);
+	}
+
+	final protected void checkValueBoolean(Boolean... next) {
+		Assert.assertNotNull(next);
+		Assert.assertEquals(1, next.length);
+		checkValueBoolean(next[0]);
 	}
 
 	@Test(expected = BinderException.class)

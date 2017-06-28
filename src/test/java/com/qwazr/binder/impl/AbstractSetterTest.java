@@ -64,23 +64,13 @@ public abstract class AbstractSetterTest {
 		return RandomUtils.nextBoolean();
 	}
 
-	protected abstract void checkValueString(String next);
+	protected abstract void checkValueString(String... next);
 
-	protected abstract void checkValueShort(Short next);
+	protected abstract void checkValueNumber(Number... next);
 
-	protected abstract void checkValueLong(Long next);
+	protected abstract void checkValueChar(Character... next);
 
-	protected abstract void checkValueInteger(Integer next);
-
-	protected abstract void checkValueFloat(Float next);
-
-	protected abstract void checkValueDouble(Double next);
-
-	protected abstract void checkValueChar(Character next);
-
-	protected abstract void checkValueByte(Byte next);
-
-	protected abstract void checkValueBoolean(Boolean next);
+	protected abstract void checkValueBoolean(Boolean... next);
 
 	protected abstract void checkValueNull();
 
@@ -137,14 +127,14 @@ public abstract class AbstractSetterTest {
 	final public void testShortPrimitive() {
 		final short v = nextShort();
 		setter.fromShort(v, this);
-		checkValueShort(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testShortPrimitiveArray() {
 		final short[] v = new short[] { nextShort() };
 		setter.fromShort(v, this);
-		checkValueShort(v[0]);
+		checkValueNumber(v[0]);
 	}
 
 	@Test
@@ -158,14 +148,14 @@ public abstract class AbstractSetterTest {
 	final public void testShort() {
 		final Short v = nextShort();
 		setter.fromShort(v, this);
-		checkValueShort(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testShortArray() {
 		final Short[] v = new Short[] { nextShort() };
 		setter.fromShort(v, this);
-		checkValueShort(v[0]);
+		checkValueNumber(v[0]);
 	}
 
 	@Test
@@ -179,7 +169,7 @@ public abstract class AbstractSetterTest {
 	final public void testShortCollection() {
 		final Collection<Short> v = Arrays.asList(nextShort());
 		setter.fromShort(v, this);
-		checkValueShort(v.iterator().next());
+		checkValueNumber(v.iterator().next());
 	}
 
 	@Test
@@ -193,7 +183,7 @@ public abstract class AbstractSetterTest {
 	public void testShortList() {
 		final List<Short> v = Arrays.asList(nextShort());
 		setter.fromShort(v, this);
-		checkValueShort(v.iterator().next());
+		checkValueNumber(v.iterator().next());
 	}
 
 	@Test
@@ -207,14 +197,14 @@ public abstract class AbstractSetterTest {
 	final public void testLongPrimitive() {
 		final long v = nextLong();
 		setter.fromLong(v, this);
-		checkValueLong(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testLongPrimitiveArray() {
 		final long[] v = new long[] { nextLong() };
 		setter.fromLong(v, this);
-		checkValueLong(v[0]);
+		checkValueNumber(v[0]);
 	}
 
 	@Test
@@ -228,14 +218,14 @@ public abstract class AbstractSetterTest {
 	final public void testLong() {
 		final Long v = nextLong();
 		setter.fromLong(v, this);
-		checkValueLong(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testLongArray() {
 		final Long[] v = new Long[] { nextLong() };
 		setter.fromLong(v, this);
-		checkValueLong(v[0]);
+		checkValueNumber(v[0]);
 	}
 
 	@Test
@@ -249,7 +239,7 @@ public abstract class AbstractSetterTest {
 	final public void testLongCollection() {
 		final Collection<Long> v = Arrays.asList(nextLong());
 		setter.fromLong(v, this);
-		checkValueLong(v.iterator().next());
+		checkValueNumber(v.iterator().next());
 	}
 
 	@Test
@@ -263,7 +253,7 @@ public abstract class AbstractSetterTest {
 	final public void testLongList() {
 		final List<Long> v = Arrays.asList(nextLong());
 		setter.fromLong(v, this);
-		checkValueLong(v.iterator().next());
+		checkValueNumber(v.iterator().next());
 	}
 
 	@Test
@@ -277,14 +267,14 @@ public abstract class AbstractSetterTest {
 	final public void testIntegerPrimitive() {
 		final int v = nextInt();
 		setter.fromInteger(v, this);
-		checkValueInteger(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testIntegerPrimitiveArray() {
 		final int[] v = new int[] { nextInt() };
 		setter.fromInteger(v, this);
-		checkValueInteger(v[0]);
+		checkValueNumber(v[0]);
 	}
 
 	@Test
@@ -298,14 +288,14 @@ public abstract class AbstractSetterTest {
 	final public void testInteger() {
 		final Integer v = nextInt();
 		setter.fromInteger(v, this);
-		checkValueInteger(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testIntegerArray() {
 		final Integer[] v = new Integer[] { nextInt() };
 		setter.fromInteger(v, this);
-		checkValueInteger(v[0]);
+		checkValueNumber(v[0]);
 	}
 
 	@Test
@@ -319,7 +309,7 @@ public abstract class AbstractSetterTest {
 	final public void testIntegerCollection() {
 		final Collection<Integer> v = Arrays.asList(nextInt());
 		setter.fromInteger(v, this);
-		checkValueInteger(v.iterator().next());
+		checkValueNumber(v.iterator().next());
 	}
 
 	@Test
@@ -333,7 +323,7 @@ public abstract class AbstractSetterTest {
 	final public void testIntegerList() {
 		final List<Integer> v = Arrays.asList(nextInt());
 		setter.fromInteger(v, this);
-		checkValueInteger(v.iterator().next());
+		checkValueNumber(v.iterator().next());
 	}
 
 	@Test
@@ -347,14 +337,14 @@ public abstract class AbstractSetterTest {
 	final public void testFloatPrimitive() {
 		final float v = nextFloat();
 		setter.fromFloat(v, this);
-		checkValueFloat(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testFloatPrimitiveArray() {
 		final float[] v = new float[] { nextFloat() };
 		setter.fromFloat(v, this);
-		checkValueFloat(v[0]);
+		checkValueNumber(v[0]);
 	}
 
 	@Test
@@ -368,14 +358,14 @@ public abstract class AbstractSetterTest {
 	final public void testFloat() {
 		final Float v = nextFloat();
 		setter.fromFloat(v, this);
-		checkValueFloat(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testFloatArray() {
 		final Float[] v = new Float[] { nextFloat() };
 		setter.fromFloat(v, this);
-		checkValueFloat(v[0]);
+		checkValueNumber(v[0]);
 	}
 
 	@Test
@@ -389,7 +379,7 @@ public abstract class AbstractSetterTest {
 	final public void testFloatCollection() {
 		final Collection<Float> v = Arrays.asList(nextFloat());
 		setter.fromFloat(v, this);
-		checkValueFloat(v.iterator().next());
+		checkValueNumber(v.iterator().next());
 	}
 
 	@Test
@@ -403,7 +393,7 @@ public abstract class AbstractSetterTest {
 	final public void testFloatList() {
 		final List<Float> v = Arrays.asList(nextFloat());
 		setter.fromFloat(v, this);
-		checkValueFloat(v.iterator().next());
+		checkValueNumber(v.iterator().next());
 	}
 
 	@Test
@@ -417,14 +407,14 @@ public abstract class AbstractSetterTest {
 	final public void testDoublePrimitive() {
 		final double v = nextDouble();
 		setter.fromDouble(v, this);
-		checkValueDouble(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testDoublePrimitiveArray() {
 		final double[] v = new double[] { nextDouble() };
 		setter.fromDouble(v, this);
-		checkValueDouble(v[0]);
+		checkValueNumber(v[0]);
 	}
 
 	@Test
@@ -438,14 +428,14 @@ public abstract class AbstractSetterTest {
 	final public void testDouble() {
 		final Double v = nextDouble();
 		setter.fromDouble(v, this);
-		checkValueDouble(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testDoubleArray() {
 		final Double[] v = new Double[] { nextDouble() };
 		setter.fromDouble(v, this);
-		checkValueDouble(v[0]);
+		checkValueNumber(v[0]);
 	}
 
 	@Test
@@ -459,7 +449,7 @@ public abstract class AbstractSetterTest {
 	final public void testDoubleCollection() {
 		final Collection<Double> v = Arrays.asList(nextDouble());
 		setter.fromDouble(v, this);
-		checkValueDouble(v.iterator().next());
+		checkValueNumber(v.iterator().next());
 	}
 
 	@Test
@@ -473,7 +463,7 @@ public abstract class AbstractSetterTest {
 	final public void testDoubleList() {
 		final List<Double> v = Arrays.asList(nextDouble());
 		setter.fromDouble(v, this);
-		checkValueDouble(v.iterator().next());
+		checkValueNumber(v.iterator().next());
 	}
 
 	@Test
@@ -557,14 +547,14 @@ public abstract class AbstractSetterTest {
 	final public void testBytePrimitive() {
 		final byte v = nextByte();
 		setter.fromByte(v, this);
-		checkValueByte(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testBytePrimitiveArray() {
 		final byte[] v = new byte[] { nextByte() };
 		setter.fromByte(v, this);
-		checkValueByte(v[0]);
+		checkValueNumber(v[0]);
 	}
 
 	@Test
@@ -578,14 +568,14 @@ public abstract class AbstractSetterTest {
 	final public void testByte() {
 		final Byte v = nextByte();
 		setter.fromByte(v, this);
-		checkValueByte(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testByteArray() {
 		final Byte[] v = new Byte[] { nextByte() };
 		setter.fromByte(v, this);
-		checkValueByte(v[0]);
+		checkValueNumber(v[0]);
 	}
 
 	@Test
@@ -599,7 +589,7 @@ public abstract class AbstractSetterTest {
 	final public void testByteCollection() {
 		final Collection<Byte> v = Arrays.asList(nextByte());
 		setter.fromByte(v, this);
-		checkValueByte(v.iterator().next());
+		checkValueNumber(v.iterator().next());
 	}
 
 	@Test
@@ -613,7 +603,7 @@ public abstract class AbstractSetterTest {
 	final public void testByteList() {
 		final List<Byte> v = Arrays.asList(nextByte());
 		setter.fromByte(v, this);
-		checkValueByte(v.iterator().next());
+		checkValueNumber(v.iterator().next());
 	}
 
 	@Test

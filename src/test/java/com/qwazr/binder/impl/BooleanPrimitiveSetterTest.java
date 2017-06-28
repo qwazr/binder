@@ -36,40 +36,15 @@ public class BooleanPrimitiveSetterTest extends AbstractSingleSetterTest {
 	}
 
 	@Override
-	protected void checkValueShort(Short next) {
-		Assert.assertEquals(next != 0, value);
-	}
-
-	@Override
-	protected void checkValueLong(Long next) {
-		Assert.assertEquals(next != 0, value);
-	}
-
-	@Override
-	protected void checkValueInteger(Integer next) {
-		Assert.assertEquals(next != 0, value);
-	}
-
-	@Override
-	protected void checkValueFloat(Float next) {
-		Assert.assertEquals(next != 0, value);
-	}
-
-	@Override
-	protected void checkValueDouble(Double next) {
-		Assert.assertEquals(next != 0, value);
+	protected void checkValueNumber(Number next) {
+		Assert.assertEquals(next.intValue() != 0, value);
 	}
 
 	@Override
 	protected void checkValueChar(Character next) {
 		Assert.assertEquals(next != 0, value);
 	}
-
-	@Override
-	protected void checkValueByte(Byte next) {
-		Assert.assertEquals(next != 0, value);
-	}
-
+	
 	@Override
 	protected void checkValueBoolean(Boolean next) {
 		Assert.assertEquals(next, value);

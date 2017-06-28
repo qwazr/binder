@@ -23,11 +23,7 @@ public class BooleanSetterTest extends AbstractObjectSetterTest<Boolean> {
 		super(new BooleanSetterImpl(getValueField()));
 
 	}
-
-	BooleanSetterTest(FieldSetterAbstract fieldSetter) {
-		super(fieldSetter);
-	}
-
+	
 	@Override
 	protected String nextString() {
 		return Boolean.toString(nextBoolean());
@@ -39,37 +35,12 @@ public class BooleanSetterTest extends AbstractObjectSetterTest<Boolean> {
 	}
 
 	@Override
-	protected void checkValueShort(Short next) {
-		Assert.assertEquals(next != 0, value);
-	}
-
-	@Override
-	protected void checkValueLong(Long next) {
-		Assert.assertEquals(next != 0, value);
-	}
-
-	@Override
-	protected void checkValueInteger(Integer next) {
-		Assert.assertEquals(next != 0, value);
-	}
-
-	@Override
-	protected void checkValueFloat(Float next) {
-		Assert.assertEquals(next != 0, value);
-	}
-
-	@Override
-	protected void checkValueDouble(Double next) {
-		Assert.assertEquals(next != 0, value);
+	protected void checkValueNumber(Number next) {
+		Assert.assertEquals(next.intValue() != 0, value);
 	}
 
 	@Override
 	protected void checkValueChar(Character next) {
-		Assert.assertEquals(next != 0, value);
-	}
-
-	@Override
-	protected void checkValueByte(Byte next) {
 		Assert.assertEquals(next != 0, value);
 	}
 

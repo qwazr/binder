@@ -36,37 +36,12 @@ public class BytePrimitiveSetterTest extends AbstractSingleSetterTest {
 	}
 
 	@Override
-	protected void checkValueShort(Short next) {
-		Assert.assertEquals(next.byteValue(), value, 0);
-	}
-
-	@Override
-	protected void checkValueLong(Long next) {
-		Assert.assertEquals(next.byteValue(), value, 0);
-	}
-
-	@Override
-	protected void checkValueInteger(Integer next) {
-		Assert.assertEquals(next.byteValue(), value, 0);
-	}
-
-	@Override
-	protected void checkValueFloat(Float next) {
-		Assert.assertEquals(next.byteValue(), value, 0);
-	}
-
-	@Override
-	protected void checkValueDouble(Double next) {
+	protected void checkValueNumber(Number next) {
 		Assert.assertEquals(next.byteValue(), value, 0);
 	}
 
 	@Override
 	protected void checkValueChar(Character next) {
-		Assert.assertEquals(next, value, 0);
-	}
-
-	@Override
-	protected void checkValueByte(Byte next) {
 		Assert.assertEquals(next, value, 0);
 	}
 

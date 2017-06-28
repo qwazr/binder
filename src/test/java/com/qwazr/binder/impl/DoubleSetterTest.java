@@ -33,38 +33,13 @@ public class DoubleSetterTest extends AbstractObjectSetterTest<Double> {
 	}
 
 	@Override
-	protected void checkValueShort(Short next) {
-		Assert.assertEquals(next, value.shortValue(), 0);
-	}
-
-	@Override
-	protected void checkValueLong(Long next) {
-		Assert.assertEquals(next, value.longValue(), 0);
-	}
-
-	@Override
-	protected void checkValueInteger(Integer next) {
-		Assert.assertEquals(next, value.intValue(), 0);
-	}
-
-	@Override
-	protected void checkValueFloat(Float next) {
-		Assert.assertEquals(next, value.floatValue(), 0);
-	}
-
-	@Override
-	protected void checkValueDouble(Double next) {
-		Assert.assertEquals(next, value, 0);
+	protected void checkValueNumber(Number next) {
+		Assert.assertEquals(next.doubleValue(), value, 0);
 	}
 
 	@Override
 	protected void checkValueChar(Character next) {
 		Assert.assertEquals(next, value, 0);
-	}
-
-	@Override
-	protected void checkValueByte(Byte next) {
-		Assert.assertEquals(next, value.byteValue(), 0);
 	}
 
 	@Override

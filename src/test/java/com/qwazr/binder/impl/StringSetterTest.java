@@ -35,38 +35,13 @@ public class StringSetterTest extends AbstractObjectSetterTest<String> {
 	}
 
 	@Override
-	protected void checkValueShort(Short next) {
-		Assert.assertEquals(next, Short.parseShort(value), 0);
-	}
-
-	@Override
-	protected void checkValueLong(Long next) {
-		Assert.assertEquals(next, Long.parseLong(value), 0);
-	}
-
-	@Override
-	protected void checkValueInteger(Integer next) {
-		Assert.assertEquals(next, Integer.parseInt(value), 0);
-	}
-
-	@Override
-	protected void checkValueFloat(Float next) {
-		Assert.assertEquals(next, Float.parseFloat(value), 0);
-	}
-
-	@Override
-	protected void checkValueDouble(Double next) {
-		Assert.assertEquals(next, Double.parseDouble(value), 0);
+	protected void checkValueNumber(Number next) {
+		Assert.assertEquals(next.toString(), value);
 	}
 
 	@Override
 	protected void checkValueChar(Character next) {
 		Assert.assertEquals(Character.toString(next), value);
-	}
-
-	@Override
-	protected void checkValueByte(Byte next) {
-		Assert.assertEquals(next, Byte.parseByte(value), 0);
 	}
 
 	@Override

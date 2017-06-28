@@ -16,6 +16,7 @@
 package com.qwazr.binder.impl;
 
 import com.qwazr.utils.ArrayUtils;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -30,327 +31,261 @@ public abstract class AbstractCollectionSetterTest<T> extends AbstractSetterTest
 		super(setter);
 	}
 
-	protected abstract void checkValuesString(String... v);
-
-	private void checkValuesString(Collection<String> v) {
-		checkValuesString(ArrayUtils.toArray(v));
+	private void checkValueString(Collection<String> v) {
+		Assert.assertEquals(v.size(), value.size());
+		checkValueString(ArrayUtils.toArray(v));
 	}
 
-	protected abstract void checkValuesShort(short... v);
-
-	private void checkValuesShort(Collection<Short> v) {
-		checkValuesShort(ArrayUtils.toPrimitiveShort(v));
+	private void checkValueNumber(Collection<? extends Number> v) {
+		Assert.assertEquals(v.size(), value.size());
+		checkValueNumber((Number[]) v.toArray());
 	}
 
-	private void checkValuesShort(Short[] v) {
-		checkValuesShort(ArrayUtils.toPrimitive(v));
+	private void checkValueChar(Collection<Character> v) {
+		Assert.assertEquals(v.size(), value.size());
+		checkValueChar((Character[]) v.toArray());
 	}
 
-	protected abstract void checkValuesLong(long... v);
-
-	private void checkValuesLong(Collection<Long> v) {
-		checkValuesLong(ArrayUtils.toPrimitiveLong(v));
-	}
-
-	private void checkValuesLong(Long[] v) {
-		checkValuesLong(ArrayUtils.toPrimitive(v));
-	}
-
-	protected abstract void checkValuesInteger(int... v);
-
-	private void checkValuesInteger(Collection<Integer> v) {
-		checkValuesInteger(ArrayUtils.toPrimitiveInt(v));
-	}
-
-	private void checkValuesInteger(Integer[] v) {
-		checkValuesInteger(ArrayUtils.toPrimitive(v));
-	}
-
-	protected abstract void checkValuesFloat(float... v);
-
-	private void checkValuesFloat(Collection<Float> v) {
-		checkValuesFloat(ArrayUtils.toPrimitiveFloat(v));
-	}
-
-	private void checkValuesFloat(Float[] v) {
-		checkValuesFloat(ArrayUtils.toPrimitive(v));
-	}
-
-	protected abstract void checkValuesDouble(double... v);
-
-	private void checkValuesDouble(Collection<Double> v) {
-		checkValuesDouble(ArrayUtils.toPrimitiveDouble(v));
-	}
-
-	private void checkValuesDouble(Double[] v) {
-		checkValuesDouble(ArrayUtils.toPrimitive(v));
-	}
-
-	protected abstract void checkValuesChar(char... v);
-
-	private void checkValuesChar(Collection<Character> v) {
-		checkValuesChar(ArrayUtils.toPrimitiveChar(v));
-	}
-
-	private void checkValuesChar(Character[] v) {
-		checkValuesChar(ArrayUtils.toPrimitive(v));
-	}
-
-	protected abstract void checkValuesByte(byte... v);
-
-	private void checkValuesByte(Collection<Byte> v) {
-		checkValuesByte(ArrayUtils.toPrimitiveByte(v));
-	}
-
-	private void checkValuesByte(Byte[] v) {
-		checkValuesByte(ArrayUtils.toPrimitive(v));
-	}
-
-	protected abstract void checkValuesBoolean(boolean... v);
-
-	private void checkValuesBoolean(Collection<Boolean> v) {
-		checkValuesBoolean(ArrayUtils.toPrimitiveBoolean(v));
-	}
-
-	private void checkValuesBoolean(Boolean[] v) {
-		checkValuesBoolean(ArrayUtils.toPrimitive(v));
+	private void checkValueBoolean(Collection<Boolean> v) {
+		Assert.assertEquals(v.size(), value.size());
+		checkValueBoolean((Boolean[]) v.toArray());
 	}
 
 	@Test
 	final public void testStringCollectionMultiple() {
 		final Collection<String> v = Arrays.asList(nextString(), nextString());
 		setter.fromString(v, this);
-		checkValuesString(v);
+		checkValueString(v);
 	}
 
 	@Test
 	final public void testStringListMultiple() {
 		final List<String> v = Arrays.asList(nextString(), nextString());
 		setter.fromString(v, this);
-		checkValuesString(v);
+		checkValueString(v);
 	}
 
 	@Test
 	final public void testShortPrimitiveArrayMultiple() {
 		final short[] v = new short[] { nextShort(), nextShort() };
 		setter.fromShort(v, this);
-		checkValuesShort(v);
+		checkValueNumber(ArrayUtils.toObject(v));
 	}
 
 	@Test
 	final public void testShortArrayMultiple() {
 		final Short[] v = new Short[] { nextShort(), nextShort() };
 		setter.fromShort(v, this);
-		checkValuesShort(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testShortCollectionMultiple() {
 		final Collection<Short> v = Arrays.asList(nextShort(), nextShort());
 		setter.fromShort(v, this);
-		checkValuesShort(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testShortListMultiple() {
 		final List<Short> v = Arrays.asList(nextShort(), nextShort());
 		setter.fromShort(v, this);
-		checkValuesShort(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testLongPrimitiveArrayMultiple() {
 		final long[] v = new long[] { nextLong(), nextLong() };
 		setter.fromLong(v, this);
-		checkValuesLong(v);
+		checkValueNumber(ArrayUtils.toObject(v));
 	}
 
 	@Test
 	final public void testLongArrayMultiple() {
 		final Long[] v = new Long[] { nextLong(), nextLong() };
 		setter.fromLong(v, this);
-		checkValuesLong(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testLongCollectionMultiple() {
 		final Collection<Long> v = Arrays.asList(nextLong(), nextLong());
 		setter.fromLong(v, this);
-		checkValuesLong(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testLongListMultiple() {
 		final List<Long> v = Arrays.asList(nextLong(), nextLong());
 		setter.fromLong(v, this);
-		checkValuesLong(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testIntegerPrimitiveArrayMultiple() {
 		final int[] v = new int[] { nextInt(), nextInt() };
 		setter.fromInteger(v, this);
-		checkValuesInteger(v);
+		checkValueNumber(ArrayUtils.toObject(v));
 	}
 
 	@Test
 	final public void testIntegerArrayMultiple() {
 		final Integer[] v = new Integer[] { nextInt(), nextInt() };
 		setter.fromInteger(v, this);
-		checkValuesInteger(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testIntegerCollectionMultiple() {
 		final Collection<Integer> v = Arrays.asList(nextInt(), nextInt());
 		setter.fromInteger(v, this);
-		checkValuesInteger(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testIntegerListMultiple() {
 		final List<Integer> v = Arrays.asList(nextInt(), nextInt());
 		setter.fromInteger(v, this);
-		checkValuesInteger(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testFloatPrimitiveArrayMultiple() {
 		final float[] v = new float[] { nextFloat(), nextFloat() };
 		setter.fromFloat(v, this);
-		checkValuesFloat(v);
+		checkValueNumber(ArrayUtils.toObject(v));
 	}
 
 	@Test
 	final public void testFloatArrayMultiple() {
 		final Float[] v = new Float[] { nextFloat(), nextFloat() };
 		setter.fromFloat(v, this);
-		checkValuesFloat(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testFloatCollectionMultiple() {
 		final Collection<Float> v = Arrays.asList(nextFloat(), nextFloat());
 		setter.fromFloat(v, this);
-		checkValuesFloat(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testFloatListMultiple() {
 		final List<Float> v = Arrays.asList(nextFloat(), nextFloat());
 		setter.fromFloat(v, this);
-		checkValuesFloat(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testDoublePrimitiveArrayMultiple() {
 		final double[] v = new double[] { nextDouble(), nextDouble() };
 		setter.fromDouble(v, this);
-		checkValuesDouble(v);
+		checkValueNumber(ArrayUtils.toObject(v));
 	}
 
 	@Test
 	final public void testDoubleArrayMultiple() {
 		final Double[] v = new Double[] { nextDouble(), nextDouble() };
 		setter.fromDouble(v, this);
-		checkValuesDouble(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testDoubleCollectionMultiple() {
 		final Collection<Double> v = Arrays.asList(nextDouble(), nextDouble());
 		setter.fromDouble(v, this);
-		checkValuesDouble(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testDoubleListMultiple() {
 		final List<Double> v = Arrays.asList(nextDouble(), nextDouble());
 		setter.fromDouble(v, this);
-		checkValuesDouble(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testCharPrimitiveArrayMultiple() {
 		final char[] v = new char[] { nextChar(), nextChar() };
 		setter.fromChar(v, this);
-		checkValuesChar(v);
+		checkValueChar(ArrayUtils.toObject(v));
 	}
 
 	@Test
 	final public void testCharArrayMultiple() {
 		final Character[] v = new Character[] { nextChar(), nextChar() };
 		setter.fromChar(v, this);
-		checkValuesChar(v);
+		checkValueChar(v);
 	}
 
 	@Test
 	final public void testCharCollectionMultiple() {
 		final Collection<Character> v = Arrays.asList(nextChar(), nextChar());
 		setter.fromChar(v, this);
-		checkValuesChar(v);
+		checkValueChar(v);
 	}
 
 	@Test
 	final public void testCharListMultiple() {
 		final List<Character> v = Arrays.asList(nextChar(), nextChar());
 		setter.fromChar(v, this);
-		checkValuesChar(v);
+		checkValueChar(v);
 	}
 
 	@Test
 	final public void testBytePrimitiveArrayMultiple() {
 		final byte[] v = new byte[] { nextByte(), nextByte() };
 		setter.fromByte(v, this);
-		checkValuesByte(v);
+		checkValueNumber(ArrayUtils.toObject(v));
 	}
 
 	@Test
 	final public void testByteArrayMultiple() {
 		final Byte[] v = new Byte[] { nextByte(), nextByte() };
 		setter.fromByte(v, this);
-		checkValuesByte(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testByteCollectionMultiple() {
 		final Collection<Byte> v = Arrays.asList(nextByte(), nextByte());
 		setter.fromByte(v, this);
-		checkValuesByte(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testByteListMultiple() {
 		final List<Byte> v = Arrays.asList(nextByte(), nextByte());
 		setter.fromByte(v, this);
-		checkValuesByte(v);
+		checkValueNumber(v);
 	}
 
 	@Test
 	final public void testBooleanPrimitiveArrayMultiple() {
 		final boolean[] v = new boolean[] { nextBoolean(), nextBoolean() };
 		setter.fromBoolean(v, this);
-		checkValuesBoolean(v);
+		checkValueBoolean(ArrayUtils.toObject(v));
 	}
 
 	@Test
 	final public void testBooleanArrayMultiple() {
 		final Boolean[] v = new Boolean[] { nextBoolean(), nextBoolean() };
 		setter.fromBoolean(v, this);
-		checkValuesBoolean(v);
+		checkValueBoolean(v);
 	}
 
 	@Test
 	final public void testBooleanCollectionMultiple() {
 		final Collection<Boolean> v = Arrays.asList(nextBoolean(), nextBoolean());
 		setter.fromBoolean(v, this);
-		checkValuesBoolean(v);
+		checkValueBoolean(v);
 	}
 
 	@Test
 	final public void testBooleanListMultiple() {
 		final List<Boolean> v = Arrays.asList(nextBoolean(), nextBoolean());
 		setter.fromBoolean(v, this);
-		checkValuesBoolean(v);
+		checkValueBoolean(v);
 	}
 }
