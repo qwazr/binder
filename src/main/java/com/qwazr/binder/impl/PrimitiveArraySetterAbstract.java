@@ -152,8 +152,18 @@ public abstract class PrimitiveArraySetterAbstract extends FieldSetterAbstract {
 	}
 
 	@Override
+	final public void fromInteger(Collection<Integer> values, Object object) {
+		fromNumber(values, object);
+	}
+
+	@Override
+	final public void fromShort(Collection<Short> values, Object object) {
+		fromNumber(values, object);
+	}
+
+	@Override
 	final public void fromByte(Collection<Byte> values, Object object) {
 		fromNumber(values, object);
 	}
-	
+
 }

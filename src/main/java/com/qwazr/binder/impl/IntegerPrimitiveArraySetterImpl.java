@@ -18,210 +18,214 @@ package com.qwazr.binder.impl;
 import java.lang.reflect.Field;
 import java.util.Collection;
 
-final public class BytePrimitiveArraySetterImpl extends PrimitiveArraySetterAbstract {
+final public class IntegerPrimitiveArraySetterImpl extends PrimitiveArraySetterAbstract {
 
-	public BytePrimitiveArraySetterImpl(Field field) {
+	public IntegerPrimitiveArraySetterImpl(Field field) {
 		super(field);
 	}
 
 	@Override
 	public void fromString(String value, Object object) {
-		set(object, new byte[] { Byte.parseByte(value) });
+		set(object, new int[] { Integer.parseInt(value) });
 	}
 
 	@Override
 	final protected void fromNumber(Number number, Object object) {
-		set(object, new byte[] { number.byteValue() });
+		set(object, new int[] { number.intValue() });
 	}
 
 	@Override
 	public void fromChar(Character value, Object object) {
-		set(object, new byte[] { (byte) value.charValue() });
+		set(object, new int[] { (int) value });
 	}
 
 	@Override
 	public void fromBoolean(Boolean value, Object object) {
-		set(object, new byte[] { (byte) (value ? 1 : 0) });
+		set(object, new int[] { value ? 1 : 0 });
 	}
 
 	@Override
 	public void fromDouble(double value, Object object) {
-		set(object, new byte[] { (byte) value });
+		set(object, new int[] { (int) value });
 	}
 
 	@Override
 	public void fromFloat(float value, Object object) {
-		set(object, new byte[] { (byte) value });
+		set(object, new int[] { (int) value });
 	}
 
 	@Override
 	public void fromLong(long value, Object object) {
-		set(object, new byte[] { (byte) value });
+		set(object, new int[] { (int) value });
 	}
 
 	@Override
 	public void fromInteger(int value, Object object) {
-		set(object, new byte[] { (byte) value });
+		set(object, new int[] { value });
 	}
 
 	@Override
 	public void fromShort(short value, Object object) {
-		set(object, new byte[] { (byte) value });
+		set(object, new int[] { (int) value });
 	}
 
 	@Override
 	public void fromChar(char value, Object object) {
-		set(object, new byte[] { (byte) value });
+		set(object, new int[] { (int) value });
 	}
 
 	@Override
 	public void fromByte(byte value, Object object) {
-		set(object, new byte[] { value });
+		set(object, new int[] { (int) value });
 	}
 
 	@Override
 	public void fromBoolean(boolean value, Object object) {
-		set(object, new byte[] { (byte) (value ? 1 : 0) });
+		set(object, new int[] { value ? 1 : 0 });
 	}
 
 	@Override
 	protected void fromNumber(Number[] values, Object object) {
-		final byte[] bytes = new byte[values.length];
+		final int[] array = new int[values.length];
 		int i = 0;
 		for (Number v : values)
-			bytes[i++] = v.byteValue();
-		set(object, bytes);
+			array[i++] = v.intValue();
+		set(object, array);
 	}
 
 	@Override
 	public void fromString(String[] values, Object object) {
-		final byte[] bytes = new byte[values.length];
+		final int[] array = new int[values.length];
 		int i = 0;
 		for (String v : values)
-			bytes[i++] = Byte.parseByte(v);
-		set(object, bytes);
+			array[i++] = Integer.parseInt(v);
+		set(object, array);
 	}
 
 	@Override
 	public void fromChar(Character[] values, Object object) {
-		final byte[] bytes = new byte[values.length];
+		final int[] array = new int[values.length];
 		int i = 0;
 		for (Character v : values)
-			bytes[i++] = (byte) v.charValue();
-		set(object, bytes);
+			array[i++] = (int) v;
+		set(object, array);
 	}
 
 	@Override
 	public void fromBoolean(Boolean[] values, Object object) {
-		final byte[] bytes = new byte[values.length];
+		final int[] array = new int[values.length];
 		int i = 0;
 		for (Boolean v : values)
-			bytes[i++] = (byte) (v ? 1 : 0);
-		set(object, bytes);
+			array[i++] = v ? 1 : 0;
+		set(object, array);
 	}
 
 	@Override
 	protected void fromNumber(Collection<? extends Number> values, Object object) {
-		final byte[] bytes = new byte[values.size()];
+		final int[] array = new int[values.size()];
 		int i = 0;
 		for (Number v : values)
-			bytes[i++] = v.byteValue();
-		set(object, bytes);
+			array[i++] = v.intValue();
+		set(object, array);
 	}
 
 	@Override
 	public void fromString(Collection<String> values, Object object) {
-		final byte[] bytes = new byte[values.size()];
+		final int[] array = new int[values.size()];
 		int i = 0;
 		for (String v : values)
-			bytes[i++] = Byte.parseByte(v);
-		set(object, bytes);
+			array[i++] = Byte.parseByte(v);
+		set(object, array);
 	}
 
 	@Override
 	public void fromChar(Collection<Character> values, Object object) {
-		final byte[] bytes = new byte[values.size()];
+		final int[] array = new int[values.size()];
 		int i = 0;
 		for (Character v : values)
-			bytes[i++] = (byte) v.charValue();
-		set(object, bytes);
+			array[i++] = (int) v;
+		set(object, array);
 	}
 
 	@Override
 	public void fromBoolean(Collection<Boolean> values, Object object) {
-		final byte[] bytes = new byte[values.size()];
+		final int[] array = new int[values.size()];
 		int i = 0;
 		for (Boolean v : values)
-			bytes[i++] = (byte) (v ? 1 : 0);
-		set(object, bytes);
+			array[i++] = v ? 1 : 0;
+		set(object, array);
 	}
 
 	@Override
 	public void fromDouble(double[] values, Object object) {
-		final byte[] bytes = new byte[values.length];
+		final int[] array = new int[values.length];
 		int i = 0;
 		for (double v : values)
-			bytes[i++] = (byte) v;
-		set(object, bytes);
+			array[i++] = (int) v;
+		set(object, array);
 	}
 
 	@Override
 	public void fromFloat(float[] values, Object object) {
-		final byte[] bytes = new byte[values.length];
+		final int[] array = new int[values.length];
 		int i = 0;
 		for (float v : values)
-			bytes[i++] = (byte) v;
-		set(object, bytes);
+			array[i++] = (int) v;
+		set(object, array);
 	}
 
 	@Override
 	public void fromLong(long[] values, Object object) {
-		final byte[] bytes = new byte[values.length];
+		final int[] array = new int[values.length];
 		int i = 0;
 		for (long v : values)
-			bytes[i++] = (byte) v;
-		set(object, bytes);
+			array[i++] = (int) v;
+		set(object, array);
 	}
 
 	@Override
 	public void fromInteger(int[] values, Object object) {
-		final byte[] bytes = new byte[values.length];
+		final int[] array = new int[values.length];
 		int i = 0;
 		for (int v : values)
-			bytes[i++] = (byte) v;
-		set(object, bytes);
+			array[i++] = v;
+		set(object, array);
 	}
 
 	@Override
 	public void fromShort(short[] values, Object object) {
-		final byte[] bytes = new byte[values.length];
+		final int[] array = new int[values.length];
 		int i = 0;
 		for (short v : values)
-			bytes[i++] = (byte) v;
-		set(object, bytes);
+			array[i++] = (int) v;
+		set(object, array);
 	}
 
 	@Override
 	public void fromChar(char[] values, Object object) {
-		final byte[] bytes = new byte[values.length];
+		final int[] array = new int[values.length];
 		int i = 0;
 		for (char v : values)
-			bytes[i++] = (byte) v;
-		set(object, bytes);
+			array[i++] = (int) v;
+		set(object, array);
 	}
 
 	@Override
 	public void fromByte(byte[] values, Object object) {
-		set(object, values);
+		final int[] array = new int[values.length];
+		int i = 0;
+		for (byte v : values)
+			array[i++] = (int) v;
+		set(object, array);
 	}
 
 	@Override
 	public void fromBoolean(boolean[] values, Object object) {
-		final byte[] bytes = new byte[values.length];
+		final int[] array = new int[values.length];
 		int i = 0;
 		for (boolean v : values)
-			bytes[i++] = (byte) (v ? 1 : 0);
-		set(object, bytes);
+			array[i++] = v ? 1 : 0;
+		set(object, array);
 	}
 
 }
