@@ -17,7 +17,7 @@ package com.qwazr.binder.impl;
 
 public abstract class AbstractArraySetterTest<T> extends AbstractMultipleSetterTest {
 
-	T[] value;
+	final T[] value = null;
 
 	protected AbstractArraySetterTest(FieldSetterAbstract setter) {
 		super(setter);
@@ -26,5 +26,9 @@ public abstract class AbstractArraySetterTest<T> extends AbstractMultipleSetterT
 	@Override
 	final protected int size() {
 		return value.length;
+	}
+
+	final protected T get(int pos) {
+		return value[pos];
 	}
 }

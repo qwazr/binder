@@ -70,5 +70,5 @@ public class BytePrimitiveArraySetterTest extends AbstractMultipleSetterTest {
 	protected void checkValueNull() {
 		Assert.assertNull(value);
 	}
-	
+
 }
