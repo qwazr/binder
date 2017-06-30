@@ -17,10 +17,15 @@ package com.qwazr.binder.impl;
 
 import java.lang.reflect.Field;
 
-final public class LongArraySetterImpl extends ArraySetterAbstract<Long> {
+final public class LongArraySetterImpl extends NumberArraySetterAbstract<Long> {
 
 	LongArraySetterImpl(Field field) {
 		super(field);
+	}
+
+	@Override
+	protected Long fromNumber(Number value) {
+		return value.longValue();
 	}
 
 	@Override
@@ -29,18 +34,8 @@ final public class LongArraySetterImpl extends ArraySetterAbstract<Long> {
 	}
 
 	@Override
-	protected Long fromDouble(Double value) {
-		return value.longValue();
-	}
-
-	@Override
 	protected Long fromDouble(double value) {
 		return (long) value;
-	}
-
-	@Override
-	protected Long fromFloat(Float value) {
-		return value.longValue();
 	}
 
 	@Override
@@ -49,28 +44,13 @@ final public class LongArraySetterImpl extends ArraySetterAbstract<Long> {
 	}
 
 	@Override
-	protected Long fromLong(Long value) {
-		return value;
-	}
-
-	@Override
 	protected Long fromLong(long value) {
 		return value;
 	}
 
 	@Override
-	protected Long fromShort(Short value) {
-		return value.longValue();
-	}
-
-	@Override
 	protected Long fromShort(short value) {
 		return (long) value;
-	}
-
-	@Override
-	protected Long fromInteger(Integer value) {
-		return value.longValue();
 	}
 
 	@Override
@@ -86,11 +66,6 @@ final public class LongArraySetterImpl extends ArraySetterAbstract<Long> {
 	@Override
 	protected Long fromChar(char value) {
 		return (long) value;
-	}
-
-	@Override
-	protected Long fromByte(Byte value) {
-		return value.longValue();
 	}
 
 	@Override
