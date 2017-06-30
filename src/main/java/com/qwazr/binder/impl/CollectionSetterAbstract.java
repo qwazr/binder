@@ -53,33 +53,23 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 		}
 	}
 
-	protected abstract T fromString(String value);
+	protected abstract T fromNumber(Number value);
 
-	protected abstract T fromDouble(Double value);
+	protected abstract T fromString(String value);
 
 	protected abstract T fromDouble(double value);
 
-	protected abstract T fromFloat(Float value);
-
 	protected abstract T fromFloat(float value);
-
-	protected abstract T fromLong(Long value);
 
 	protected abstract T fromLong(long value);
 
-	protected abstract T fromShort(Short value);
-
 	protected abstract T fromShort(short value);
-
-	protected abstract T fromInteger(Integer value);
 
 	protected abstract T fromInteger(int value);
 
 	protected abstract T fromChar(Character value);
 
 	protected abstract T fromChar(char value);
-
-	protected abstract T fromByte(Byte value);
 
 	protected abstract T fromByte(byte value);
 
@@ -94,27 +84,27 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromDouble(Double value, Object object) {
-		createCollection(object).add(fromDouble(value));
+		createCollection(object).add(fromNumber(value));
 	}
 
 	@Override
 	final public void fromFloat(Float value, Object object) {
-		createCollection(object).add(fromFloat(value));
+		createCollection(object).add(fromNumber(value));
 	}
 
 	@Override
 	final public void fromLong(Long value, Object object) {
-		createCollection(object).add(fromLong(value));
+		createCollection(object).add(fromNumber(value));
 	}
 
 	@Override
 	final public void fromInteger(Integer value, Object object) {
-		createCollection(object).add(fromInteger(value));
+		createCollection(object).add(fromNumber(value));
 	}
 
 	@Override
 	final public void fromShort(Short value, Object object) {
-		createCollection(object).add(fromShort(value));
+		createCollection(object).add(fromNumber(value));
 	}
 
 	@Override
@@ -124,7 +114,7 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 
 	@Override
 	final public void fromByte(Byte value, Object object) {
-		createCollection(object).add(fromByte(value));
+		createCollection(object).add(fromNumber(value));
 	}
 
 	@Override

@@ -29,7 +29,7 @@ final public class LongCollectionSetterImpl extends CollectionSetterAbstract<Lon
 	}
 
 	@Override
-	protected Long fromDouble(Double value) {
+	protected Long fromNumber(Number value) {
 		return value.longValue();
 	}
 
@@ -39,18 +39,8 @@ final public class LongCollectionSetterImpl extends CollectionSetterAbstract<Lon
 	}
 
 	@Override
-	protected Long fromFloat(Float value) {
-		return value.longValue();
-	}
-
-	@Override
 	protected Long fromFloat(float value) {
 		return (long) value;
-	}
-
-	@Override
-	protected Long fromLong(Long value) {
-		return value;
 	}
 
 	@Override
@@ -59,18 +49,8 @@ final public class LongCollectionSetterImpl extends CollectionSetterAbstract<Lon
 	}
 
 	@Override
-	protected Long fromShort(Short value) {
-		return value.longValue();
-	}
-
-	@Override
 	protected Long fromShort(short value) {
 		return (long) value;
-	}
-
-	@Override
-	protected Long fromInteger(Integer value) {
-		return value.longValue();
 	}
 
 	@Override
@@ -86,11 +66,6 @@ final public class LongCollectionSetterImpl extends CollectionSetterAbstract<Lon
 	@Override
 	protected Long fromChar(char value) {
 		return (long) value;
-	}
-
-	@Override
-	protected Long fromByte(Byte value) {
-		return value.longValue();
 	}
 
 	@Override

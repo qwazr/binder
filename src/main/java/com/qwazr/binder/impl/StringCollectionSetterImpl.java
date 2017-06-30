@@ -29,7 +29,7 @@ final public class StringCollectionSetterImpl extends CollectionSetterAbstract<S
 	}
 
 	@Override
-	protected String fromDouble(Double value) {
+	protected String fromNumber(Number value) {
 		return value.toString();
 	}
 
@@ -39,18 +39,8 @@ final public class StringCollectionSetterImpl extends CollectionSetterAbstract<S
 	}
 
 	@Override
-	protected String fromFloat(Float value) {
-		return value.toString();
-	}
-
-	@Override
 	protected String fromFloat(float value) {
 		return Float.toString(value);
-	}
-
-	@Override
-	protected String fromLong(Long value) {
-		return value.toString();
 	}
 
 	@Override
@@ -59,18 +49,8 @@ final public class StringCollectionSetterImpl extends CollectionSetterAbstract<S
 	}
 
 	@Override
-	protected String fromShort(Short value) {
-		return value.toString();
-	}
-
-	@Override
 	protected String fromShort(short value) {
 		return Short.toString(value);
-	}
-
-	@Override
-	protected String fromInteger(Integer value) {
-		return value.toString();
 	}
 
 	@Override
@@ -86,11 +66,6 @@ final public class StringCollectionSetterImpl extends CollectionSetterAbstract<S
 	@Override
 	protected String fromChar(char value) {
 		return Character.toString(value);
-	}
-
-	@Override
-	protected String fromByte(Byte value) {
-		return value.toString();
 	}
 
 	@Override
