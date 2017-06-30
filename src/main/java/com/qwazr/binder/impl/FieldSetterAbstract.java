@@ -33,7 +33,7 @@ abstract class FieldSetterAbstract implements FieldSetter {
 	public void fromNull(final Object object) {
 		set(object, null);
 	}
-	
+
 	final void set(final Object object, final Object value) {
 		try {
 			field.set(object, value);
@@ -42,11 +42,20 @@ abstract class FieldSetterAbstract implements FieldSetter {
 		}
 	}
 
+	@Override
+	public final Object get(Object object) {
+		try {
+			return field.get(object);
+		} catch (IllegalAccessException e) {
+			throw error("Cannot get value", e);
+		}
+	}
+
 	final void setBoolean(final Object object, final boolean value) {
 		try {
 			field.setBoolean(object, value);
 		} catch (IllegalAccessException e) {
-			throw new BinderException(field, value, e);
+			throw error("Cannot get value", e);
 		}
 	}
 
@@ -106,7 +115,9 @@ abstract class FieldSetterAbstract implements FieldSetter {
 		}
 	}
 
-	final void error(final Object value) {
-		throw new BinderException(field, value);
+	@Override
+	public final BinderException error(final String message, final Object value) {
+		return new BinderException(message, field, value);
 	}
+
 }

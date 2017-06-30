@@ -15,10 +15,7 @@
  */
 package com.qwazr.binder.setter;
 
-/**
- * Created by ekeller on 29/05/2017.
- */
-public interface PrimitiveArraySetter {
+public interface PrimitiveArraySetter extends ErrorSetter {
 
 	void fromDouble(double[] values, Object object);
 
@@ -36,4 +33,24 @@ public interface PrimitiveArraySetter {
 
 	void fromBoolean(boolean[] values, Object object);
 
+	default void fromPrimitiveArray(Class<?> type, Object values, Object object) {
+		if (type == double.class) {
+			fromDouble((double[]) values, object);
+		} else if (type == float.class) {
+			fromFloat((float[]) values, object);
+		} else if (type == long.class) {
+			fromLong((long[]) values, object);
+		} else if (type == int.class) {
+			fromInteger((int[]) values, object);
+		} else if (type == short.class) {
+			fromShort((short[]) values, object);
+		} else if (type == char.class) {
+			fromChar((char[]) values, object);
+		} else if (type == byte.class) {
+			fromByte((byte[]) values, object);
+		} else if (type == boolean.class) {
+			fromBoolean((boolean[]) values, object);
+		} else
+			throw error("Unsupported primitive type: " + type, values);
+	}
 }

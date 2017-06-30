@@ -15,6 +15,8 @@
  */
 package com.qwazr.binder;
 
+import com.qwazr.binder.impl.FieldSetterBuilder;
+import com.qwazr.binder.setter.FieldSetter;
 import com.qwazr.utils.AnnotationsUtils;
 import com.qwazr.utils.CollectionsUtils;
 import com.qwazr.utils.RandomUtils;
@@ -24,7 +26,6 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -210,10 +211,10 @@ public class FieldMapWrapperTest {
 
 		@Override
 		protected <C> FieldMapWrapper<C> newFieldMapWrapper(Class<C> objectClass) throws NoSuchMethodException {
-			final Map<String, Field> fieldMap = new HashMap<>();
+			final Map<String, FieldSetter> fieldMap = new HashMap<>();
 			AnnotationsUtils.browseFieldsRecursive(objectClass, field -> {
 				field.setAccessible(true);
-				fieldMap.put(field.getName(), field);
+				fieldMap.put(field.getName(), FieldSetterBuilder.of(field));
 			});
 			return new FieldMapWrapper<>(fieldMap, objectClass);
 		}

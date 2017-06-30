@@ -15,7 +15,7 @@
  */
 package com.qwazr.binder.setter;
 
-public interface ObjectArraySetter {
+public interface ObjectArraySetter extends ErrorSetter {
 
 	void fromString(String[] values, Object object);
 
@@ -35,4 +35,26 @@ public interface ObjectArraySetter {
 
 	void fromBoolean(Boolean[] values, Object object);
 
+	default void fromObjectArray(Class<?> type, Object values, Object object) {
+		if (type == String.class) {
+			fromString((String[]) values, object);
+		} else if (type == Double.class) {
+			fromDouble((Double[]) values, object);
+		} else if (type == Float.class) {
+			fromFloat((Float[]) values, object);
+		} else if (type == Long.class) {
+			fromLong((Long[]) values, object);
+		} else if (type == Integer.class) {
+			fromInteger((Integer[]) values, object);
+		} else if (type == Short.class) {
+			fromShort((Short[]) values, object);
+		} else if (type == Character.class) {
+			fromChar((Character[]) values, object);
+		} else if (type == Byte.class) {
+			fromByte((Byte[]) values, object);
+		} else if (type == Boolean.class) {
+			fromBoolean((Boolean[]) values, object);
+		} else
+			throw error("Unsupported generic type for collection: " + type, values);
+	}
 }

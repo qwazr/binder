@@ -20,14 +20,23 @@ import java.lang.reflect.Field;
 public class BinderException extends RuntimeException {
 
 	public BinderException(Field field, Object value, Exception e) {
-		super(getMessage(field, value), e);
+		super(getMessage(null, field, value), e);
 	}
 
-	public BinderException(Field field, Object value) {
-		super(getMessage(field, value));
+	public BinderException(String message, Field field, Object value) {
+		super(getMessage(message, field, value));
 	}
 
-	private static String getMessage(Field field, Object value) {
-		return "Cannot set the type " + (value == null ? "null" : value.getClass()) + " in " + field;
+	private static String getMessage(String message, Field field, Object value) {
+		final StringBuilder sb = new StringBuilder(message == null ? "Binder error" : message);
+		if (field != null) {
+			sb.append("- Field: ");
+			sb.append(field);
+		}
+		if (value != null) {
+			sb.append(" - Value: ");
+			sb.append(value);
+		}
+		return sb.toString();
 	}
 }

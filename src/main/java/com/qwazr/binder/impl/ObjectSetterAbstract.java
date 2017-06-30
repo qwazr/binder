@@ -32,7 +32,7 @@ abstract class ObjectSetterAbstract extends SingleSetterAbstract {
 		else if (values.length == 1)
 			consumer.accept(values[0], object);
 		else
-			error(values);
+			throw error("Cannot set more than 1 value", values);
 	}
 
 	final <T> void fromObjectCollection(final Collection<T> values, final Object object,
@@ -45,8 +45,7 @@ abstract class ObjectSetterAbstract extends SingleSetterAbstract {
 			consumer.accept(values.iterator().next(), object);
 			break;
 		default:
-			error(values);
-			break;
+			throw error("Cannot set more than 1 value", values);
 		}
 	}
 
@@ -59,8 +58,7 @@ abstract class ObjectSetterAbstract extends SingleSetterAbstract {
 			consumer.accept(values.get(0), object);
 			break;
 		default:
-			error(values);
-			break;
+			throw error("Cannot set more than 1 value", values);
 		}
 	}
 

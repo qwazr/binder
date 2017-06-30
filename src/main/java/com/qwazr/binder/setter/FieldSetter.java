@@ -15,8 +15,40 @@
  */
 package com.qwazr.binder.setter;
 
+import java.lang.reflect.ParameterizedType;
+import java.util.Collection;
+
 public interface FieldSetter
 		extends CollectionSetter, ListSetter, ObjectArraySetter, ObjectSetter, PrimitiveArraySetter, PrimitiveSetter {
 
 	void fromNull(Object object);
+
+	Object get(Object object);
+
+	default void setValue(Object object, Object value) {
+		if (value == null) {
+			fromNull(object);
+			return;
+		}
+		final Class<?> valueClass = value.getClass();
+		if (valueClass == Collection.class) {
+			final Class<?> genericClass =
+					(Class<?>) ((ParameterizedType) valueClass.getGenericSuperclass()).getActualTypeArguments()[0];
+			fromCollection(genericClass, (Collection<?>) value, object);
+			return;
+		} else if (valueClass.isArray()) {
+			final Class<?> componentType = valueClass.getComponentType();
+			if (componentType.isPrimitive())
+				fromPrimitiveArray(componentType, value, object);
+			else
+				fromObjectArray(componentType, value, object);
+			return;
+		} else {
+			if (valueClass.isPrimitive())
+				fromPrimitive(valueClass, value, object);
+			else
+				fromObject(valueClass, value, object);
+		}
+		throw error("Unsupported type: " + valueClass, value);
+	}
 }

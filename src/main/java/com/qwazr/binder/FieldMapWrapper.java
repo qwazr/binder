@@ -15,6 +15,7 @@
  */
 package com.qwazr.binder;
 
+import com.qwazr.binder.setter.FieldSetter;
 import com.qwazr.utils.FunctionUtils;
 import com.qwazr.utils.SerializationUtils;
 
@@ -32,10 +33,11 @@ import java.util.Map;
 
 public class FieldMapWrapper<T> {
 
-	public final Map<String, Field> fieldMap;
+	public final Map<String, FieldSetter> fieldMap;
 	public final Constructor<T> constructor;
 
-	public FieldMapWrapper(final Map<String, Field> fieldMap, final Class<T> objectClass) throws NoSuchMethodException {
+	public FieldMapWrapper(final Map<String, FieldSetter> fieldMap, final Class<T> objectClass)
+			throws NoSuchMethodException {
 		this.fieldMap = fieldMap;
 		this.constructor = objectClass.getDeclaredConstructor();
 	}
@@ -49,33 +51,19 @@ public class FieldMapWrapper<T> {
 	public Map<String, Object> newMap(final T row) {
 		final Map<String, Object> map = new HashMap<>();
 		fieldMap.forEach((name, field) -> {
-			try {
-				Object value = field.get(row);
-				if (value == null)
-					return;
-				if (value instanceof Number || value instanceof String) {
-					map.put(name, value);
-					return;
-				}
-				if (value instanceof Collection) {
-					map.put(name, value);
-					return;
-				}
-				if (value instanceof Map) {
-					map.put(name, value);
-					return;
-				}
-				if (value.getClass().isArray()) {
-					map.put(name, value);
-					return;
-				}
-				if (value instanceof Serializable) {
-					map.put(name, SerializationUtils.toExternalizorBytes((Serializable) value));
-					return;
-				}
+			//try {
+			final Object value = field.get(row);
+			if (value == null)
+				return;
+				/*if (field.getType() == FieldSetter.Type.Other) {
+					if (value instanceof Serializable)
+						map.put(name, SerializationUtils.toExternalizorBytes((Serializable) value));
+				} else */
+			map.put(name, value);
+				/*
 			} catch (IOException | ReflectiveOperationException e) {
 				throw new IllegalArgumentException("Cannot convert the field " + name, e);
-			}
+			}*/
 		});
 		return map.isEmpty() ? null : map;
 	}
@@ -211,10 +199,11 @@ public class FieldMapWrapper<T> {
 		final T record = constructor.newInstance();
 		final FunctionUtils.BiConsumerEx2<String, Object, ReflectiveOperationException, IOException> consumer =
 				(name, value) -> {
-					final Field field = fieldMap.get(name);
-					if (field == null || value == null)
+					if (value == null)
 						return;
-					toField(value, field, record);
+					final FieldSetter field = fieldMap.get(name);
+					if (field != null)
+						field.setValue(record, value);
 				};
 		FunctionUtils.forEachEx2(fields, consumer);
 		return record;

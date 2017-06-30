@@ -17,7 +17,7 @@ package com.qwazr.binder.setter;
 
 import java.util.Collection;
 
-public interface CollectionSetter {
+public interface CollectionSetter extends ErrorSetter {
 
 	void fromString(Collection<String> values, Object object);
 
@@ -37,4 +37,26 @@ public interface CollectionSetter {
 
 	void fromBoolean(Collection<Boolean> values, Object object);
 
+	default void fromCollection(Class<?> type, Collection<?> values, Object object) {
+		if (type == String.class) {
+			fromString((Collection<String>) values, object);
+		} else if (type == Double.class) {
+			fromDouble((Collection<Double>) values, object);
+		} else if (type == Float.class) {
+			fromFloat((Collection<Float>) values, object);
+		} else if (type == Long.class) {
+			fromLong((Collection<Long>) values, object);
+		} else if (type == Integer.class) {
+			fromInteger((Collection<Integer>) values, object);
+		} else if (type == Short.class) {
+			fromShort((Collection<Short>) values, object);
+		} else if (type == Character.class) {
+			fromChar((Collection<Character>) values, object);
+		} else if (type == Byte.class) {
+			fromByte((Collection<Byte>) values, object);
+		} else if (type == Boolean.class) {
+			fromBoolean((Collection<Boolean>) values, object);
+		} else
+			throw error("Unsupported generic type for collection: " + type, values);
+	}
 }

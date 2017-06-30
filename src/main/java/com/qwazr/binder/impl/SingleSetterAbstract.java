@@ -33,8 +33,7 @@ abstract class SingleSetterAbstract extends FieldSetterAbstract {
 			fromDouble(values[0], object);
 			break;
 		default:
-			error(values);
-			break;
+			throw error("Cannot add more than 1 one value", values);
 		}
 	}
 
@@ -48,8 +47,7 @@ abstract class SingleSetterAbstract extends FieldSetterAbstract {
 			fromFloat(values[0], object);
 			break;
 		default:
-			error(values);
-			break;
+			throw error("Cannot add more than 1 one value", values);
 		}
 	}
 
@@ -63,8 +61,7 @@ abstract class SingleSetterAbstract extends FieldSetterAbstract {
 			fromLong(values[0], object);
 			break;
 		default:
-			error(values);
-			break;
+			throw error("Cannot add more than 1 one value", values);
 		}
 	}
 
@@ -78,8 +75,7 @@ abstract class SingleSetterAbstract extends FieldSetterAbstract {
 			fromInteger(values[0], object);
 			break;
 		default:
-			error(values);
-			break;
+			throw error("Cannot add more than 1 one value", values);
 		}
 	}
 
@@ -93,8 +89,7 @@ abstract class SingleSetterAbstract extends FieldSetterAbstract {
 			fromShort(values[0], object);
 			break;
 		default:
-			error(values);
-			break;
+			throw error("Cannot add more than 1 one value", values);
 		}
 	}
 
@@ -108,8 +103,7 @@ abstract class SingleSetterAbstract extends FieldSetterAbstract {
 			fromChar(values[0], object);
 			break;
 		default:
-			error(values);
-			break;
+			throw error("Cannot add more than 1 one value", values);
 		}
 	}
 
@@ -123,8 +117,7 @@ abstract class SingleSetterAbstract extends FieldSetterAbstract {
 			fromByte(values[0], object);
 			break;
 		default:
-			error(values);
-			break;
+			throw error("Cannot add more than 1 one value", values);
 		}
 	}
 
@@ -138,8 +131,7 @@ abstract class SingleSetterAbstract extends FieldSetterAbstract {
 			fromBoolean(values[0], object);
 			break;
 		default:
-			error(values);
-			break;
+			throw error("Cannot add more than 1 one value", values);
 		}
 	}
 }
