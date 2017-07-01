@@ -16,10 +16,11 @@
 package com.qwazr.binder.impl;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
 
 final public class ShortCollectionSetterImpl extends CollectionSetterAbstract<Short> {
 
-	ShortCollectionSetterImpl(Field field) {
+	public ShortCollectionSetterImpl(Field field) {
 		super(field);
 	}
 
@@ -82,5 +83,5 @@ final public class ShortCollectionSetterImpl extends CollectionSetterAbstract<Sh
 	protected Short fromBoolean(boolean value) {
 		return (short) (value ? 1 : 0);
 	}
-
+	
 }

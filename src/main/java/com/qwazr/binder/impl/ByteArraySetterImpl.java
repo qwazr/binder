@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class ByteArraySetterImpl extends NumberArraySetterAbstract<Byte> {
 
-	ByteArraySetterImpl(Field field) {
+	public ByteArraySetterImpl(Field field) {
 		super(field);
 	}
 

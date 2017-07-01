@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class LongArraySetterImpl extends NumberArraySetterAbstract<Long> {
 
-	LongArraySetterImpl(Field field) {
+	public LongArraySetterImpl(Field field) {
 		super(field);
 	}
 

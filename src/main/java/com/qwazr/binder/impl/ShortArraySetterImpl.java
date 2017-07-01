@@ -16,10 +16,11 @@
 package com.qwazr.binder.impl;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
 
 final public class ShortArraySetterImpl extends NumberArraySetterAbstract<Short> {
 
-	ShortArraySetterImpl(Field field) {
+	public ShortArraySetterImpl(Field field) {
 		super(field);
 	}
 
@@ -87,5 +88,5 @@ final public class ShortArraySetterImpl extends NumberArraySetterAbstract<Short>
 	protected Short[] newArray(int size) {
 		return new Short[size];
 	}
-
+	
 }

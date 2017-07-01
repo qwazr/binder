@@ -16,7 +16,9 @@
 package com.qwazr.binder.impl;
 
 import org.junit.Assert;
+import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 public abstract class AbstractCollectionSetterTest<T> extends AbstractMultipleSetterTest {
@@ -37,4 +39,18 @@ public abstract class AbstractCollectionSetterTest<T> extends AbstractMultipleSe
 		Assert.assertNull(value);
 	}
 
+	private void checkValueObject(Object... values) {
+		Assert.assertEquals(values.length, value.size());
+		int i = 0;
+		for (Object v : value)
+			Assert.assertEquals(v, values[i++]);
+	}
+
+	@Test
+	final public void testObjectCollectionMultiple() {
+		final Object[] values = { new Object(), new Object(), new Object() };
+		final Collection<Object> v = Arrays.asList(values);
+		setter.fromObject(v, this);
+		checkValueObject(values);
+	}
 }

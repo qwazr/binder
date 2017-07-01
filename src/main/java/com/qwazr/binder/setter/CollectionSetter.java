@@ -15,6 +15,17 @@
  */
 package com.qwazr.binder.setter;
 
+import com.qwazr.binder.impl.BooleanCollectionSetterImpl;
+import com.qwazr.binder.impl.ByteCollectionSetterImpl;
+import com.qwazr.binder.impl.CharCollectionSetterImpl;
+import com.qwazr.binder.impl.DoubleCollectionSetterImpl;
+import com.qwazr.binder.impl.FloatCollectionSetterImpl;
+import com.qwazr.binder.impl.IntegerCollectionSetterImpl;
+import com.qwazr.binder.impl.LongCollectionSetterImpl;
+import com.qwazr.binder.impl.ShortCollectionSetterImpl;
+import com.qwazr.binder.impl.StringCollectionSetterImpl;
+
+import java.lang.reflect.Field;
 import java.util.Collection;
 
 public interface CollectionSetter extends ErrorSetter {
@@ -37,26 +48,51 @@ public interface CollectionSetter extends ErrorSetter {
 
 	void fromBoolean(Collection<Boolean> values, Object object);
 
+	void fromObject(Collection<Object> values, Object object);
+
 	default void fromCollection(Class<?> type, Collection<?> values, Object object) {
-		if (type == String.class) {
+		if (type == String.class)
 			fromString((Collection<String>) values, object);
-		} else if (type == Double.class) {
+		else if (type == Double.class)
 			fromDouble((Collection<Double>) values, object);
-		} else if (type == Float.class) {
+		else if (type == Float.class)
 			fromFloat((Collection<Float>) values, object);
-		} else if (type == Long.class) {
+		else if (type == Long.class)
 			fromLong((Collection<Long>) values, object);
-		} else if (type == Integer.class) {
+		else if (type == Integer.class)
 			fromInteger((Collection<Integer>) values, object);
-		} else if (type == Short.class) {
+		else if (type == Short.class)
 			fromShort((Collection<Short>) values, object);
-		} else if (type == Character.class) {
+		else if (type == Character.class)
 			fromChar((Collection<Character>) values, object);
-		} else if (type == Byte.class) {
+		else if (type == Byte.class)
 			fromByte((Collection<Byte>) values, object);
-		} else if (type == Boolean.class) {
+		else if (type == Boolean.class)
 			fromBoolean((Collection<Boolean>) values, object);
+		else
+			fromObject((Collection<Object>) values, object);
+	}
+
+	static FieldSetter from(final Field field, final Class<?> type) {
+		if (type == String.class) {
+			return new StringCollectionSetterImpl(field);
+		} else if (type == Double.class) {
+			return new DoubleCollectionSetterImpl(field);
+		} else if (type == Float.class) {
+			return new FloatCollectionSetterImpl(field);
+		} else if (type == Long.class) {
+			return new LongCollectionSetterImpl(field);
+		} else if (type == Integer.class) {
+			return new IntegerCollectionSetterImpl(field);
+		} else if (type == Short.class) {
+			return new ShortCollectionSetterImpl(field);
+		} else if (type == Character.class) {
+			return new CharCollectionSetterImpl(field);
+		} else if (type == Byte.class) {
+			return new ByteCollectionSetterImpl(field);
+		} else if (type == Boolean.class) {
+			return new BooleanCollectionSetterImpl(field);
 		} else
-			throw error("Unsupported generic type for collection: " + type, values);
+			return null;
 	}
 }

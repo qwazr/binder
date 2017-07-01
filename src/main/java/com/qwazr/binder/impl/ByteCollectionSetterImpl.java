@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class ByteCollectionSetterImpl extends CollectionSetterAbstract<Byte> {
 
-	ByteCollectionSetterImpl(Field field) {
+	public ByteCollectionSetterImpl(Field field) {
 		super(field);
 	}
 

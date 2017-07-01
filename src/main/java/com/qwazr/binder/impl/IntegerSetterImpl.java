@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class IntegerSetterImpl extends ObjectSetterAbstract {
 
-	IntegerSetterImpl(Field field) {
+	public IntegerSetterImpl(Field field) {
 		super(field);
 	}
 

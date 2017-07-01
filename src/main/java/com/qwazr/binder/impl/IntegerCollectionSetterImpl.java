@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class IntegerCollectionSetterImpl extends CollectionSetterAbstract<Integer> {
 
-	IntegerCollectionSetterImpl(Field field) {
+	public IntegerCollectionSetterImpl(Field field) {
 		super(field);
 	}
 
@@ -50,12 +50,12 @@ final public class IntegerCollectionSetterImpl extends CollectionSetterAbstract<
 
 	@Override
 	protected Integer fromShort(short value) {
-		return (int)value;
+		return (int) value;
 	}
 
 	@Override
 	protected Integer fromInteger(int value) {
-		return  value;
+		return value;
 	}
 
 	@Override
@@ -80,7 +80,7 @@ final public class IntegerCollectionSetterImpl extends CollectionSetterAbstract<
 
 	@Override
 	protected Integer fromBoolean(boolean value) {
-		return  (value ? 1 : 0);
+		return (value ? 1 : 0);
 	}
 
 }

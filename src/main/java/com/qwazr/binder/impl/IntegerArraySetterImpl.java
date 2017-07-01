@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class IntegerArraySetterImpl extends NumberArraySetterAbstract<Integer> {
 
-	IntegerArraySetterImpl(Field field) {
+	public IntegerArraySetterImpl(Field field) {
 		super(field);
 	}
 

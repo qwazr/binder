@@ -15,6 +15,17 @@
  */
 package com.qwazr.binder.setter;
 
+import com.qwazr.binder.impl.BooleanPrimitiveSetterImpl;
+import com.qwazr.binder.impl.BytePrimitiveSetterImpl;
+import com.qwazr.binder.impl.CharPrimitiveSetterImpl;
+import com.qwazr.binder.impl.DoublePrimitiveSetterImpl;
+import com.qwazr.binder.impl.FloatPrimitiveSetterImpl;
+import com.qwazr.binder.impl.IntegerPrimitiveSetterImpl;
+import com.qwazr.binder.impl.LongPrimitiveSetterImpl;
+import com.qwazr.binder.impl.ShortPrimitiveSetterImpl;
+
+import java.lang.reflect.Field;
+
 public interface PrimitiveSetter extends ErrorSetter {
 
 	void fromDouble(double value, Object object);
@@ -33,7 +44,7 @@ public interface PrimitiveSetter extends ErrorSetter {
 
 	void fromBoolean(boolean value, Object object);
 
-	default void fromPrimitive(Class<?> type, Object values, Object object) {
+	default void fromPrimitive(final Class<?> type, final Object values, final Object object) {
 		if (type == double.class) {
 			fromDouble((double) values, object);
 		} else if (type == float.class) {
@@ -52,5 +63,26 @@ public interface PrimitiveSetter extends ErrorSetter {
 			fromBoolean((boolean) values, object);
 		} else
 			throw error("Unsupported primitive type: " + type, values);
+	}
+
+	static FieldSetter from(final Field field, final Class<?> type) {
+		if (type == double.class) {
+			return new DoublePrimitiveSetterImpl(field);
+		} else if (type == float.class) {
+			return new FloatPrimitiveSetterImpl(field);
+		} else if (type == long.class) {
+			return new LongPrimitiveSetterImpl(field);
+		} else if (type == int.class) {
+			return new IntegerPrimitiveSetterImpl(field);
+		} else if (type == short.class) {
+			return new ShortPrimitiveSetterImpl(field);
+		} else if (type == char.class) {
+			return new CharPrimitiveSetterImpl(field);
+		} else if (type == byte.class) {
+			return new BytePrimitiveSetterImpl(field);
+		} else if (type == boolean.class) {
+			return new BooleanPrimitiveSetterImpl(field);
+		} else
+			return null;
 	}
 }

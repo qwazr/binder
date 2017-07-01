@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class BooleanArraySetterImpl extends ArraySetterAbstract<Boolean> {
 
-	BooleanArraySetterImpl(Field field) {
+	public BooleanArraySetterImpl(Field field) {
 		super(field);
 	}
 

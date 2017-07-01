@@ -34,7 +34,7 @@ abstract class FieldSetterAbstract implements FieldSetter {
 		set(object, null);
 	}
 
-	final void set(final Object object, final Object value) {
+	public final void set(final Object object, final Object value) {
 		try {
 			field.set(object, value);
 		} catch (IllegalAccessException e) {

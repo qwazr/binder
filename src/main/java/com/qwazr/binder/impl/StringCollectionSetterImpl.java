@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class StringCollectionSetterImpl extends CollectionSetterAbstract<String> {
 
-	StringCollectionSetterImpl(Field field) {
+	public StringCollectionSetterImpl(Field field) {
 		super(field);
 	}
 

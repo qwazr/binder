@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class CharCollectionSetterImpl extends CollectionSetterAbstract<Character> {
 
-	CharCollectionSetterImpl(Field field) {
+	public CharCollectionSetterImpl(Field field) {
 		super(field);
 	}
 

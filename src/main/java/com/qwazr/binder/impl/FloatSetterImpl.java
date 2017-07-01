@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class FloatSetterImpl extends ObjectSetterAbstract {
 
-	FloatSetterImpl(Field field) {
+	public FloatSetterImpl(Field field) {
 		super(field);
 	}
 
@@ -107,4 +107,5 @@ final public class FloatSetterImpl extends ObjectSetterAbstract {
 	public void fromBoolean(boolean value, Object object) {
 		set(object, (float) (value ? 1 : 0));
 	}
+	
 }

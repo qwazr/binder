@@ -228,4 +228,13 @@ final public class DoublePrimitiveArraySetterImpl extends PrimitiveArraySetterAb
 		set(object, array);
 	}
 
+	@Override
+	public void fromObject(final Collection<Object> values, final Object object) {
+		final double[] array = new double[values.size()];
+		int i = 0;
+		for (Object v : values)
+			array[i++] = (double) v;
+		set(object, array);
+	}
+
 }

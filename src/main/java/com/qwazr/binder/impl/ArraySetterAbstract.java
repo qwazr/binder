@@ -213,6 +213,15 @@ public abstract class ArraySetterAbstract<T> extends FieldSetterAbstract {
 	}
 
 	@Override
+	final public void fromObject(final Collection<Object> values, final Object object) {
+		final T[] array = newArray((values.size()));
+		int i = 0;
+		for (Object value : values)
+			array[i++] = (T) value;
+		set(object, array);
+	}
+
+	@Override
 	final public void fromString(List<String> values, Object object) {
 		fromCollection(values, object, this::fromString);
 	}

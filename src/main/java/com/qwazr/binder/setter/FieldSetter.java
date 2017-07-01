@@ -15,7 +15,9 @@
  */
 package com.qwazr.binder.setter;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Collection;
 
 public interface FieldSetter
@@ -31,24 +33,46 @@ public interface FieldSetter
 			return;
 		}
 		final Class<?> valueClass = value.getClass();
-		if (valueClass == Collection.class) {
-			final Class<?> genericClass =
-					(Class<?>) ((ParameterizedType) valueClass.getGenericSuperclass()).getActualTypeArguments()[0];
+		if (Collection.class.isAssignableFrom(valueClass)) {
+			Class<?> genericClass = Object.class;
+			final Type type = valueClass.getGenericSuperclass();
+			if (type != null && type instanceof ParameterizedType) {
+				Type genericType = ((ParameterizedType) type).getActualTypeArguments()[0];
+				if (genericType instanceof Class<?>)
+					genericClass = (Class<?>) genericType;
+			}
 			fromCollection(genericClass, (Collection<?>) value, object);
-			return;
 		} else if (valueClass.isArray()) {
 			final Class<?> componentType = valueClass.getComponentType();
 			if (componentType.isPrimitive())
 				fromPrimitiveArray(componentType, value, object);
 			else
 				fromObjectArray(componentType, value, object);
-			return;
 		} else {
 			if (valueClass.isPrimitive())
 				fromPrimitive(valueClass, value, object);
 			else
 				fromObject(valueClass, value, object);
 		}
-		throw error("Unsupported type: " + valueClass, value);
+	}
+
+	static FieldSetter of(Field field) {
+		final Class<?> fieldType = field.getType();
+		if (Collection.class.isAssignableFrom(fieldType)) {
+			final Class<?> genericClass =
+					(Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
+			return CollectionSetter.from(field, genericClass);
+		} else if (fieldType.isArray()) {
+			final Class<?> componentType = fieldType.getComponentType();
+			if (componentType.isPrimitive())
+				return PrimitiveArraySetter.from(field, componentType);
+			else
+				return ObjectArraySetter.from(field, componentType);
+		} else {
+			if (fieldType.isPrimitive())
+				return PrimitiveSetter.from(field, fieldType);
+			else
+				return ObjectSetter.from(field, fieldType);
+		}
 	}
 }

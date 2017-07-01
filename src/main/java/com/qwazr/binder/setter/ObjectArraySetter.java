@@ -15,6 +15,18 @@
  */
 package com.qwazr.binder.setter;
 
+import com.qwazr.binder.impl.BooleanArraySetterImpl;
+import com.qwazr.binder.impl.ByteArraySetterImpl;
+import com.qwazr.binder.impl.CharArraySetterImpl;
+import com.qwazr.binder.impl.DoubleArraySetterImpl;
+import com.qwazr.binder.impl.FloatArraySetterImpl;
+import com.qwazr.binder.impl.IntegerArraySetterImpl;
+import com.qwazr.binder.impl.LongArraySetterImpl;
+import com.qwazr.binder.impl.ShortArraySetterImpl;
+import com.qwazr.binder.impl.StringArraySetterImpl;
+
+import java.lang.reflect.Field;
+
 public interface ObjectArraySetter extends ErrorSetter {
 
 	void fromString(String[] values, Object object);
@@ -56,5 +68,28 @@ public interface ObjectArraySetter extends ErrorSetter {
 			fromBoolean((Boolean[]) values, object);
 		} else
 			throw error("Unsupported generic type for collection: " + type, values);
+	}
+
+	static FieldSetter from(final Field field, final Class<?> type) {
+		if (type == String.class) {
+			return new StringArraySetterImpl(field);
+		} else if (type == Double.class) {
+			return new DoubleArraySetterImpl(field);
+		} else if (type == Float.class) {
+			return new FloatArraySetterImpl(field);
+		} else if (type == Long.class) {
+			return new LongArraySetterImpl(field);
+		} else if (type == Integer.class) {
+			return new IntegerArraySetterImpl(field);
+		} else if (type == Short.class) {
+			return new ShortArraySetterImpl(field);
+		} else if (type == Character.class) {
+			return new CharArraySetterImpl(field);
+		} else if (type == Byte.class) {
+			return new ByteArraySetterImpl(field);
+		} else if (type == Boolean.class) {
+			return new BooleanArraySetterImpl(field);
+		} else
+			return null;
 	}
 }

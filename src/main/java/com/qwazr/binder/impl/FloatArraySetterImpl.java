@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class FloatArraySetterImpl extends NumberArraySetterAbstract<Float> {
 
-	FloatArraySetterImpl(Field field) {
+	public FloatArraySetterImpl(Field field) {
 		super(field);
 	}
 

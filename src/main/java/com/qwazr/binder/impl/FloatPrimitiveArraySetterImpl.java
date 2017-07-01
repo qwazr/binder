@@ -228,4 +228,13 @@ final public class FloatPrimitiveArraySetterImpl extends PrimitiveArraySetterAbs
 		set(object, array);
 	}
 
+	@Override
+	public void fromObject(final Collection<Object> values, final Object object) {
+		final float[] array = new float[values.size()];
+		int i = 0;
+		for (Object v : values)
+			array[i++] = (float) v;
+		set(object, array);
+	}
+
 }

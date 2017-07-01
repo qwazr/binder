@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class BooleanSetterImpl extends ObjectSetterAbstract {
 
-	BooleanSetterImpl(Field field) {
+	public BooleanSetterImpl(Field field) {
 		super(field);
 	}
 

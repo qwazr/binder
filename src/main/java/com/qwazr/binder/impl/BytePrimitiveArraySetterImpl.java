@@ -224,4 +224,13 @@ final public class BytePrimitiveArraySetterImpl extends PrimitiveArraySetterAbst
 		set(object, bytes);
 	}
 
+	@Override
+	public void fromObject(final Collection<Object> values, final Object object) {
+		final byte[] array = new byte[values.size()];
+		int i = 0;
+		for (Object v : values)
+			array[i++] = (byte) v;
+		set(object, array);
+	}
+
 }

@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class DoubleSetterImpl extends ObjectSetterAbstract {
 
-	DoubleSetterImpl(Field field) {
+	public DoubleSetterImpl(Field field) {
 		super(field);
 	}
 

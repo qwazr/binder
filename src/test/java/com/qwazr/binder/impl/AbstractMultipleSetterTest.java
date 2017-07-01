@@ -293,4 +293,5 @@ public abstract class AbstractMultipleSetterTest extends AbstractSetterTest {
 		setter.fromBoolean(v, this);
 		checkValueBoolean(v);
 	}
+	
 }

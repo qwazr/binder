@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class FloatCollectionSetterImpl extends CollectionSetterAbstract<Float> {
 
-	FloatCollectionSetterImpl(Field field) {
+	public FloatCollectionSetterImpl(Field field) {
 		super(field);
 	}
 

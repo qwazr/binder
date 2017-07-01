@@ -228,4 +228,12 @@ final public class IntegerPrimitiveArraySetterImpl extends PrimitiveArraySetterA
 		set(object, array);
 	}
 
+	@Override
+	public void fromObject(final Collection<Object> values, final Object object) {
+		final int[] array = new int[values.size()];
+		int i = 0;
+		for (Object v : values)
+			array[i++] = (int) v;
+		set(object, array);
+	}
 }

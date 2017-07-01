@@ -15,7 +15,6 @@
  */
 package com.qwazr.binder;
 
-import com.qwazr.binder.impl.FieldSetterBuilder;
 import com.qwazr.binder.setter.FieldSetter;
 import com.qwazr.utils.AnnotationsUtils;
 import com.qwazr.utils.CollectionsUtils;
@@ -214,7 +213,7 @@ public class FieldMapWrapperTest {
 			final Map<String, FieldSetter> fieldMap = new HashMap<>();
 			AnnotationsUtils.browseFieldsRecursive(objectClass, field -> {
 				field.setAccessible(true);
-				fieldMap.put(field.getName(), FieldSetterBuilder.of(field));
+				fieldMap.put(field.getName(), FieldSetter.of(field));
 			});
 			return new FieldMapWrapper<>(fieldMap, objectClass);
 		}

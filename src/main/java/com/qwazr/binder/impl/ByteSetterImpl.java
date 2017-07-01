@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class ByteSetterImpl extends ObjectSetterAbstract {
 
-	ByteSetterImpl(Field field) {
+	public ByteSetterImpl(Field field) {
 		super(field);
 	}
 

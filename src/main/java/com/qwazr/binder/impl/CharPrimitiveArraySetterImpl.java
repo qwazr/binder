@@ -236,4 +236,13 @@ final public class CharPrimitiveArraySetterImpl extends PrimitiveArraySetterAbst
 		set(object, array);
 	}
 
+	@Override
+	public void fromObject(final Collection<Object> values, final Object object) {
+		final char[] array = new char[values.size()];
+		int i = 0;
+		for (Object v : values)
+			array[i++] = (char) v;
+		set(object, array);
+	}
+
 }

@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class CharArraySetterImpl extends ArraySetterAbstract<Character> {
 
-	CharArraySetterImpl(Field field) {
+	public CharArraySetterImpl(Field field) {
 		super(field);
 	}
 

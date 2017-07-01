@@ -310,6 +310,13 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 	}
 
 	@Override
+	final public void fromObject(Collection<Object> values, Object object) {
+		final Collection<T> collection = createCollection(object);
+		for (Object value : values)
+			collection.add((T) value);
+	}
+
+	@Override
 	final public void fromDouble(double[] values, Object object) {
 		final Collection<T> collection = createCollection(object);
 		for (double value : values)

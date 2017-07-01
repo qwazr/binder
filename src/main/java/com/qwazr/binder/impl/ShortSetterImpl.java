@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class ShortSetterImpl extends ObjectSetterAbstract {
 
-	ShortSetterImpl(Field field) {
+	public ShortSetterImpl(Field field) {
 		super(field);
 	}
 

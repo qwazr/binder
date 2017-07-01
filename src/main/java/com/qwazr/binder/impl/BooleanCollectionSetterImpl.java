@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class BooleanCollectionSetterImpl extends CollectionSetterAbstract<Boolean> {
 
-	BooleanCollectionSetterImpl(Field field) {
+	public BooleanCollectionSetterImpl(Field field) {
 		super(field);
 	}
 

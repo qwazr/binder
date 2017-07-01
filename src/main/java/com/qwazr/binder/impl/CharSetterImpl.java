@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class CharSetterImpl extends ObjectSetterAbstract {
 
-	CharSetterImpl(Field field) {
+	public CharSetterImpl(Field field) {
 		super(field);
 	}
 

@@ -228,4 +228,12 @@ final public class BooleanPrimitiveArraySetterImpl extends PrimitiveArraySetterA
 		set(object, array);
 	}
 
+	@Override
+	public void fromObject(final Collection<Object> values, final Object object) {
+		final boolean[] array = new boolean[values.size()];
+		int i = 0;
+		for (Object v : values)
+			array[i++] = (boolean) v;
+		set(object, array);
+	}
 }

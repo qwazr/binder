@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 
 final public class DoubleCollectionSetterImpl extends CollectionSetterAbstract<Double> {
 
-	DoubleCollectionSetterImpl(Field field) {
+	public DoubleCollectionSetterImpl(Field field) {
 		super(field);
 	}
 

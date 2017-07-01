@@ -15,6 +15,18 @@
  */
 package com.qwazr.binder.setter;
 
+import com.qwazr.binder.impl.BooleanSetterImpl;
+import com.qwazr.binder.impl.ByteSetterImpl;
+import com.qwazr.binder.impl.CharSetterImpl;
+import com.qwazr.binder.impl.DoubleSetterImpl;
+import com.qwazr.binder.impl.FloatSetterImpl;
+import com.qwazr.binder.impl.IntegerSetterImpl;
+import com.qwazr.binder.impl.LongSetterImpl;
+import com.qwazr.binder.impl.ShortSetterImpl;
+import com.qwazr.binder.impl.StringSetterImpl;
+
+import java.lang.reflect.Field;
+
 public interface ObjectSetter extends ErrorSetter {
 
 	void fromString(String value, Object object);
@@ -35,7 +47,9 @@ public interface ObjectSetter extends ErrorSetter {
 
 	void fromBoolean(Boolean value, Object object);
 
-	default void fromObject(Class<?> type, Object values, Object object) {
+	void set(Object value, Object object);
+
+	default void fromObject(final Class<?> type, final Object values, final Object object) {
 		if (type == String.class) {
 			fromString((String) values, object);
 		} else if (type == Double.class) {
@@ -56,5 +70,28 @@ public interface ObjectSetter extends ErrorSetter {
 			fromBoolean((Boolean) values, object);
 		} else
 			throw error("Unsupported type: " + type, values);
+	}
+
+	static FieldSetter from(final Field field, final Class<?> type) {
+		if (type == String.class) {
+			return new StringSetterImpl(field);
+		} else if (type == Double.class) {
+			return new DoubleSetterImpl(field);
+		} else if (type == Float.class) {
+			return new FloatSetterImpl(field);
+		} else if (type == Long.class) {
+			return new LongSetterImpl(field);
+		} else if (type == Integer.class) {
+			return new IntegerSetterImpl(field);
+		} else if (type == Short.class) {
+			return new ShortSetterImpl(field);
+		} else if (type == Character.class) {
+			return new CharSetterImpl(field);
+		} else if (type == Byte.class) {
+			return new ByteSetterImpl(field);
+		} else if (type == Boolean.class) {
+			return new BooleanSetterImpl(field);
+		} else
+			return null;
 	}
 }

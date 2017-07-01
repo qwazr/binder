@@ -228,4 +228,12 @@ final public class LongPrimitiveArraySetterImpl extends PrimitiveArraySetterAbst
 		set(object, array);
 	}
 
+	@Override
+	public void fromObject(final Collection<Object> values, final Object object) {
+		final long[] array = new long[values.size()];
+		int i = 0;
+		for (Object v : values)
+			array[i++] = (long) v;
+		set(object, array);
+	}
 }
