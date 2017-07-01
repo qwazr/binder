@@ -15,7 +15,6 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.utils.RandomUtils;
 import org.junit.Assert;
 
 public class IntegerArraySetterTest extends AbstractArraySetterTest<Integer> {
@@ -26,9 +25,14 @@ public class IntegerArraySetterTest extends AbstractArraySetterTest<Integer> {
 
 	@Override
 	protected String nextString() {
-		return Integer.toString(RandomUtils.nextInt());
+		return Integer.toString(nextInt());
 	}
 
+	@Override
+	protected Integer nextObject() {
+		return nextInt();
+	}
+	
 	@Override
 	protected void checkValueNull() {
 		Assert.assertNull(value);

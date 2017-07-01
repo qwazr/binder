@@ -15,7 +15,6 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.utils.RandomUtils;
 import org.junit.Assert;
 
 public class CharCollectionSetterTest extends AbstractCollectionSetterTest<Character> {
@@ -26,9 +25,14 @@ public class CharCollectionSetterTest extends AbstractCollectionSetterTest<Chara
 
 	@Override
 	protected String nextString() {
-		return Character.toString(RandomUtils.nextAlphanumericChar());
+		return Character.toString(nextChar());
 	}
 
+	@Override
+	protected Character nextObject() {
+		return nextChar();
+	}
+	
 	@Override
 	protected void checkValueString(String... values) {
 		Assert.assertEquals(values.length, value.size());

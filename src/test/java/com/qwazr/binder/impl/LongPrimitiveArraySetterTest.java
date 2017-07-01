@@ -36,6 +36,11 @@ public class LongPrimitiveArraySetterTest extends AbstractMultipleSetterTest {
 	}
 
 	@Override
+	protected Long nextObject() {
+		return nextLong();
+	}
+
+	@Override
 	protected void checkValueString(String... next) {
 		Assert.assertEquals(next.length, value.length);
 		int i = 0;
@@ -71,4 +76,11 @@ public class LongPrimitiveArraySetterTest extends AbstractMultipleSetterTest {
 		Assert.assertNull(value);
 	}
 
+	@Override
+	protected void checkValueObject(Object... values) {
+		Assert.assertEquals(values.length, value.length);
+		int i = 0;
+		for (long v : value)
+			Assert.assertEquals(v, (long) values[i++], 0);
+	}
 }

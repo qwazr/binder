@@ -30,6 +30,11 @@ public class ShortCollectionSetterTest extends AbstractCollectionSetterTest<Shor
 	}
 
 	@Override
+	protected Short nextObject() {
+		return nextShort();
+	}
+
+	@Override
 	protected void checkValueString(String... values) {
 		Assert.assertEquals(values.length, value.size());
 		int i = 0;

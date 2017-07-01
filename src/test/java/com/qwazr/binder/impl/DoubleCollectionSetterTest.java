@@ -15,7 +15,6 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.utils.RandomUtils;
 import org.junit.Assert;
 
 public class DoubleCollectionSetterTest extends AbstractCollectionSetterTest<Double> {
@@ -26,9 +25,14 @@ public class DoubleCollectionSetterTest extends AbstractCollectionSetterTest<Dou
 
 	@Override
 	protected String nextString() {
-		return Double.toString(RandomUtils.nextDouble());
+		return Double.toString(nextDouble());
 	}
 
+	@Override
+	protected Double nextObject() {
+		return nextDouble();
+	}
+	
 	@Override
 	protected void checkValueString(String... values) {
 		Assert.assertEquals(values.length, value.size());

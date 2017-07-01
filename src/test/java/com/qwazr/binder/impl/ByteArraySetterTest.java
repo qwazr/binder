@@ -15,7 +15,6 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.utils.RandomUtils;
 import org.junit.Assert;
 
 public class ByteArraySetterTest extends AbstractArraySetterTest<Byte> {
@@ -26,7 +25,12 @@ public class ByteArraySetterTest extends AbstractArraySetterTest<Byte> {
 
 	@Override
 	protected String nextString() {
-		return Byte.toString(RandomUtils.nextByte());
+		return Byte.toString(nextByte());
+	}
+
+	@Override
+	protected Byte nextObject() {
+		return nextByte();
 	}
 
 	@Override

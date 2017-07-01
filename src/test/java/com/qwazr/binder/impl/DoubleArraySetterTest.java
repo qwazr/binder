@@ -30,6 +30,11 @@ public class DoubleArraySetterTest extends AbstractArraySetterTest<Double> {
 	}
 
 	@Override
+	protected Double nextObject() {
+		return nextDouble();
+	}
+
+	@Override
 	protected void checkValueNull() {
 		Assert.assertNull(value);
 	}
@@ -64,5 +69,13 @@ public class DoubleArraySetterTest extends AbstractArraySetterTest<Double> {
 		int i = 0;
 		for (Boolean v : values)
 			Assert.assertEquals(v ? 1d : 0, get(i++), 0);
+	}
+
+	@Override
+	protected void checkValueObject(Object... values) {
+		Assert.assertEquals(values.length, value.length);
+		int i = 0;
+		for (double v : value)
+			Assert.assertEquals(v, (double) values[i++], 0);
 	}
 }

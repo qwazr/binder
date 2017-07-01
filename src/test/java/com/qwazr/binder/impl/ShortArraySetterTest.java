@@ -15,7 +15,6 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.utils.RandomUtils;
 import org.junit.Assert;
 
 public class ShortArraySetterTest extends AbstractArraySetterTest<Short> {
@@ -26,7 +25,12 @@ public class ShortArraySetterTest extends AbstractArraySetterTest<Short> {
 
 	@Override
 	protected String nextString() {
-		return Short.toString(RandomUtils.nextShort());
+		return Short.toString(nextShort());
+	}
+
+	@Override
+	protected Short nextObject() {
+		return nextShort();
 	}
 
 	@Override

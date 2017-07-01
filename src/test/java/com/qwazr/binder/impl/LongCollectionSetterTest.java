@@ -15,7 +15,6 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.utils.RandomUtils;
 import org.junit.Assert;
 
 public class LongCollectionSetterTest extends AbstractCollectionSetterTest<Long> {
@@ -26,7 +25,12 @@ public class LongCollectionSetterTest extends AbstractCollectionSetterTest<Long>
 
 	@Override
 	protected String nextString() {
-		return Long.toString(RandomUtils.nextLong());
+		return Long.toString(nextLong());
+	}
+
+	@Override
+	protected Long nextObject() {
+		return nextLong();
 	}
 
 	@Override

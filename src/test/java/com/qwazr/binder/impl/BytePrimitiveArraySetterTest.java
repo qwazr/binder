@@ -36,6 +36,11 @@ public class BytePrimitiveArraySetterTest extends AbstractMultipleSetterTest {
 	}
 
 	@Override
+	protected Byte nextObject() {
+		return nextByte();
+	}
+
+	@Override
 	protected void checkValueString(String... next) {
 		Assert.assertEquals(next.length, value.length);
 		int i = 0;
@@ -71,4 +76,11 @@ public class BytePrimitiveArraySetterTest extends AbstractMultipleSetterTest {
 		Assert.assertNull(value);
 	}
 
+	@Override
+	protected void checkValueObject(Object... values) {
+		Assert.assertEquals(values.length, value.length);
+		int i = 0;
+		for (byte v : value)
+			Assert.assertEquals(v, (byte) values[i++], 0);
+	}
 }

@@ -15,7 +15,6 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.utils.RandomUtils;
 import org.junit.Assert;
 
 public class CharArraySetterTest extends AbstractArraySetterTest<Character> {
@@ -26,7 +25,12 @@ public class CharArraySetterTest extends AbstractArraySetterTest<Character> {
 
 	@Override
 	protected String nextString() {
-		return Character.toString(RandomUtils.nextAlphanumericChar());
+		return Character.toString(nextChar());
+	}
+
+	@Override
+	protected Character nextObject() {
+		return nextChar();
 	}
 
 	@Override

@@ -31,6 +31,10 @@ public abstract class AbstractMultipleSetterTest extends AbstractSetterTest {
 
 	protected abstract int size();
 
+	protected abstract void checkValueObject(Object... values);
+
+	protected abstract Object nextObject();
+
 	@Override
 	final protected void checkValueEmpty() {
 		Assert.assertEquals(0, size());
@@ -293,5 +297,13 @@ public abstract class AbstractMultipleSetterTest extends AbstractSetterTest {
 		setter.fromBoolean(v, this);
 		checkValueBoolean(v);
 	}
-	
+
+	@Test
+	final public void testObjectCollectionMultiple() {
+		final Object[] values = { nextObject(), nextObject(), nextObject() };
+		final Collection<Object> v = Arrays.asList(values);
+		setter.fromObject(v, this);
+		checkValueObject(values);
+	}
+
 }

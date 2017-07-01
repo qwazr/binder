@@ -15,7 +15,6 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.utils.RandomUtils;
 import org.junit.Assert;
 
 public class FloatArraySetterTest extends AbstractArraySetterTest<Float> {
@@ -26,7 +25,12 @@ public class FloatArraySetterTest extends AbstractArraySetterTest<Float> {
 
 	@Override
 	protected String nextString() {
-		return Float.toString(RandomUtils.nextFloat());
+		return Float.toString(nextFloat());
+	}
+
+	@Override
+	protected Float nextObject() {
+		return nextFloat();
 	}
 
 	@Override

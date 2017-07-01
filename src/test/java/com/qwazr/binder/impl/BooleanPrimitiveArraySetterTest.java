@@ -36,6 +36,11 @@ public class BooleanPrimitiveArraySetterTest extends AbstractMultipleSetterTest 
 	}
 
 	@Override
+	protected Boolean nextObject() {
+		return nextBoolean();
+	}
+
+	@Override
 	protected void checkValueString(String... next) {
 		Assert.assertEquals(next.length, value.length);
 		int i = 0;
@@ -64,6 +69,14 @@ public class BooleanPrimitiveArraySetterTest extends AbstractMultipleSetterTest 
 		int i = 0;
 		for (Boolean v : next)
 			Assert.assertEquals(v, value[i++]);
+	}
+
+	@Override
+	protected void checkValueObject(Object... values) {
+		Assert.assertEquals(values.length, value.length);
+		int i = 0;
+		for (boolean v : value)
+			Assert.assertEquals(v, (boolean) values[i++]);
 	}
 
 	@Override

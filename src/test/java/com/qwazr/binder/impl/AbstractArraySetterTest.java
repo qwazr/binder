@@ -15,6 +15,8 @@
  */
 package com.qwazr.binder.impl;
 
+import org.junit.Assert;
+
 public abstract class AbstractArraySetterTest<T> extends AbstractMultipleSetterTest {
 
 	final T[] value = null;
@@ -30,5 +32,13 @@ public abstract class AbstractArraySetterTest<T> extends AbstractMultipleSetterT
 
 	final protected T get(int pos) {
 		return value[pos];
+	}
+
+	@Override
+	protected void checkValueObject(Object... values) {
+		Assert.assertEquals(values.length, value.length);
+		int i = 0;
+		for (T v : value)
+			Assert.assertEquals(v, values[i++]);
 	}
 }

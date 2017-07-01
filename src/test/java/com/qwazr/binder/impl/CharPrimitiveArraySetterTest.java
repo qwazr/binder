@@ -37,6 +37,11 @@ public class CharPrimitiveArraySetterTest extends AbstractMultipleSetterTest {
 	}
 
 	@Override
+	protected Character nextObject() {
+		return nextChar();
+	}
+
+	@Override
 	protected void checkValueString(String... next) {
 		Assert.assertEquals(next.length, value.length);
 		Assert.assertEquals(StringUtils.join(next), new String(value));
@@ -70,4 +75,11 @@ public class CharPrimitiveArraySetterTest extends AbstractMultipleSetterTest {
 		Assert.assertNull(value);
 	}
 
+	@Override
+	protected void checkValueObject(Object... values) {
+		Assert.assertEquals(values.length, value.length);
+		int i = 0;
+		for (char v : value)
+			Assert.assertEquals(v, (char) values[i++], 0);
+	}
 }

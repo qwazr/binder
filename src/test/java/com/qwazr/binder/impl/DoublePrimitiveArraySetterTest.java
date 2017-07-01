@@ -36,6 +36,11 @@ public class DoublePrimitiveArraySetterTest extends AbstractMultipleSetterTest {
 	}
 
 	@Override
+	protected Double nextObject() {
+		return nextDouble();
+	}
+
+	@Override
 	protected void checkValueString(String... next) {
 		Assert.assertEquals(next.length, value.length);
 		int i = 0;
@@ -71,4 +76,11 @@ public class DoublePrimitiveArraySetterTest extends AbstractMultipleSetterTest {
 		Assert.assertNull(value);
 	}
 
+	@Override
+	protected void checkValueObject(Object... values) {
+		Assert.assertEquals(values.length, value.length);
+		int i = 0;
+		for (double v : value)
+			Assert.assertEquals(v, (double) values[i++], 0);
+	}
 }

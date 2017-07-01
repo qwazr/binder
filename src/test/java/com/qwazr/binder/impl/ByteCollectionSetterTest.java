@@ -15,7 +15,6 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.utils.RandomUtils;
 import org.junit.Assert;
 
 public class ByteCollectionSetterTest extends AbstractCollectionSetterTest<Byte> {
@@ -26,7 +25,12 @@ public class ByteCollectionSetterTest extends AbstractCollectionSetterTest<Byte>
 
 	@Override
 	protected String nextString() {
-		return Byte.toString(RandomUtils.nextByte());
+		return Byte.toString(nextByte());
+	}
+
+	@Override
+	protected Byte nextObject() {
+		return nextByte();
 	}
 
 	@Override
@@ -60,4 +64,5 @@ public class ByteCollectionSetterTest extends AbstractCollectionSetterTest<Byte>
 		for (Byte v : value)
 			Assert.assertEquals(v, values[i++] ? 1 : 0, 0);
 	}
+	
 }

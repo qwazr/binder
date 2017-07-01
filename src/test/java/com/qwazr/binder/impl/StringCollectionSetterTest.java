@@ -32,6 +32,11 @@ public class StringCollectionSetterTest extends AbstractCollectionSetterTest<Str
 	}
 
 	@Override
+	protected String nextObject() {
+		return nextString();
+	}
+
+	@Override
 	protected void checkValueString(String... v) {
 		Assert.assertTrue(CollectionsUtils.equals(value, v));
 	}

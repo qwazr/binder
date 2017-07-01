@@ -31,6 +31,11 @@ public class StringArraySetterTest extends AbstractArraySetterTest<String> {
 	}
 
 	@Override
+	protected String nextObject() {
+		return nextString();
+	}
+
+	@Override
 	protected void checkValueNull() {
 		Assert.assertNull(value);
 	}
@@ -53,5 +58,13 @@ public class StringArraySetterTest extends AbstractArraySetterTest<String> {
 	@Override
 	protected void checkValueBoolean(Boolean... v) {
 		Assert.assertArrayEquals(ArrayUtils.toStringArray(v), value);
+	}
+
+	@Override
+	protected void checkValueObject(Object... values) {
+		Assert.assertEquals(values.length, value.length);
+		int i = 0;
+		for (String v : value)
+			Assert.assertEquals(v, values[i++].toString());
 	}
 }
