@@ -23,15 +23,27 @@ import java.lang.reflect.Field;
 abstract class FieldSetterAbstract implements FieldSetter {
 
 	final Field field;
+	final Class<?> type;
 
 	FieldSetterAbstract(final Field field) {
 		this.field = field;
+		this.type = field.getType();
 		field.setAccessible(true);
 	}
 
 	@Override
 	public void fromNull(final Object object) {
 		set(object, null);
+	}
+
+	@Override
+	final public Field getField() {
+		return field;
+	}
+
+	@Override
+	final public Class<?> getType() {
+		return type;
 	}
 
 	public final void set(final Object object, final Object value) {

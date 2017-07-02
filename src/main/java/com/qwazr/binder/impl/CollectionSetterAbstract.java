@@ -32,15 +32,15 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 
 	CollectionSetterAbstract(Field field) {
 		super(field);
-		Class<?> fieldType = field.getType();
-		final int modifier = fieldType.getModifiers();
+		Class<?> fieldType = type;
+		final int modifier = type.getModifiers();
 		if (Modifier.isAbstract(modifier) || Modifier.isInterface(modifier)) {
-			if (Set.class.isAssignableFrom(fieldType))
+			if (Set.class.isAssignableFrom(type))
 				fieldType = LinkedHashSet.class;
 			else
 				fieldType = ArrayList.class;
 		}
-		if (!Collection.class.isAssignableFrom(fieldType))
+		if (!Collection.class.isAssignableFrom(type))
 			error("The type should be a collection", fieldType);
 		this.collectionClass = (Class<Collection<T>>) fieldType;
 	}

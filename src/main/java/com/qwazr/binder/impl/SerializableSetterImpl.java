@@ -24,11 +24,8 @@ import java.util.Base64;
 
 final public class SerializableSetterImpl extends FieldSetterAbstract {
 
-	private Class<? extends Serializable> fieldType;
-
 	public SerializableSetterImpl(Field field) {
 		super(field);
-		this.fieldType = (Class<? extends Serializable>) field.getType();
 	}
 
 	final public void fromString(final String string, final Object object) {
@@ -38,7 +35,7 @@ final public class SerializableSetterImpl extends FieldSetterAbstract {
 	@Override
 	final public void fromByte(final byte[] bytes, Object object) {
 		try {
-			set(object, SerializationUtils.fromExternalizorBytes(bytes, fieldType));
+			set(object, SerializationUtils.fromExternalizorBytes(bytes, (Class<? extends Serializable>) type));
 		} catch (IOException | ReflectiveOperationException e) {
 			throw error("Serialization failure", bytes);
 		}

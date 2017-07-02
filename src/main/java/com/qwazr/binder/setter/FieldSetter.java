@@ -25,6 +25,10 @@ public interface FieldSetter
 
 	void fromNull(Object object);
 
+	Class<?> getType();
+
+	Field getField();
+	
 	Object get(Object object);
 
 	default void setValue(Object object, Object value) {
