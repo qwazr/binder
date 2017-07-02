@@ -15,6 +15,7 @@
  */
 package com.qwazr.binder.setter;
 
+import com.qwazr.binder.BinderException;
 import com.qwazr.binder.impl.BooleanCollectionSetterImpl;
 import com.qwazr.binder.impl.ByteCollectionSetterImpl;
 import com.qwazr.binder.impl.CharCollectionSetterImpl;
@@ -30,25 +31,45 @@ import java.util.Collection;
 
 public interface CollectionSetter extends ErrorSetter {
 
-	void fromString(Collection<String> values, Object object);
+	default void fromString(Collection<String> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromDouble(Collection<Double> values, Object object);
+	default void fromDouble(Collection<Double> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromFloat(Collection<Float> values, Object object);
+	default void fromFloat(Collection<Float> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromLong(Collection<Long> values, Object object);
+	default void fromLong(Collection<Long> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromInteger(Collection<Integer> values, Object object);
+	default void fromInteger(Collection<Integer> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromShort(Collection<Short> values, Object object);
+	default void fromShort(Collection<Short> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromChar(Collection<Character> values, Object object);
+	default void fromChar(Collection<Character> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromByte(Collection<Byte> values, Object object);
+	default void fromByte(Collection<Byte> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromBoolean(Collection<Boolean> values, Object object);
+	default void fromBoolean(Collection<Boolean> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromObject(Collection<Object> values, Object object);
+	default void fromObject(Collection<Object> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
 	default void fromCollection(Class<?> type, Collection<?> values, Object object) {
 		if (type == String.class)
@@ -93,6 +114,7 @@ public interface CollectionSetter extends ErrorSetter {
 		} else if (type == Boolean.class) {
 			return new BooleanCollectionSetterImpl(field);
 		} else
-			return null;
+			throw new BinderException("Unsupported type: " + type, field, null);
+
 	}
 }

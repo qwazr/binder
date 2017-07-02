@@ -15,6 +15,7 @@
  */
 package com.qwazr.binder.setter;
 
+import com.qwazr.binder.BinderException;
 import com.qwazr.binder.impl.BooleanPrimitiveArraySetterImpl;
 import com.qwazr.binder.impl.BytePrimitiveArraySetterImpl;
 import com.qwazr.binder.impl.CharPrimitiveArraySetterImpl;
@@ -28,21 +29,37 @@ import java.lang.reflect.Field;
 
 public interface PrimitiveArraySetter extends ErrorSetter {
 
-	void fromDouble(double[] values, Object object);
+	default void fromDouble(double[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromFloat(float[] values, Object object);
+	default void fromFloat(float[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromLong(long[] values, Object object);
+	default void fromLong(long[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromInteger(int[] values, Object object);
+	default void fromInteger(int[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromShort(short[] values, Object object);
+	default void fromShort(short[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromChar(char[] values, Object object);
+	default void fromChar(char[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromByte(byte[] values, Object object);
+	default void fromByte(byte[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromBoolean(boolean[] values, Object object);
+	default void fromBoolean(boolean[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
 	default void fromPrimitiveArray(Class<?> type, Object values, Object object) {
 		if (type == double.class) {
@@ -83,6 +100,7 @@ public interface PrimitiveArraySetter extends ErrorSetter {
 		} else if (type == boolean.class) {
 			return new BooleanPrimitiveArraySetterImpl(field);
 		} else
-			return null;
+			throw new BinderException("Unsupported type: " + type, field, null);
+
 	}
 }

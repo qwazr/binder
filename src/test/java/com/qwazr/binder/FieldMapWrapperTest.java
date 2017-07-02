@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -33,6 +34,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FieldMapWrapperTest {
@@ -99,6 +101,8 @@ public class FieldMapWrapperTest {
 	public void test501toRecordStringToCollection() throws ReflectiveOperationException, IOException {
 		Map map = getRandom();
 		map.put("tags", RandomUtils.alphanumeric(5));
+		map.put("tagsAbstract", RandomUtils.alphanumeric(6));
+		map.put("tagsAbstractList", RandomUtils.alphanumeric(7));
 		Record record = wrapper.toRecord(map);
 		Assert.assertNotNull(record);
 		Assert.assertEquals(record, map);
@@ -108,6 +112,8 @@ public class FieldMapWrapperTest {
 	public void test502toRecordCollectionToCollection() throws ReflectiveOperationException, IOException {
 		Map map = getRandom();
 		map.put("tags", Arrays.asList(RandomUtils.alphanumeric(5), RandomUtils.alphanumeric(5)));
+		map.put("tagsAbstract", Arrays.asList(RandomUtils.alphanumeric(6), RandomUtils.alphanumeric(6)));
+		map.put("tagsAbstractList", Arrays.asList(RandomUtils.alphanumeric(7), RandomUtils.alphanumeric(7)));
 		Record record = wrapper.toRecord(map);
 		Assert.assertNotNull(record);
 		Assert.assertEquals(record, map);
@@ -117,6 +123,8 @@ public class FieldMapWrapperTest {
 	public void test503toRecordArrayToCollection() throws ReflectiveOperationException, IOException {
 		Map map = getRandom();
 		map.put("tags", new String[] { RandomUtils.alphanumeric(5), RandomUtils.alphanumeric(5) });
+		map.put("tagsAbstract", new String[] { RandomUtils.alphanumeric(6), RandomUtils.alphanumeric(6) });
+		map.put("tagsAbstractList", new String[] { RandomUtils.alphanumeric(7), RandomUtils.alphanumeric(7) });
 		Record record = wrapper.toRecord(map);
 		Assert.assertNotNull(record);
 		Assert.assertEquals(record, map);
@@ -157,21 +165,39 @@ public class FieldMapWrapperTest {
 		final String title;
 		final Double price;
 		final LinkedHashSet<String> tags;
+		final Set<String> tagsAbstract;
+		final List<String> tagsAbstractList;
 
 		Record(Long id, String title, Double price, String... tags) {
 			this.id = id;
 			this.title = title;
 			this.price = price;
-			if (tags == null || tags.length == 0)
+			if (tags == null || tags.length == 0) {
 				this.tags = null;
-			else {
+				this.tagsAbstract = null;
+				this.tagsAbstractList = null;
+			} else {
 				this.tags = new LinkedHashSet<>();
 				Collections.addAll(this.tags, tags);
+				this.tagsAbstract = new LinkedHashSet<>();
+				Collections.addAll(this.tagsAbstract, tags);
+				this.tagsAbstractList = new ArrayList<>();
+				Collections.addAll(this.tagsAbstractList, tags);
 			}
 		}
 
 		public Record() {
 			this(null, null, null);
+		}
+
+		private static boolean equalsStringMap(Object mtags, Collection<String> tags) {
+			if (mtags == null)
+				return tags == null || tags.isEmpty();
+			if (mtags instanceof Collection)
+				return CollectionsUtils.equals(tags, (Collection) mtags);
+			if (mtags instanceof String)
+				return tags.size() == 1 && tags.iterator().next().equals(mtags);
+			return CollectionsUtils.equals(tags, (String[]) mtags);
 		}
 
 		@Override
@@ -187,15 +213,8 @@ public class FieldMapWrapperTest {
 				Map m = (Map) object;
 				if (!Objects.equals(id, m.get("id")) && Objects.equals(title, m.get("title")))
 					return false;
-				Object mtags = m.get("tags");
-				if (mtags == null)
-					return tags == null || tags.isEmpty();
-				if (mtags instanceof Collection)
-					return CollectionsUtils.equals(tags, (Collection) mtags);
-				if (mtags instanceof String)
-					return tags.size() == 1 && tags.iterator().next().equals(mtags);
-				return CollectionsUtils.equals(tags, (String[]) mtags);
-
+				return equalsStringMap(m.get("tags"), tags) && equalsStringMap(m.get("tagsAbstract"), tagsAbstract) &&
+						equalsStringMap(m.get("tagsAbstractList"), tagsAbstractList);
 			}
 			return false;
 		}

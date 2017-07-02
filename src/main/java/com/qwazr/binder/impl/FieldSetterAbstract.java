@@ -120,4 +120,9 @@ abstract class FieldSetterAbstract implements FieldSetter {
 		return new BinderException(message, field, value);
 	}
 
+	@Override
+	public final BinderException error(final String message, final Object value, final Exception cause) {
+		return new BinderException(message, field, value, cause);
+	}
+
 }

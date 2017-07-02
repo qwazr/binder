@@ -15,17 +15,15 @@
  */
 package com.qwazr.binder;
 
+import com.qwazr.binder.impl.SerializableSetterImpl;
 import com.qwazr.binder.setter.FieldSetter;
 import com.qwazr.utils.FunctionUtils;
 import com.qwazr.utils.SerializationUtils;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -51,19 +49,18 @@ public class FieldMapWrapper<T> {
 	public Map<String, Object> newMap(final T row) {
 		final Map<String, Object> map = new HashMap<>();
 		fieldMap.forEach((name, field) -> {
-			//try {
 			final Object value = field.get(row);
 			if (value == null)
 				return;
-				/*if (field.getType() == FieldSetter.Type.Other) {
-					if (value instanceof Serializable)
-						map.put(name, SerializationUtils.toExternalizorBytes((Serializable) value));
-				} else */
+			try {
+			if (field instanceof SerializableSetterImpl)
+				map.put(name, SerializationUtils.toExternalizorBytes((Serializable) value));
+				 else
 			map.put(name, value);
-				/*
+
 			} catch (IOException | ReflectiveOperationException e) {
-				throw new IllegalArgumentException("Cannot convert the field " + name, e);
-			}*/
+				throw field.error("Cannot convert the field " + name, field, e);
+			}
 		});
 		return map.isEmpty() ? null : map;
 	}
@@ -95,102 +92,6 @@ public class FieldMapWrapper<T> {
 		for (T row : rows)
 			list.add(newMap(row));
 		return list;
-	}
-
-	public void toField(final Object sourceValue, final Field targetField, final T record)
-			throws ReflectiveOperationException, IOException {
-
-		final Class<?> targetFieldType = targetField.getType();
-		final Class<?> sourceFieldValueType = sourceValue.getClass();
-
-		if (targetFieldType.isAssignableFrom(sourceFieldValueType)) {
-			targetField.set(record, sourceValue);
-			return;
-		}
-
-		// Check number
-		if (sourceValue instanceof Number) {
-			final Number numberValue = (Number) sourceValue;
-			if (targetFieldType == Long.class)
-				targetField.set(record, numberValue.longValue());
-			else if (targetFieldType == Integer.class)
-				targetField.set(record, numberValue.intValue());
-			else if (targetFieldType == Float.class)
-				targetField.set(record, numberValue.floatValue());
-			else if (targetFieldType == Double.class)
-				targetField.set(record, numberValue.doubleValue());
-			return;
-		}
-
-		if (sourceFieldValueType.isArray()) {
-			final int length = Array.getLength(sourceValue);
-			if (length == 0)
-				return;
-			if (Collection.class.isAssignableFrom(targetFieldType)) {
-				final Collection fieldValues = (Collection) targetFieldType.newInstance();
-				for (int i = 0; i < length; i++)
-					fieldValues.add(Array.get(sourceValue, i));
-				targetField.set(record, fieldValues);
-			} else
-				targetField.set(record, Array.get(sourceValue, 0));
-			return;
-		}
-
-		// Check collection
-		if (Collection.class.isAssignableFrom(targetFieldType)) {
-			Collection fieldValue = (Collection) targetField.get(record);
-			if (fieldValue == null) {
-				fieldValue = (Collection) targetFieldType.newInstance();
-				targetField.set(record, fieldValue);
-			}
-			if (sourceValue instanceof Collection)
-				fieldValue.addAll((Collection) sourceValue);
-			else
-				fieldValue.add(sourceValue);
-			return;
-		}
-
-		if (sourceValue instanceof Collection) {
-			final Collection<?> fieldValues = (Collection<?>) sourceValue;
-			if (fieldValues.isEmpty())
-				return;
-			targetField.set(record, fieldValues.iterator().next());
-			return;
-		}
-
-		if (sourceValue instanceof String && Number.class.isAssignableFrom(targetFieldType)) {
-
-			if (targetFieldType == Integer.class) {
-				targetField.set(record, Integer.valueOf((String) sourceValue));
-				return;
-			}
-			if (targetFieldType == Long.class) {
-				targetField.set(record, Long.valueOf((String) sourceValue));
-				return;
-			}
-			if (targetFieldType == Double.class) {
-				targetField.set(record, Double.valueOf((String) sourceValue));
-				return;
-			}
-			if (targetFieldType == Float.class) {
-				targetField.set(record, Float.valueOf((String) sourceValue));
-				return;
-			}
-			if (targetFieldType == Short.class) {
-				targetField.set(record, Short.valueOf((String) sourceValue));
-				return;
-			}
-		}
-
-		if (Serializable.class.isAssignableFrom(targetFieldType)) {
-			targetField.set(record,
-					SerializationUtils.fromExternalizorBytes(Base64.getDecoder().decode((String) sourceValue),
-							(Class<? extends Serializable>) targetFieldType));
-			return;
-		}
-		throw new UnsupportedOperationException(
-				"Field " + targetField.getName() + " not assignable: " + targetFieldType + " -> " +
-						sourceFieldValueType);
 	}
 
 	public T toRecord(final Map<String, Object> fields) throws ReflectiveOperationException, IOException {

@@ -15,6 +15,7 @@
  */
 package com.qwazr.binder.setter;
 
+import com.qwazr.binder.BinderException;
 import com.qwazr.binder.impl.BooleanPrimitiveSetterImpl;
 import com.qwazr.binder.impl.BytePrimitiveSetterImpl;
 import com.qwazr.binder.impl.CharPrimitiveSetterImpl;
@@ -28,21 +29,37 @@ import java.lang.reflect.Field;
 
 public interface PrimitiveSetter extends ErrorSetter {
 
-	void fromDouble(double value, Object object);
+	default void fromDouble(double value, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromFloat(float value, Object object);
+	default void fromFloat(float value, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromLong(long value, Object object);
+	default void fromLong(long value, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromInteger(int value, Object object);
+	default void fromInteger(int value, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromShort(short value, Object object);
+	default void fromShort(short value, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromChar(char value, Object object);
+	default void fromChar(char value, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromByte(byte value, Object object);
+	default void fromByte(byte value, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromBoolean(boolean value, Object object);
+	default void fromBoolean(boolean value, Object object) {
+		throw error("Not supported ", object);
+	}
 
 	default void fromPrimitive(final Class<?> type, final Object values, final Object object) {
 		if (type == double.class) {
@@ -83,6 +100,7 @@ public interface PrimitiveSetter extends ErrorSetter {
 		} else if (type == boolean.class) {
 			return new BooleanPrimitiveSetterImpl(field);
 		} else
-			return null;
+			throw new BinderException("Unsupported type: " + type, field, null);
+
 	}
 }

@@ -17,24 +17,42 @@ package com.qwazr.binder.setter;
 
 import java.util.List;
 
-public interface ListSetter {
+public interface ListSetter extends ErrorSetter {
 
-	void fromString(List<String> values, Object object);
+	default void fromString(List<String> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromDouble(List<Double> values, Object object);
+	default void fromDouble(List<Double> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromFloat(List<Float> values, Object object);
+	default void fromFloat(List<Float> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromLong(List<Long> values, Object object);
+	default void fromLong(List<Long> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromInteger(List<Integer> values, Object object);
+	default void fromInteger(List<Integer> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromShort(List<Short> values, Object object);
+	default void fromShort(List<Short> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromChar(List<Character> values, Object object);
+	default void fromChar(List<Character> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromByte(List<Byte> values, Object object);
+	default void fromByte(List<Byte> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromBoolean(List<Boolean> values, Object object);
+	default void fromBoolean(List<Boolean> values, Object object) {
+		throw error("Not supported ", object);
+	}
 
 }

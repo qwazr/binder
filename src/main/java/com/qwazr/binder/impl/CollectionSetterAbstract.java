@@ -40,6 +40,8 @@ public abstract class CollectionSetterAbstract<T> extends FieldSetterAbstract {
 			else
 				fieldType = ArrayList.class;
 		}
+		if (!Collection.class.isAssignableFrom(fieldType))
+			error("The type should be a collection", fieldType);
 		this.collectionClass = (Class<Collection<T>>) fieldType;
 	}
 

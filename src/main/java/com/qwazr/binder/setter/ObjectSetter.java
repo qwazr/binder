@@ -15,6 +15,7 @@
  */
 package com.qwazr.binder.setter;
 
+import com.qwazr.binder.BinderException;
 import com.qwazr.binder.impl.BooleanSetterImpl;
 import com.qwazr.binder.impl.ByteSetterImpl;
 import com.qwazr.binder.impl.CharSetterImpl;
@@ -22,30 +23,50 @@ import com.qwazr.binder.impl.DoubleSetterImpl;
 import com.qwazr.binder.impl.FloatSetterImpl;
 import com.qwazr.binder.impl.IntegerSetterImpl;
 import com.qwazr.binder.impl.LongSetterImpl;
+import com.qwazr.binder.impl.SerializableSetterImpl;
 import com.qwazr.binder.impl.ShortSetterImpl;
 import com.qwazr.binder.impl.StringSetterImpl;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 
 public interface ObjectSetter extends ErrorSetter {
 
-	void fromString(String value, Object object);
+	default void fromString(String value, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromDouble(Double value, Object object);
+	default void fromDouble(Double value, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromFloat(Float value, Object object);
+	default void fromFloat(Float value, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromLong(Long value, Object object);
+	default void fromLong(Long value, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromInteger(Integer value, Object object);
+	default void fromInteger(Integer value, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromShort(Short value, Object object);
+	default void fromShort(Short value, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromChar(Character value, Object object);
+	default void fromChar(Character value, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromByte(Byte value, Object object);
+	default void fromByte(Byte value, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromBoolean(Boolean value, Object object);
+	default void fromBoolean(Boolean value, Object object) {
+		throw error("Not supported ", object);
+	}
 
 	void set(Object value, Object object);
 
@@ -91,7 +112,9 @@ public interface ObjectSetter extends ErrorSetter {
 			return new ByteSetterImpl(field);
 		} else if (type == Boolean.class) {
 			return new BooleanSetterImpl(field);
-		} else
-			return null;
+		} else if (Serializable.class.isAssignableFrom(type))
+			return new SerializableSetterImpl(field);
+		else
+			throw new BinderException("Unsupported type: " + type, field, null);
 	}
 }

@@ -15,6 +15,7 @@
  */
 package com.qwazr.binder.setter;
 
+import com.qwazr.binder.BinderException;
 import com.qwazr.binder.impl.BooleanArraySetterImpl;
 import com.qwazr.binder.impl.ByteArraySetterImpl;
 import com.qwazr.binder.impl.CharArraySetterImpl;
@@ -29,23 +30,41 @@ import java.lang.reflect.Field;
 
 public interface ObjectArraySetter extends ErrorSetter {
 
-	void fromString(String[] values, Object object);
+	default void fromString(String[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromDouble(Double[] values, Object object);
+	default void fromDouble(Double[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromFloat(Float[] values, Object object);
+	default void fromFloat(Float[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromLong(Long[] values, Object object);
+	default void fromLong(Long[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromInteger(Integer[] values, Object object);
+	default void fromInteger(Integer[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromShort(Short[] values, Object object);
+	default void fromShort(Short[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromChar(Character[] values, Object object);
+	default void fromChar(Character[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromByte(Byte[] values, Object object);
+	default void fromByte(Byte[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
-	void fromBoolean(Boolean[] values, Object object);
+	default void fromBoolean(Boolean[] values, Object object) {
+		throw error("Not supported ", object);
+	}
 
 	default void fromObjectArray(Class<?> type, Object values, Object object) {
 		if (type == String.class) {
@@ -90,6 +109,7 @@ public interface ObjectArraySetter extends ErrorSetter {
 		} else if (type == Boolean.class) {
 			return new BooleanArraySetterImpl(field);
 		} else
-			return null;
+			throw new BinderException("Unsupported type: " + type, field, null);
+
 	}
 }

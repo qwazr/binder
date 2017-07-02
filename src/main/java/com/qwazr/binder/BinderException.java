@@ -19,8 +19,12 @@ import java.lang.reflect.Field;
 
 public class BinderException extends RuntimeException {
 
-	public BinderException(Field field, Object value, Exception e) {
-		super(getMessage(null, field, value), e);
+	public BinderException(String message, Field field, Object value, Exception cause) {
+		super(getMessage(message, field, value), cause);
+	}
+
+	public BinderException(Field field, Object value, Exception cause) {
+		super(getMessage(null, field, value), cause);
 	}
 
 	public BinderException(String message, Field field, Object value) {

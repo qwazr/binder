@@ -44,4 +44,5 @@ public abstract class AbstractCollectionSetterTest<T> extends AbstractMultipleSe
 		for (Object v : value)
 			Assert.assertEquals(v, values[i++]);
 	}
+	
 }
