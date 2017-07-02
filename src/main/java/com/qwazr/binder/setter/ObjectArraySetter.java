@@ -23,6 +23,7 @@ import com.qwazr.binder.impl.DoubleArraySetterImpl;
 import com.qwazr.binder.impl.FloatArraySetterImpl;
 import com.qwazr.binder.impl.IntegerArraySetterImpl;
 import com.qwazr.binder.impl.LongArraySetterImpl;
+import com.qwazr.binder.impl.ObjectArraySetterImpl;
 import com.qwazr.binder.impl.ShortArraySetterImpl;
 import com.qwazr.binder.impl.StringArraySetterImpl;
 
@@ -108,6 +109,8 @@ public interface ObjectArraySetter extends ErrorSetter {
 			return new ByteArraySetterImpl(field);
 		} else if (type == Boolean.class) {
 			return new BooleanArraySetterImpl(field);
+		} else if (type == Object.class) {
+			return new ObjectArraySetterImpl(field);
 		} else
 			throw new BinderException("Unsupported type: " + type, field, null);
 

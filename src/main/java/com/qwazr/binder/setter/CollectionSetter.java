@@ -23,6 +23,7 @@ import com.qwazr.binder.impl.DoubleCollectionSetterImpl;
 import com.qwazr.binder.impl.FloatCollectionSetterImpl;
 import com.qwazr.binder.impl.IntegerCollectionSetterImpl;
 import com.qwazr.binder.impl.LongCollectionSetterImpl;
+import com.qwazr.binder.impl.ObjectCollectionSetterImpl;
 import com.qwazr.binder.impl.ShortCollectionSetterImpl;
 import com.qwazr.binder.impl.StringCollectionSetterImpl;
 
@@ -113,6 +114,8 @@ public interface CollectionSetter extends ErrorSetter {
 			return new ByteCollectionSetterImpl(field);
 		} else if (type == Boolean.class) {
 			return new BooleanCollectionSetterImpl(field);
+		} else if (type == Object.class) {
+			return new ObjectCollectionSetterImpl(field);
 		} else
 			throw new BinderException("Unsupported type: " + type, field, null);
 
