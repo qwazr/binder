@@ -154,7 +154,7 @@ abstract class ObjectSetterAbstract extends SingleSetterAbstract {
 
 	@Override
 	final public void fromObject(Collection<Object> values, Object object) {
-		fromObjectCollection(values, object, this::set);
+		fromObjectCollection(values, object, (v, o) -> set(o, v));
 	}
 
 	@Override

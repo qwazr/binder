@@ -67,8 +67,8 @@ public interface ObjectSetter extends ErrorSetter {
 	default void fromBoolean(Boolean value, Object object) {
 		throw error("Not supported ", object);
 	}
-
-	void set(Object value, Object object);
+	
+	void set(Object object, Object value);
 
 	default void fromObject(final Class<?> type, final Object values, final Object object) {
 		if (type == String.class) {
