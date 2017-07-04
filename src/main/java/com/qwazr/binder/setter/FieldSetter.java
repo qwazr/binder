@@ -19,16 +19,18 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
+import java.util.Map;
 
 public interface FieldSetter
-		extends CollectionSetter, ListSetter, ObjectArraySetter, ObjectSetter, PrimitiveArraySetter, PrimitiveSetter {
+		extends CollectionSetter, ListSetter, ObjectArraySetter, ObjectSetter, PrimitiveArraySetter, PrimitiveSetter,
+		MapSetter {
 
 	void fromNull(Object object);
 
 	Class<?> getType();
 
 	Field getField();
-	
+
 	Object get(Object object);
 
 	default void setValue(Object object, Object value) {
@@ -46,6 +48,8 @@ public interface FieldSetter
 					genericClass = (Class<?>) genericType;
 			}
 			fromCollection(genericClass, (Collection<?>) value, object);
+		} else if (Map.class.isAssignableFrom(valueClass)) {
+			fromMap((Map<?, ?>) value, object);
 		} else if (valueClass.isArray()) {
 			final Class<?> componentType = valueClass.getComponentType();
 			if (componentType.isPrimitive())
@@ -66,6 +70,12 @@ public interface FieldSetter
 			final Class<?> genericClass =
 					(Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
 			return CollectionSetter.from(field, genericClass);
+		} else if (Map.class.isAssignableFrom(fieldType)) {
+			final Class<?> keyClass =
+					(Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
+			final Class<?> valueClass =
+					(Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[1];
+			return MapSetter.from(field, keyClass, valueClass);
 		} else if (fieldType.isArray()) {
 			final Class<?> componentType = fieldType.getComponentType();
 			if (componentType.isPrimitive())

@@ -31,6 +31,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -83,9 +84,14 @@ public class FieldMapWrapperTest {
 
 	private Map<String, Object> getRandom() {
 		Map<String, Object> map = new HashMap<>();
+		final String title = RandomUtils.alphanumeric(10);
+		final Double price = RandomUtils.nextDouble();
 		map.put("id", RandomUtils.nextLong());
-		map.put("title", RandomUtils.alphanumeric(10));
-		map.put("price", RandomUtils.nextDouble());
+		map.put("title", title);
+		map.put("price", price);
+		LinkedHashMap<String, Double> m = new LinkedHashMap<>();
+		m.put(title, price);
+		map.put("map", m);
 		return map;
 	}
 
@@ -167,6 +173,7 @@ public class FieldMapWrapperTest {
 		final LinkedHashSet<String> tags;
 		final Set<String> tagsAbstract;
 		final List<String> tagsAbstractList;
+		final Map<String, Double> map;
 
 		Record(Long id, String title, Double price, String... tags) {
 			this.id = id;
@@ -184,6 +191,8 @@ public class FieldMapWrapperTest {
 				this.tagsAbstractList = new ArrayList<>();
 				Collections.addAll(this.tagsAbstractList, tags);
 			}
+			this.map = new LinkedHashMap<>();
+			this.map.put(title, price);
 		}
 
 		public Record() {
@@ -207,14 +216,16 @@ public class FieldMapWrapperTest {
 			if (object instanceof Record) {
 				Record r = (Record) object;
 				return Objects.equals(id, r.id) && Objects.equals(title, r.title) && CollectionsUtils.equals(tags,
-						r.tags);
+						r.tags) && CollectionsUtils.equals(map, r.map);
 			}
 			if (object instanceof Map) {
 				Map m = (Map) object;
 				if (!Objects.equals(id, m.get("id")) && Objects.equals(title, m.get("title")))
 					return false;
-				return equalsStringMap(m.get("tags"), tags) && equalsStringMap(m.get("tagsAbstract"), tagsAbstract) &&
-						equalsStringMap(m.get("tagsAbstractList"), tagsAbstractList);
+				if (!equalsStringMap(m.get("tags"), tags) && equalsStringMap(m.get("tagsAbstract"), tagsAbstract) &&
+						equalsStringMap(m.get("tagsAbstractList"), tagsAbstractList))
+					return false;
+				return CollectionsUtils.equals((Map) m.get("map"), map);
 			}
 			return false;
 		}
