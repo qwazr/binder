@@ -92,6 +92,9 @@ public class FieldMapWrapperTest {
 		LinkedHashMap<String, Double> m = new LinkedHashMap<>();
 		m.put(title, price);
 		map.put("map", m);
+		LinkedHashMap<String, List<Double>> ml = new LinkedHashMap<>();
+		ml.put(title, Arrays.asList(price));
+		map.put("mapList", ml);
 		return map;
 	}
 
@@ -174,6 +177,7 @@ public class FieldMapWrapperTest {
 		final Set<String> tagsAbstract;
 		final List<String> tagsAbstractList;
 		final Map<String, Double> map;
+		final Map<String, List<Double>> mapList;
 
 		Record(Long id, String title, Double price, String... tags) {
 			this.id = id;
@@ -193,6 +197,8 @@ public class FieldMapWrapperTest {
 			}
 			this.map = new LinkedHashMap<>();
 			this.map.put(title, price);
+			this.mapList = new LinkedHashMap<>();
+			this.mapList.put(title, Arrays.asList(price));
 		}
 
 		public Record() {
@@ -225,7 +231,11 @@ public class FieldMapWrapperTest {
 				if (!equalsStringMap(m.get("tags"), tags) && equalsStringMap(m.get("tagsAbstract"), tagsAbstract) &&
 						equalsStringMap(m.get("tagsAbstractList"), tagsAbstractList))
 					return false;
-				return CollectionsUtils.equals((Map) m.get("map"), map);
+				if (!CollectionsUtils.equals((Map) m.get("map"), map))
+					return false;
+				if (!CollectionsUtils.equals((Map) m.get("mapList"), mapList))
+					return false;
+				return true;
 			}
 			return false;
 		}

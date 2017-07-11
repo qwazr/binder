@@ -16,12 +16,18 @@
 package com.qwazr.binder.impl;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
 import java.util.Map;
 
 final public class MapSetterImpl extends FieldSetterAbstract {
 
 	public MapSetterImpl(Field field, Class<?> keyType, Class<?> valueType) {
 		super(field);
+	}
+
+	@Override
+	final public void fromObject(Collection<Object> values, Object object) {
+		set(object, values);
 	}
 
 	@Override

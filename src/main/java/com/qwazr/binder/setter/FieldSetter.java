@@ -73,8 +73,12 @@ public interface FieldSetter
 		} else if (Map.class.isAssignableFrom(fieldType)) {
 			final Class<?> keyClass =
 					(Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
-			final Class<?> valueClass =
-					(Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[1];
+			final Object secondArgument = ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[1];
+			final Class<?> valueClass;
+			if (secondArgument instanceof ParameterizedType)
+				valueClass = (Class<?>) ((ParameterizedType) secondArgument).getActualTypeArguments()[0];
+			else
+				valueClass = (Class<?>) secondArgument;
 			return MapSetter.from(field, keyClass, valueClass);
 		} else if (fieldType.isArray()) {
 			final Class<?> componentType = fieldType.getComponentType();
