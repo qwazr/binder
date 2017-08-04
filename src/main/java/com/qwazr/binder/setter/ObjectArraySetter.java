@@ -67,6 +67,10 @@ public interface ObjectArraySetter extends ErrorSetter {
 		throw error("Not supported ", object);
 	}
 
+	default void fromObject(Object[] values, Object object) {
+		throw error("Not supported ", object);
+	}
+
 	default void fromObjectArray(Class<?> type, Object values, Object object) {
 		if (type == String.class) {
 			fromString((String[]) values, object);
@@ -86,8 +90,9 @@ public interface ObjectArraySetter extends ErrorSetter {
 			fromByte((Byte[]) values, object);
 		} else if (type == Boolean.class) {
 			fromBoolean((Boolean[]) values, object);
-		} else
-			throw error("Unsupported generic type for collection: " + type, values);
+		} else {
+			fromObject((Object[]) values, object);
+		}
 	}
 
 	static FieldSetter from(final Field field, final Class<?> type) {

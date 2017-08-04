@@ -75,6 +75,13 @@ public abstract class AbstractMultipleSetterTest extends AbstractSetterTest {
 	}
 
 	@Test
+	final public void testStringArrayMultiple() {
+		final String[] v = new String[] { nextString(), nextString() };
+		setter.fromObjectArray(String.class, v, this);
+		checkValueString(v);
+	}
+
+	@Test
 	final public void testShortPrimitiveArrayMultiple() {
 		final short[] v = new short[] { nextShort(), nextShort() };
 		setter.fromShort(v, this);

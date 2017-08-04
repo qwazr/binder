@@ -15,54 +15,19 @@
  */
 package com.qwazr.binder.impl;
 
-import com.qwazr.utils.RandomUtils;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class AbstractSetterTest {
-
-	final protected FieldSetterAbstract setter;
+public abstract class AbstractSetterTest extends AbstractTest {
 
 	protected AbstractSetterTest(FieldSetterAbstract setter) {
-		this.setter = setter;
+		super(setter);
 	}
 
 	protected abstract String nextString();
-
-	final Long nextLong() {
-		return RandomUtils.nextLong(0, Byte.MAX_VALUE);
-	}
-
-	final Short nextShort() {
-		return (short) RandomUtils.nextInt(0, Byte.MAX_VALUE);
-	}
-
-	final Integer nextInt() {
-		return RandomUtils.nextInt(0, Byte.MAX_VALUE);
-	}
-
-	final Double nextDouble() {
-		return RandomUtils.nextDouble(0, Byte.MAX_VALUE);
-	}
-
-	final Float nextFloat() {
-		return RandomUtils.nextFloat(0, Byte.MAX_VALUE);
-	}
-
-	final Byte nextByte() {
-		return (byte) RandomUtils.nextInt(0, Byte.MAX_VALUE);
-	}
-
-	final Character nextChar() {
-		return (char) (byte) nextByte();
-	}
-
-	final Boolean nextBoolean() {
-		return RandomUtils.nextBoolean();
-	}
 
 	protected abstract void checkValueString(String... next);
 

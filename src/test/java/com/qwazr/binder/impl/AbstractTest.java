@@ -15,36 +15,13 @@
  */
 package com.qwazr.binder.impl;
 
-import org.junit.Assert;
-import org.junit.Test;
+import com.qwazr.binder.setter.FieldSetter;
 
-import java.lang.reflect.Field;
+public class AbstractTest implements BaseTestInterface {
 
-public abstract class AbstractObjectSetterTest<T> extends AbstractSingleSetterTest {
+	final protected FieldSetter setter;
 
-	final protected T value = null;
-
-	protected AbstractObjectSetterTest(FieldSetterAbstract setter) {
-		super(setter);
+	protected AbstractTest(FieldSetter setter) {
+		this.setter = setter;
 	}
-
-	static public Field getValueField() {
-		try {
-			return AbstractObjectSetterTest.class.getDeclaredField("value");
-		} catch (NoSuchFieldException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@Test
-	public void testNull() {
-		setter.set(this, null);
-		checkValueNull();
-	}
-
-	@Override
-	final protected void checkValueNull() {
-		Assert.assertNull(value);
-	}
-
 }

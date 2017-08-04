@@ -15,19 +15,54 @@
  */
 package com.qwazr.binder.impl;
 
+import com.qwazr.binder.BinderException;
+
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 final public class MapSetterImpl extends FieldSetterAbstract {
 
+	final private Class<Map> mapClass;
+
 	public MapSetterImpl(Field field, Class<?> keyType, Class<?> valueType) {
 		super(field);
+		if (!Map.class.isAssignableFrom(type))
+			error("The type should be a map", type);
+		Class<?> fieldType = type;
+		final int modifier = type.getModifiers();
+		if (Modifier.isAbstract(modifier) || Modifier.isInterface(modifier))
+			fieldType = LinkedHashMap.class;
+		this.mapClass = (Class<Map>) fieldType;
+	}
+
+	private Map createMap(final Object object) {
+		try {
+			final Map map = mapClass.newInstance();
+			field.set(object, map);
+			return map;
+		} catch (IllegalAccessException | InstantiationException e) {
+			throw new BinderException(field, null, e);
+		}
+	}
+
+	@Override
+	public void fromObject(Object[] values, Object object) {
+		final Map map = createMap(object);
+		int i = 0;
+		while (i < values.length)
+			map.put(values[i++], values[i++]);
 	}
 
 	@Override
 	final public void fromObject(Collection<Object> values, Object object) {
-		set(object, values);
+		final Map map = createMap(object);
+		final Iterator it = values.iterator();
+		while (it.hasNext())
+			map.put(it.next(), it.next());
 	}
 
 	@Override
