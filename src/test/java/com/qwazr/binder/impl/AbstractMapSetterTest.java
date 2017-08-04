@@ -133,8 +133,38 @@ public abstract class AbstractMapSetterTest<K, V> extends AbstractTest {
 		}
 
 		@Test
-		public void testSetObjectCollection() {
+		public void testSetStringCollection() {
 			testSetCollection(getRandomMap(), new ArrayList<String>());
 		}
+	}
+
+	public static class StringInteger extends AbstractMapSetterTest<String, Integer> {
+
+		final Map<String, Integer> value = null;
+
+		public StringInteger() throws NoSuchFieldException {
+			super(FieldSetter.of(StringInteger.class.getDeclaredField("value")));
+		}
+
+		@Override
+		protected Map<String, Integer> getNewMap() {
+			return new HashMap<>();
+		}
+
+		@Override
+		protected String getRandomKey() {
+			return RandomUtils.alphanumeric(5);
+		}
+
+		@Override
+		protected Integer getRandomValue() {
+			return nextInt();
+		}
+
+		@Override
+		protected Map<String, Integer> getValue() {
+			return value;
+		}
+		
 	}
 }
