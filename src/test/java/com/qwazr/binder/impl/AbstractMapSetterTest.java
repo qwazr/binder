@@ -22,8 +22,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -53,29 +53,35 @@ public abstract class AbstractMapSetterTest<K, V> extends AbstractTest {
 		return map;
 	}
 
-	@Test
-	public void testSetArray() {
-		final Map<K, V> map = getRandomMap();
-		final Object[] objects = new Object[map.size() * 2];
+	<T> void testSetArray(Map<K, V> map, T[] array) {
 		final AtomicInteger i = new AtomicInteger();
 		map.forEach((k, v) -> {
-			objects[i.getAndIncrement()] = k;
-			objects[i.getAndIncrement()] = v;
+			array[i.getAndIncrement()] = (T) k;
+			array[i.getAndIncrement()] = (T) v;
 		});
-		setter.setValue(this, objects);
+		setter.setValue(this, array);
 		Assert.assertTrue(CollectionsUtils.equals(map, getValue()));
 	}
 
 	@Test
-	public void testSetCollection() {
+	public void testSetObjectArray() {
 		final Map<K, V> map = getRandomMap();
-		final List<Object> objects = new ArrayList<>(map.size() * 2);
+		final Object[] objects = new Object[map.size() * 2];
+		testSetArray(map, objects);
+	}
+
+	<T> void testSetCollection(Map<K, V> map, Collection<T> collection) {
 		map.forEach((k, v) -> {
-			objects.add(k);
-			objects.add(v);
+			collection.add((T) k);
+			collection.add((T) v);
 		});
-		setter.setValue(this, objects);
+		setter.setValue(this, collection);
 		Assert.assertTrue(CollectionsUtils.equals(map, getValue()));
+	}
+
+	@Test
+	public void testSetObjectCollection() {
+		testSetCollection(getRandomMap(), new ArrayList<>());
 	}
 
 	protected abstract Map<K, V> getNewMap();
@@ -117,6 +123,18 @@ public abstract class AbstractMapSetterTest<K, V> extends AbstractTest {
 		@Override
 		protected Map<String, String> getValue() {
 			return value;
+		}
+
+		@Test
+		public void testSetStringArray() {
+			final Map<String, String> map = getRandomMap();
+			final String[] array = new String[map.size() * 2];
+			testSetArray(map, array);
+		}
+
+		@Test
+		public void testSetObjectCollection() {
+			testSetCollection(getRandomMap(), new ArrayList<String>());
 		}
 	}
 }

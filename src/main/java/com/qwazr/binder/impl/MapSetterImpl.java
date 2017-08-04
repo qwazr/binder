@@ -58,6 +58,46 @@ final public class MapSetterImpl extends FieldSetterAbstract {
 	}
 
 	@Override
+	public void fromString(String[] values, Object object) {
+		fromObject(values, object);
+	}
+
+	@Override
+	public void fromDouble(Double[] values, Object object) {
+		fromObject(values, object);
+	}
+
+	@Override
+	public void fromFloat(Float[] values, Object object) {
+		fromObject(values, object);
+	}
+
+	@Override
+	public void fromLong(Long[] values, Object object) {
+		fromObject(values, object);
+	}
+
+	@Override
+	public void fromShort(Short[] values, Object object) {
+		fromObject(values, object);
+	}
+
+	@Override
+	public void fromInteger(Integer[] values, Object object) {
+		fromObject(values, object);
+	}
+
+	@Override
+	public void fromByte(Byte[] values, Object object) {
+		fromObject(values, object);
+	}
+
+	@Override
+	public void fromChar(Character[] values, Object object) {
+		fromObject(values, object);
+	}
+
+	@Override
 	final public void fromObject(Collection<Object> values, Object object) {
 		final Map map = createMap(object);
 		final Iterator it = values.iterator();
