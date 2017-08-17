@@ -65,7 +65,7 @@ public class FieldMapWrapperTest {
 				RandomUtils.alphanumeric(3), RandomUtils.alphanumeric(3));
 		Record record2 = new Record(RandomUtils.nextLong(), RandomUtils.alphanumeric(10), RandomUtils.nextDouble(),
 				RandomUtils.alphanumeric(3), RandomUtils.alphanumeric(3));
-		List<Map<String, ?>> mapCollection = wrapper.newMapCollection(Arrays.asList(record1, record2));
+		List<Map<String, Object>> mapCollection = wrapper.newMapCollection(Arrays.asList(record1, record2));
 		Assert.assertNotNull(mapCollection);
 		Assert.assertEquals(2, mapCollection.size());
 		Assert.assertEquals(record1, mapCollection.get(0));

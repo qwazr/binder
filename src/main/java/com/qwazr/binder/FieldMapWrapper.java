@@ -45,7 +45,7 @@ public class FieldMapWrapper<T> {
 	 * @param row the record
 	 * @return a new Map
 	 */
-	public Map<String, ?> newMap(final T row) {
+	public Map<String, Object> newMap(final T row) {
 		final Map<String, Object> map = new HashMap<>();
 		fieldMap.forEach((name, field) -> {
 			final Object value = field.get(row);
@@ -70,10 +70,10 @@ public class FieldMapWrapper<T> {
 	 * @param rows a collection of records
 	 * @return a new list of mapped objects
 	 */
-	public List<Map<String, ?>> newMapCollection(final Collection<T> rows) {
+	public List<Map<String, Object>> newMapCollection(final Collection<T> rows) {
 		if (rows == null || rows.isEmpty())
 			return null;
-		final List<Map<String, ?>> list = new ArrayList<>(rows.size());
+		final List<Map<String, Object>> list = new ArrayList<>(rows.size());
 		rows.forEach(row -> list.add(newMap(row)));
 		return list;
 	}
@@ -84,16 +84,16 @@ public class FieldMapWrapper<T> {
 	 * @param rows an array of records
 	 * @return a new list of mapped objects
 	 */
-	public List<Map<String, ?>> newMapArray(final T... rows) {
+	public List<Map<String, Object>> newMapArray(final T... rows) {
 		if (rows == null || rows.length == 0)
 			return null;
-		final List<Map<String, ?>> list = new ArrayList<>(rows.length);
+		final List<Map<String, Object>> list = new ArrayList<>(rows.length);
 		for (T row : rows)
 			list.add(newMap(row));
 		return list;
 	}
 
-	public T toRecord(final Map<String, ?> fields) throws ReflectiveOperationException, IOException {
+	public T toRecord(final Map<String, Object> fields) throws ReflectiveOperationException, IOException {
 		if (fields == null)
 			return null;
 		final T record = constructor.newInstance();
@@ -109,20 +109,21 @@ public class FieldMapWrapper<T> {
 		return record;
 	}
 
-	public List<T> toRecords(final Collection<Map<String, ?>> docs) throws IOException, ReflectiveOperationException {
+	public List<T> toRecords(final Collection<Map<String, Object>> docs)
+			throws IOException, ReflectiveOperationException {
 		if (docs == null)
 			return null;
 		final List<T> records = new ArrayList<>();
-		for (final Map<String, ?> doc : docs)
+		for (final Map<String, Object> doc : docs)
 			records.add(toRecord(doc));
 		return records;
 	}
 
-	public List<T> toRecords(final Map<String, ?>... docs) throws IOException, ReflectiveOperationException {
+	public List<T> toRecords(final Map<String, Object>... docs) throws IOException, ReflectiveOperationException {
 		if (docs == null)
 			return null;
 		final List<T> records = new ArrayList<>();
-		for (Map<String, ?> doc : docs)
+		for (Map<String, Object> doc : docs)
 			records.add(toRecord(doc));
 		return records;
 	}
