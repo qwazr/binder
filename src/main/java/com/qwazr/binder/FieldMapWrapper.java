@@ -17,7 +17,6 @@ package com.qwazr.binder;
 
 import com.qwazr.binder.impl.SerializableSetterImpl;
 import com.qwazr.binder.setter.FieldSetter;
-import com.qwazr.utils.FunctionUtils;
 import com.qwazr.utils.SerializationUtils;
 
 import java.io.IOException;
@@ -46,17 +45,17 @@ public class FieldMapWrapper<T> {
 	 * @param row the record
 	 * @return a new Map
 	 */
-	public Map<String, Object> newMap(final T row) {
+	public Map<String, ?> newMap(final T row) {
 		final Map<String, Object> map = new HashMap<>();
 		fieldMap.forEach((name, field) -> {
 			final Object value = field.get(row);
 			if (value == null)
 				return;
 			try {
-			if (field instanceof SerializableSetterImpl)
-				map.put(name, SerializationUtils.toExternalizorBytes((Serializable) value));
-				 else
-			map.put(name, value);
+				if (field instanceof SerializableSetterImpl)
+					map.put(name, SerializationUtils.toExternalizorBytes((Serializable) value));
+				else
+					map.put(name, value);
 
 			} catch (IOException | ReflectiveOperationException e) {
 				throw field.error("Cannot convert the field " + name, field, e);
@@ -71,10 +70,10 @@ public class FieldMapWrapper<T> {
 	 * @param rows a collection of records
 	 * @return a new list of mapped objects
 	 */
-	public List<Map<String, Object>> newMapCollection(final Collection<T> rows) {
+	public List<Map<String, ?>> newMapCollection(final Collection<T> rows) {
 		if (rows == null || rows.isEmpty())
 			return null;
-		final List<Map<String, Object>> list = new ArrayList<>(rows.size());
+		final List<Map<String, ?>> list = new ArrayList<>(rows.size());
 		rows.forEach(row -> list.add(newMap(row)));
 		return list;
 	}
@@ -85,46 +84,45 @@ public class FieldMapWrapper<T> {
 	 * @param rows an array of records
 	 * @return a new list of mapped objects
 	 */
-	public List<Map<String, Object>> newMapArray(final T... rows) {
+	public List<Map<String, ?>> newMapArray(final T... rows) {
 		if (rows == null || rows.length == 0)
 			return null;
-		final List<Map<String, Object>> list = new ArrayList<>(rows.length);
+		final List<Map<String, ?>> list = new ArrayList<>(rows.length);
 		for (T row : rows)
 			list.add(newMap(row));
 		return list;
 	}
 
-	public T toRecord(final Map<String, Object> fields) throws ReflectiveOperationException, IOException {
+	public T toRecord(final Map<String, ?> fields) throws ReflectiveOperationException, IOException {
 		if (fields == null)
 			return null;
 		final T record = constructor.newInstance();
-		final FunctionUtils.BiConsumerEx2<String, Object, ReflectiveOperationException, IOException> consumer =
-				(name, value) -> {
-					if (value == null)
-						return;
-					final FieldSetter field = fieldMap.get(name);
-					if (field != null)
-						field.setValue(record, value);
-				};
-		FunctionUtils.forEachEx2(fields, consumer);
+		for (Map.Entry<String, ?> entry : fields.entrySet()) {
+			final String name = entry.getKey();
+			final Object value = entry.getValue();
+			if (value == null)
+				continue;
+			final FieldSetter field = fieldMap.get(name);
+			if (field != null)
+				field.setValue(record, value);
+		}
 		return record;
 	}
 
-	public List<T> toRecords(final Collection<Map<String, Object>> docs)
-			throws IOException, ReflectiveOperationException {
+	public List<T> toRecords(final Collection<Map<String, ?>> docs) throws IOException, ReflectiveOperationException {
 		if (docs == null)
 			return null;
 		final List<T> records = new ArrayList<>();
-		for (final Map<String, Object> doc : docs)
+		for (final Map<String, ?> doc : docs)
 			records.add(toRecord(doc));
 		return records;
 	}
 
-	public List<T> toRecords(final Map<String, Object>... docs) throws IOException, ReflectiveOperationException {
+	public List<T> toRecords(final Map<String, ?>... docs) throws IOException, ReflectiveOperationException {
 		if (docs == null)
 			return null;
 		final List<T> records = new ArrayList<>();
-		for (Map<String, Object> doc : docs)
+		for (Map<String, ?> doc : docs)
 			records.add(toRecord(doc));
 		return records;
 	}

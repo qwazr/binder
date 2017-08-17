@@ -54,7 +54,7 @@ public class FieldMapWrapperTest {
 	public void test200newMap() {
 		Record record = new Record(RandomUtils.nextLong(), RandomUtils.alphanumeric(10), RandomUtils.nextDouble(),
 				RandomUtils.alphanumeric(3), RandomUtils.alphanumeric(3));
-		Map<String, Object> map = wrapper.newMap(record);
+		Map<String, ?> map = wrapper.newMap(record);
 		Assert.assertNotNull(map);
 		Assert.assertEquals(record, map);
 	}
@@ -65,7 +65,7 @@ public class FieldMapWrapperTest {
 				RandomUtils.alphanumeric(3), RandomUtils.alphanumeric(3));
 		Record record2 = new Record(RandomUtils.nextLong(), RandomUtils.alphanumeric(10), RandomUtils.nextDouble(),
 				RandomUtils.alphanumeric(3), RandomUtils.alphanumeric(3));
-		List<Map<String, Object>> mapCollection = wrapper.newMapCollection(Arrays.asList(record1, record2));
+		List<Map<String, ?>> mapCollection = wrapper.newMapCollection(Arrays.asList(record1, record2));
 		Assert.assertNotNull(mapCollection);
 		Assert.assertEquals(2, mapCollection.size());
 		Assert.assertEquals(record1, mapCollection.get(0));
@@ -76,7 +76,7 @@ public class FieldMapWrapperTest {
 	public void test400newMapArray() {
 		Record record = new Record(RandomUtils.nextLong(), RandomUtils.alphanumeric(10), RandomUtils.nextDouble(),
 				RandomUtils.alphanumeric(3), RandomUtils.alphanumeric(3));
-		Map<String, Object> map = wrapper.newMap(record);
+		Map<String, ?> map = wrapper.newMap(record);
 		Assert.assertNotNull(map);
 		Assert.assertEquals(record.title, map.get("title"));
 		Assert.assertEquals(record.id, map.get("id"));
@@ -221,8 +221,8 @@ public class FieldMapWrapperTest {
 				return false;
 			if (object instanceof Record) {
 				Record r = (Record) object;
-				return Objects.equals(id, r.id) && Objects.equals(title, r.title) && CollectionsUtils.equals(tags,
-						r.tags) && CollectionsUtils.equals(map, r.map);
+				return Objects.equals(id, r.id) && Objects.equals(title, r.title) &&
+						CollectionsUtils.equals(tags, r.tags) && CollectionsUtils.equals(map, r.map);
 			}
 			if (object instanceof Map) {
 				Map m = (Map) object;
