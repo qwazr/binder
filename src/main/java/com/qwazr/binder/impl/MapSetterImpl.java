@@ -106,6 +106,11 @@ final public class MapSetterImpl extends FieldSetterAbstract {
 	}
 
 	@Override
+	final public void fromCollection(Class<?> type, Collection<?> values, Object object) {
+		fromObject((Collection<Object>) values, object);
+	}
+
+	@Override
 	public void fromMap(Map<?, ?> values, Object object) {
 		set(object, values);
 	}

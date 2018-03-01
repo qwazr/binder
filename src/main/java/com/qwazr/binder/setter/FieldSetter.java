@@ -17,7 +17,6 @@ package com.qwazr.binder.setter;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Map;
 
@@ -40,13 +39,8 @@ public interface FieldSetter
 		}
 		final Class<?> valueClass = value.getClass();
 		if (Collection.class.isAssignableFrom(valueClass)) {
-			Class<?> genericClass = Object.class;
-			final Type type = valueClass.getGenericSuperclass();
-			if (type != null && type instanceof ParameterizedType) {
-				Type genericType = ((ParameterizedType) type).getActualTypeArguments()[0];
-				if (genericType instanceof Class<?>)
-					genericClass = (Class<?>) genericType;
-			}
+			final Collection collection = (Collection) value;
+			final Class<?> genericClass = collection.isEmpty() ? Object.class : collection.iterator().next().getClass();
 			fromCollection(genericClass, (Collection<?>) value, object);
 		} else if (Map.class.isAssignableFrom(valueClass)) {
 			fromMap((Map<?, ?>) value, object);

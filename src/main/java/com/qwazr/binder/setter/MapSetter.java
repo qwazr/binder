@@ -28,6 +28,5 @@ public interface MapSetter extends ErrorSetter {
 
 	static FieldSetter from(final Field field, final Class<?> keyType, final Class<?> valueType) {
 		return new MapSetterImpl(field, keyType, valueType);
-
 	}
 }
