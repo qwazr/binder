@@ -47,17 +47,17 @@ public abstract class AbstractMultipleSetterTest extends AbstractSetterTest {
 
 	private void checkValueNumber(Collection<? extends Number> v) {
 		Assert.assertEquals(v.size(), size());
-		checkValueNumber((Number[]) v.toArray());
+		checkValueNumber(v.toArray(new Number[v.size()]));
 	}
 
 	private void checkValueChar(Collection<Character> v) {
 		Assert.assertEquals(v.size(), size());
-		checkValueChar((Character[]) v.toArray());
+		checkValueChar(v.toArray(new Character[v.size()]));
 	}
 
 	private void checkValueBoolean(Collection<Boolean> v) {
 		Assert.assertEquals(v.size(), size());
-		checkValueBoolean((Boolean[]) v.toArray());
+		checkValueBoolean(v.toArray(new Boolean[v.size()]));
 	}
 
 	@Test

@@ -36,7 +36,7 @@ public abstract class AbstractSetterTest extends AbstractTest {
 	protected abstract void checkValueChar(Character... next);
 
 	protected abstract void checkValueBoolean(Boolean... next);
-
+	
 	protected abstract void checkValueNull();
 
 	protected abstract void checkValueEmpty();
