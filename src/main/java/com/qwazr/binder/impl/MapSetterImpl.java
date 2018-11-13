@@ -26,93 +26,93 @@ import java.util.Map;
 
 final public class MapSetterImpl extends FieldSetterAbstract {
 
-	final private Class<Map> mapClass;
+    final private Class<Map> mapClass;
 
-	public MapSetterImpl(Field field, Class<?> keyType, Class<?> valueType) {
-		super(field);
-		if (!Map.class.isAssignableFrom(type))
-			error("The type should be a map", type);
-		Class<?> fieldType = type;
-		final int modifier = type.getModifiers();
-		if (Modifier.isAbstract(modifier) || Modifier.isInterface(modifier))
-			fieldType = LinkedHashMap.class;
-		this.mapClass = (Class<Map>) fieldType;
-	}
+    public MapSetterImpl(Field field, Class<?> keyType, Class<?> valueType) {
+        super(field);
+        if (!Map.class.isAssignableFrom(type))
+            throw error("The type should be a map", type);
+        Class<?> fieldType = type;
+        final int modifier = type.getModifiers();
+        if (Modifier.isAbstract(modifier) || Modifier.isInterface(modifier))
+            fieldType = LinkedHashMap.class;
+        this.mapClass = (Class<Map>) fieldType;
+    }
 
-	private Map createMap(final Object object) {
-		try {
-			final Map map = mapClass.newInstance();
-			field.set(object, map);
-			return map;
-		} catch (IllegalAccessException | InstantiationException e) {
-			throw new BinderException(field, null, e);
-		}
-	}
+    private Map createMap(final Object object) {
+        try {
+            final Map map = mapClass.newInstance();
+            field.set(object, map);
+            return map;
+        } catch (IllegalAccessException | InstantiationException e) {
+            throw new BinderException(field, null, e);
+        }
+    }
 
-	@Override
-	public void fromObject(Object[] values, Object object) {
-		final Map map = createMap(object);
-		int i = 0;
-		while (i < values.length)
-			map.put(values[i++], values[i++]);
-	}
+    @Override
+    public void fromObject(Object[] values, Object object) {
+        final Map map = createMap(object);
+        int i = 0;
+        while (i < values.length)
+            map.put(values[i++], values[i++]);
+    }
 
-	@Override
-	public void fromString(String[] values, Object object) {
-		fromObject(values, object);
-	}
+    @Override
+    public void fromString(String[] values, Object object) {
+        fromObject(values, object);
+    }
 
-	@Override
-	public void fromDouble(Double[] values, Object object) {
-		fromObject(values, object);
-	}
+    @Override
+    public void fromDouble(Double[] values, Object object) {
+        fromObject(values, object);
+    }
 
-	@Override
-	public void fromFloat(Float[] values, Object object) {
-		fromObject(values, object);
-	}
+    @Override
+    public void fromFloat(Float[] values, Object object) {
+        fromObject(values, object);
+    }
 
-	@Override
-	public void fromLong(Long[] values, Object object) {
-		fromObject(values, object);
-	}
+    @Override
+    public void fromLong(Long[] values, Object object) {
+        fromObject(values, object);
+    }
 
-	@Override
-	public void fromShort(Short[] values, Object object) {
-		fromObject(values, object);
-	}
+    @Override
+    public void fromShort(Short[] values, Object object) {
+        fromObject(values, object);
+    }
 
-	@Override
-	public void fromInteger(Integer[] values, Object object) {
-		fromObject(values, object);
-	}
+    @Override
+    public void fromInteger(Integer[] values, Object object) {
+        fromObject(values, object);
+    }
 
-	@Override
-	public void fromByte(Byte[] values, Object object) {
-		fromObject(values, object);
-	}
+    @Override
+    public void fromByte(Byte[] values, Object object) {
+        fromObject(values, object);
+    }
 
-	@Override
-	public void fromChar(Character[] values, Object object) {
-		fromObject(values, object);
-	}
+    @Override
+    public void fromChar(Character[] values, Object object) {
+        fromObject(values, object);
+    }
 
-	@Override
-	final public void fromObject(Collection<Object> values, Object object) {
-		final Map map = createMap(object);
-		final Iterator it = values.iterator();
-		while (it.hasNext())
-			map.put(it.next(), it.next());
-	}
+    @Override
+    final public void fromObject(Collection<Object> values, Object object) {
+        final Map map = createMap(object);
+        final Iterator it = values.iterator();
+        while (it.hasNext())
+            map.put(it.next(), it.next());
+    }
 
-	@Override
-	final public void fromCollection(Class<?> type, Collection<?> values, Object object) {
-		fromObject((Collection<Object>) values, object);
-	}
+    @Override
+    final public void fromCollection(Class<?> type, Collection<?> values, Object object) {
+        fromObject((Collection<Object>) values, object);
+    }
 
-	@Override
-	public void fromMap(Map<?, ?> values, Object object) {
-		set(object, values);
-	}
+    @Override
+    public void fromMap(Map<?, ?> values, Object object) {
+        set(object, values);
+    }
 
 }
