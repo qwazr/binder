@@ -30,128 +30,130 @@ import java.util.Map;
 
 public class FieldMapWrapper<T> {
 
-	public final Map<String, FieldSetter> fieldMap;
-	public final Constructor<T> constructor;
+    public final Map<String, FieldSetter> fieldMap;
+    public final Class<T> objectClass;
+    public final Constructor<T> constructor;
 
-	public FieldMapWrapper(final Map<String, FieldSetter> fieldMap, final Class<T> objectClass)
-			throws NoSuchMethodException {
-		this.fieldMap = fieldMap;
-		this.constructor = objectClass.getDeclaredConstructor();
-	}
+    public FieldMapWrapper(final Map<String, FieldSetter> fieldMap, final Class<T> objectClass)
+            throws NoSuchMethodException {
+        this.fieldMap = fieldMap;
+        this.objectClass = objectClass;
+        this.constructor = objectClass.getDeclaredConstructor();
+    }
 
-	/**
-	 * Build a new Map by reading the annotations
-	 *
-	 * @param row the record
-	 * @return a new Map
-	 */
-	public Map<String, Object> newMap(final T row) {
-		final Map<String, Object> map = new HashMap<>();
-		fieldMap.forEach((name, field) -> {
-			final Object value = field.get(row);
-			if (value == null)
-				return;
-			try {
-				if (field instanceof SerializableSetterImpl)
-					map.put(name, SerializationUtils.toExternalizorBytes((Serializable) value));
-				else
-					map.put(name, value);
+    /**
+     * Build a new Map by reading the annotations
+     *
+     * @param row the record
+     * @return a new Map
+     */
+    public Map<String, Object> newMap(final T row) {
+        final Map<String, Object> map = new HashMap<>();
+        fieldMap.forEach((name, field) -> {
+            final Object value = field.get(row);
+            if (value == null)
+                return;
+            try {
+                if (field instanceof SerializableSetterImpl)
+                    map.put(name, SerializationUtils.toExternalizorBytes((Serializable) value));
+                else
+                    map.put(name, value);
 
-			} catch (IOException | ReflectiveOperationException e) {
-				throw field.error("Cannot convert the field " + name, field, e);
-			}
-		});
-		return map.isEmpty() ? null : map;
-	}
+            } catch (IOException | ReflectiveOperationException e) {
+                throw field.error("Cannot convert the field " + name, field, e);
+            }
+        });
+        return map.isEmpty() ? null : map;
+    }
 
-	/**
-	 * Buid a collection of Map by reading the IndexFields of the annotated documents
-	 *
-	 * @param rows a collection of records
-	 * @return a new list of mapped objects
-	 */
-	public List<Map<String, Object>> newMapCollection(final Collection<T> rows) {
-		if (rows == null || rows.isEmpty())
-			return null;
-		final List<Map<String, Object>> list = new ArrayList<>(rows.size());
-		rows.forEach(row -> list.add(newMap(row)));
-		return list;
-	}
+    /**
+     * Buid a collection of Map by reading the IndexFields of the annotated documents
+     *
+     * @param rows a collection of records
+     * @return a new list of mapped objects
+     */
+    public List<Map<String, Object>> newMapCollection(final Collection<T> rows) {
+        if (rows == null || rows.isEmpty())
+            return null;
+        final List<Map<String, Object>> list = new ArrayList<>(rows.size());
+        rows.forEach(row -> list.add(newMap(row)));
+        return list;
+    }
 
-	/**
-	 * Buid a collection of Map by reading the IndexFields of the annotated documents
-	 *
-	 * @param rows an array of records
-	 * @return a new list of mapped objects
-	 */
-	public List<Map<String, Object>> newMapArray(final T... rows) {
-		if (rows == null || rows.length == 0)
-			return null;
-		final List<Map<String, Object>> list = new ArrayList<>(rows.length);
-		for (T row : rows)
-			list.add(newMap(row));
-		return list;
-	}
+    /**
+     * Buid a collection of Map by reading the IndexFields of the annotated documents
+     *
+     * @param rows an array of records
+     * @return a new list of mapped objects
+     */
+    public List<Map<String, Object>> newMapArray(final T... rows) {
+        if (rows == null || rows.length == 0)
+            return null;
+        final List<Map<String, Object>> list = new ArrayList<>(rows.length);
+        for (T row : rows)
+            list.add(newMap(row));
+        return list;
+    }
 
-	public T toRecord(final Map<String, Object> fields) throws ReflectiveOperationException, IOException {
-		if (fields == null)
-			return null;
-		final T record = constructor.newInstance();
-		for (Map.Entry<String, ?> entry : fields.entrySet()) {
-			final String name = entry.getKey();
-			final Object value = entry.getValue();
-			if (value == null)
-				continue;
-			final FieldSetter field = fieldMap.get(name);
-			if (field != null)
-				field.setValue(record, value);
-		}
-		return record;
-	}
+    public T toRecord(final Map<String, Object> fields) throws ReflectiveOperationException, IOException {
+        if (fields == null)
+            return null;
+        final T record = constructor.newInstance();
+        for (Map.Entry<String, ?> entry : fields.entrySet()) {
+            final String name = entry.getKey();
+            final Object value = entry.getValue();
+            if (value == null)
+                continue;
+            final FieldSetter field = fieldMap.get(name);
+            if (field != null)
+                field.setValue(record, value);
+        }
+        return record;
+    }
 
-	public List<T> toRecords(final Collection<Map<String, Object>> docs)
-			throws IOException, ReflectiveOperationException {
-		if (docs == null)
-			return null;
-		final List<T> records = new ArrayList<>();
-		for (final Map<String, Object> doc : docs)
-			records.add(toRecord(doc));
-		return records;
-	}
+    public List<T> toRecords(final Collection<Map<String, Object>> docs)
+            throws IOException, ReflectiveOperationException {
+        if (docs == null)
+            return null;
+        final List<T> records = new ArrayList<>();
+        for (final Map<String, Object> doc : docs)
+            records.add(toRecord(doc));
+        return records;
+    }
 
-	public List<T> toRecords(final Map<String, Object>... docs) throws IOException, ReflectiveOperationException {
-		if (docs == null)
-			return null;
-		final List<T> records = new ArrayList<>();
-		for (Map<String, Object> doc : docs)
-			records.add(toRecord(doc));
-		return records;
-	}
+    public List<T> toRecords(final Map<String, Object>... docs) throws IOException, ReflectiveOperationException {
+        if (docs == null)
+            return null;
+        final List<T> records = new ArrayList<>();
+        for (Map<String, Object> doc : docs)
+            records.add(toRecord(doc));
+        return records;
+    }
 
-	public abstract static class Cache {
+    public abstract static class Cache {
 
-		private final Map<Class<?>, FieldMapWrapper<?>> fieldMapWrappers;
+        private final Map<Class<?>, FieldMapWrapper<?>> fieldMapWrappers;
 
-		protected abstract <C> FieldMapWrapper<C> newFieldMapWrapper(final Class<C> objectClass)
-				throws NoSuchMethodException;
+        protected abstract <C> FieldMapWrapper<C> newFieldMapWrapper(final Class<C> objectClass)
+                throws NoSuchMethodException;
 
-		public Cache(Map<Class<?>, FieldMapWrapper<?>> map) {
-			fieldMapWrappers = map;
-		}
+        public Cache(Map<Class<?>, FieldMapWrapper<?>> map) {
+            fieldMapWrappers = map;
+        }
 
-		public <C> FieldMapWrapper<C> get(final Class<C> objectClass) {
-			return (FieldMapWrapper<C>) fieldMapWrappers.computeIfAbsent(objectClass, cl -> {
-				try {
-					return newFieldMapWrapper(cl);
-				} catch (NoSuchMethodException e) {
-					throw new RuntimeException(e);
-				}
-			});
-		}
+        public <C> FieldMapWrapper<C> get(final Class<C> objectClass) {
+            return (FieldMapWrapper<C>) fieldMapWrappers.computeIfAbsent(objectClass, cl -> {
+                try {
+                    return newFieldMapWrapper(cl);
+                } catch (NoSuchMethodException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
 
-		public void clear() {
-			fieldMapWrappers.clear();
-		}
+        public void clear() {
+            fieldMapWrappers.clear();
+        }
 
-	}
+    }
 }
